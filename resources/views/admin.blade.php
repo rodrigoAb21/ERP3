@@ -150,8 +150,8 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
-                          <li><a href="{{asset('/')}}"><i class="fa fa-arrow-right"></i> Gestionar Clientes</a></li>
-
+                          <li><a href="{{asset('/admin/clientes')}}"><i class="fa fa-arrow-right"></i> Gestionar Clientes</a></li>
+                          <li><a href="{{asset('/admin/categoria')}}"><i class="fa fa-arrow-right"></i> Gestionar Categoria</a></li>
                       </ul>
                   </li>
                   <li class="treeview">

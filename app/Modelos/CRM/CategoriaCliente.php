@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Modelos\CRM;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +21,7 @@ class CategoriaCliente extends Model
         'cantDiasReserva',
         'cantProdReserva',
         'idEmpresa',
+        'visible'
     ];
 
     public function beneficios()

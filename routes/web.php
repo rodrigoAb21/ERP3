@@ -79,7 +79,7 @@ Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
 
 // ------------------- VENTA ----------------------------------
-
+Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
 
 
@@ -120,13 +120,10 @@ Route::group(['middleware'=> 'web'],function(){
 });
 
 Route::group(['middleware'=> 'web'],function(){
-    Route::resource('/admin/categoria','CategoriaClienteController');
-    Route::get('/admin/categoria/{id}/beneficios','CategoriaClienteController@beneficios');
-    Route::post('/admin/categoria/{id}/agregar','CategoriaClienteController@agregar');
-    Route::post('/admin/categoria/{id}/remover','CategoriaClienteController@remover');
-    Route::get('/admin/categoria/{id}/destroy','CategoriaClienteController@destroy');
-
-
+    Route::resource('/admin/categoria','CRM\CategoriaClienteController');
+    Route::get('/admin/categoria/{id}/beneficios','CRM\CategoriaClienteController@beneficios');
+    Route::post('/admin/categoria/{id}/agregar','CRM\CategoriaClienteController@agregar');
+    Route::post('/admin/categoria/{id}/remover','CRM\CategoriaClienteController@remover');
 });
 
 
