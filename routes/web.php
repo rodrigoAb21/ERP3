@@ -67,7 +67,7 @@ Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
 
 
-// ------------------- COMPRA ----------------------------------
+// ------------------- COMPRAS ----------------------------------
 
 
 
@@ -78,8 +78,8 @@ Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
 
 
-// ------------------- VENTA ----------------------------------
-Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
+// ------------------- VENTAS ----------------------------------
+Route::resource('/admin/clientes', 'Ventas\ClienteController');
 
 
 

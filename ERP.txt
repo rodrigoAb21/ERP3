@@ -17,8 +17,8 @@ CREATE TABLE empleado (
 
 CREATE TABLE categoria_cliente (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    nombre VARCHAR(250) NOT NULL,
-    descripcion VARCHAR(250),
+    nombre VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255),
     puntosRequeridos INT NOT NULL,
     frecuenciaRequerida INT NOT NULL,
     montoRequerido INT NOT NULL,
@@ -33,9 +33,11 @@ CREATE TABLE cliente (
     nit INT,
     nombre VARCHAR(255) NOT NULL,
     puntosAcumulados INT NOT NULL,
-    direccion VARCHAR(250),
-    tipo VARCHAR(250) NOT NULL,
+    direccion VARCHAR(255),
+    email VARCHAR(255),
+    tipo VARCHAR(255) NOT NULL,
     idCategoria INT,
+    visible char NOT NULL,
     idEmpresa INT NOT NULL
 );
 
@@ -63,11 +65,11 @@ alter table users add foreign key(idCliente) references cliente(id);
 
 CREATE TABLE empresa (
     id INT AUTO_INCREMENT NOT NULL,
-    nit VARCHAR(250),
-    nombre VARCHAR(250) NOT NULL,
-    direccion VARCHAR(250),
-    telefono VARCHAR(250),
-    email VARCHAR(250),
+    nit VARCHAR(255),
+    nombre VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255),
+    telefono VARCHAR(255),
+    email VARCHAR(255),
     idEmpleado INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (idEmpleado)
