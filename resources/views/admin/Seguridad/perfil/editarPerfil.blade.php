@@ -2,7 +2,7 @@
 @section ('contenido')
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h3>Cuenta Admin: {{$admin -> nombre}}</h3>
+			<h3>Editar Perfil: {{$admin -> nombre}}</h3>
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<ul>

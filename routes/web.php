@@ -50,6 +50,9 @@ Route::post('/admin/editarPerfil/{id}', 'DashboardController@guardarPerfil');
 Route::get('/admin/editarCuenta', 'DashboardController@editarCuenta');
 Route::post('/admin/editarCuenta', 'DashboardController@guardarCuenta');
 
+Route::get('/admin/editarConfig', 'DashboardController@editarConf');
+Route::post('/admin/editarConfig', 'DashboardController@guardarConf');
+
 Route::get('/admin/editarEmpresa', 'DashboardController@editarEmpresa');
 Route::post('/admin/editarEmpresa', 'DashboardController@guardarEmpresa');
 
@@ -58,6 +61,7 @@ Route::post('/admin/editarEmpresa', 'DashboardController@guardarEmpresa');
 Route::post('/register', 'Seguridad\AdminController@crear');
 Route::resource('/admin/empleados', 'Seguridad\EmpleadoController');
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
+
 
 
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Seguridad\Empleado;
-use App\Seguridad\Empresa;
+use App\Modelos\Seguridad\Empleado;
+use App\Modelos\Seguridad\Empresa;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,11 +44,24 @@ class DashboardController extends Controller
 
     public function guardarCuenta(Request $request){
         $user4 = User::findOrFail(Auth::user()->id);
+        $user4 -> email = $request -> get('email');
+        $user4 -> password = bcrypt($request->get('password'));
+        $user4 -> update();
+
+        return Redirect::to('admin');
+    }
+
+
+
+    public function editarConf(){
+        return view('admin.Seguridad.perfil.editarConfig',["usuario" => User::findOrFail(Auth::user()->id)]);
+    }
+
+    public function guardarConf(Request $request){
+        $user4 = User::findOrFail(Auth::user()->id);
         $user4 -> color = $request -> get('color');
         $user4 -> fondo = $request -> get('fondo');
         $user4 -> fuente = $request -> get('fuente');
-        $user4 -> email = $request -> get('email');
-        $user4 -> password = bcrypt($request->get('password'));
         $user4 -> update();
 
         return Redirect::to('admin');

@@ -88,7 +88,7 @@
           <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
                   <!-- Authentication Links -->
-                      <li class="dropdown">
+                  <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                               {{ Auth::user()->name }} <span class="caret"></span>
                           </a>
@@ -118,6 +118,7 @@
                                   </li>
                               </ul>
                       </li>
+                  <li class="nav-item"> <a href="{{asset('/admin/editarConfig')}}"> <i class="fa fa-gears"> </i> </a> </li>
               </ul>
 
           </div>
