@@ -56,6 +56,7 @@ class ClienteController extends Controller
         $cliente -> email = $request->get('email');
         $cliente -> tipo = $request->get('tipo');
         $cliente -> idEmpresa = 123456;
+        $cliente -> visible = 1;
         $cliente -> idCategoria = $request->get('idCategoria');
         $cliente -> save();
 
