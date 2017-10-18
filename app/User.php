@@ -37,7 +37,6 @@ class User extends Authenticatable
     ];
     public function empleado()
     {
-//        Empleado::all();
-        return $this->belongsTo('App\Empleado','idEmpleado');
+        return $this->belongsTo('App\Modelos\Seguridad\Empleado','idEmpleado');
     }
 }
