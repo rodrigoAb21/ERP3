@@ -246,3 +246,4 @@ INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES ('1', 'ver Bitacora',
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES ('2', 'Gest. Datos de Empresa', '1');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES ('3', 'Gest. Empleados', '1');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES ('4', 'Gest. Datos de Empresa', '1');
+--probando cambios
