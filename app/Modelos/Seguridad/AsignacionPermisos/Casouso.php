@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Seguridad;
-
+namespace App\Modelos\Seguridad\AsignacionPermisos;
 use Illuminate\Database\Eloquent\Model;
 
 class Casouso extends Model
@@ -18,6 +17,7 @@ class Casouso extends Model
     ];
     public function depto()
     {
-        return $this->belongsTo('App\Seguridad\Departamento', 'depto_id');
+        return $this->belongsTo('App\Modelos\Seguridad\AsignacionPermisos\Departamento', 'depto_id');
     }
 }
+

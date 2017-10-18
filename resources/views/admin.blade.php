@@ -14,7 +14,7 @@
         <!-- Bootstrap 3.3.5 -->
       <link rel="stylesheet" href="{{asset('plantilla/css/bootstrap.min.css')}}">
       <link rel="stylesheet" href="{{asset('plantilla/css/bootstrap-select.min.css')}}">
-
+      <link rel="icon" href="{{asset('favicon.ico')}}">
 
         <!-- Theme style -->
       <link rel="stylesheet" href="{{asset('plantilla/css/AdminLTE.min.css')}}">
@@ -23,7 +23,6 @@
              folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="{{asset('plantilla/css/_all-skins.min.css')}}">
       <link rel="apple-touch-icon" href="{{asset('plantilla/img/apple-touch-icon.png')}}">
-      <link rel="shortcut icon" href="{{asset('favicon2.ico')}}">
     <!-- CSS para centrar todas las tablas tanto titulos como textos -->
       <style>
           th, td {

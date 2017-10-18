@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Seguridad;
-
+namespace App\Modelos\Seguridad\AsignacionPermisos;
 use Illuminate\Database\Eloquent\Model;
 
 class Permiso extends Model

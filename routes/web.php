@@ -59,11 +59,11 @@ Route::post('/register', 'Seguridad\AdminController@crear');
  */
 
 Route::post('/admin/empleados', 'Seguridad\EmpleadoController@store');
-Route::get('/admin/empleados', 'Seguridad\EmpleadoController@index')->middleware('permisos:3,leer');
-Route::get('/admin/empleados/create', 'Seguridad\EmpleadoController@create')->middleware('permisos:3,crear');
-Route::delete('/admin/empleados/{id}', 'Seguridad\EmpleadoController@destroy')->middleware('permisos:3,eliminar');
+Route::get('/admin/empleados', 'Seguridad\EmpleadoController@index')->middleware('permisos:1,leer');
+Route::get('/admin/empleados/create', 'Seguridad\EmpleadoController@create')->middleware('permisos:1,crear');
+Route::delete('/admin/empleados/{id}', 'Seguridad\EmpleadoController@destroy')->middleware('permisos:1,eliminar');
 Route::put('/admin/empleados', 'Seguridad\EmpleadoController@update');
-Route::get('/admin/empleados/{id}/edit', 'Seguridad\EmpleadoController@edit')->middleware('permisos:3,editar');
+Route::get('/admin/empleados/{id}/edit', 'Seguridad\EmpleadoController@edit')->middleware('permisos:1,editar');
 Route::get('/admin/empleados/{id}', 'Seguridad\EmpleadoController@show');
 
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');

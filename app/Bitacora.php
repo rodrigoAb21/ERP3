@@ -45,6 +45,7 @@ class Bitacora extends Model
     }
     public static function registrarCreate($tabla,$tupla)
     {
+        dd($tabla. '---'.$tupla);
         $accion1=new Accion;
         $accion1->accion=Utils::$ACTION_CREATE;
         $accion1->bitacora_id=Session::get(Utils::$BITACORA_ID_SESSION);

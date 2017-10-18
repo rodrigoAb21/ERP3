@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Seguridad;
 
 use App\Bitacora;
+use App\Modelos\Seguridad\AsignacionPermisos\Rol;
 use App\Modelos\Seguridad\Empleado;
-use App\Seguridad\Rol;
 use App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +74,7 @@ class EmpleadoController extends Controller
             {
                 $user2 -> idEmpleado = $empleado->id;
                 $user2->update();
-                Bitacora::registrarCreate(Utils::$TABLA_EMPLEADO,$empleado->id);
+                //Bitacora::registrarCreate(Utils::$TABLA_EMPLEADO,$empleado->id);
             }
 
         }
@@ -129,7 +129,7 @@ class EmpleadoController extends Controller
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
-            Bitacora::registrarUpdate(Utils::$TABLA_EMPLEADO,$empleado->id);
+            //Bitacora::registrarUpdate(Utils::$TABLA_EMPLEADO,$empleado->id);
         }
         return Redirect::to('admin/empleados');
     }

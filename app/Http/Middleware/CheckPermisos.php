@@ -10,7 +10,6 @@ class CheckPermisos
 
     public function handle($request, Closure $next,$cu,$accion)
     {
-
         if(Auth::user()->empleado->rol->id!=1){
             if(!$this->checkPermiso($cu, $accion))
             {

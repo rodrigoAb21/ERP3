@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Seguridad;
+namespace App\Modelos\Seguridad\AsignacionPermisos;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
@@ -16,7 +17,7 @@ class Rol extends Model
     ];
     public function casousos()
     {
-        return $this->belongsToMany('App\Seguridad\Casouso',
+        return $this->belongsToMany('App\Modelos\Seguridad\AsignacionPermisos\Casouso',
             'permisos',
             'rol_id',
             'casouso_id')

@@ -28,6 +28,6 @@ class Empleado extends Model
     }
   public function rol()
     {
-        return $this->belongsTo('App\Seguridad\Rol', 'rol_id','id');
+        return $this->belongsTo('App\Modelos\Seguridad\AsignacionPermisos\Rol', 'rol_id','id');
     }
 }

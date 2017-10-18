@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Seguridad;
 
-use App\Seguridad\Casouso;
-use App\Seguridad\Departamento;
-use App\Seguridad\Permiso;
+
+use App\Modelos\Seguridad\AsignacionPermisos\Casouso;
+use App\Modelos\Seguridad\AsignacionPermisos\Departamento;
+use App\Modelos\Seguridad\AsignacionPermisos\Permiso;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class CasousoController extends Controller

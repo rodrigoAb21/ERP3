@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>PATITO SOFT</title>
-
+      <link rel="icon" href="{{asset('favicon.ico')}}">
     <!-- Bootstrap -->
     <link href="{{asset('vistaPrincipal/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link rel="stylesheet" href="{{asset('vistaPrincipal/css/font-awesome.min.css')}}">

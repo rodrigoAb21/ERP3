@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Seguridad;
 
-use App\Seguridad\Permiso;
-use App\Seguridad\Rol;
+use App\Modelos\Seguridad\AsignacionPermisos\Permiso;
+use App\Modelos\Seguridad\AsignacionPermisos\Rol;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
