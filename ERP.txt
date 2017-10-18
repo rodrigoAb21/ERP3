@@ -3,6 +3,8 @@ create database erp3;
 use erp3;
 
 
+
+
 CREATE TABLE empleado (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     ci VARCHAR(255) NOT NULL,
