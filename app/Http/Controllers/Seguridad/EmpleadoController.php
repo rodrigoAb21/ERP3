@@ -142,7 +142,7 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        
+
         Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
     }
 }
