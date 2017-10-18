@@ -12,10 +12,10 @@
 				</ul>
 			</div>
 			@endif
+            <form method="POST" action="{{url('admin/empleados')}}">
+                {{ csrf_field() }}{{ method_field('PUT') }}
 
-			{!!Form::model($empleado,['method'=>'PATCH','route'=>['empleados.update',$empleado -> id]])!!}
-            {{Form::token()}}
-
+        <input value="{{$empleado->id}}" name="empleado_id" type="hidden">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="ci">CI</label>
@@ -50,16 +50,28 @@
                     <input type="text" name="telefono" class="form-control" value="{{$empleado -> telefono}}"  required >
                 </div>
             </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
+                <div class="form-group">
+                    <label for="rol_id">Rol:</label>
+                    <select name="rol_id" class="btn btn-info form-control">
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}"
+                                    @if($empleado->rol_id==$role->id) selected @endif>
+                                {{$role->nombre}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                </div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
 					<button class="btn btn-danger" type="reset">Cancelar</button>
 				</div>
 			</div>
+            </form>
 
-
-			{!!Form::close()!!}		
             
 		</div>
 	</div>
