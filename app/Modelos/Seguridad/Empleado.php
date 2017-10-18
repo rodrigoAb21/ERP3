@@ -26,8 +26,8 @@ class Empleado extends Model
     public function scopegetEmpleado($query, $id){
         return $this->findOrFail($id);
     }
-    public function rol()
+  public function rol()
     {
-        return $this->belongsTo('App\Seguridad\Rol', 'rol_id');
+        return $this->belongsTo('App\Seguridad\Rol', 'rol_id','id');
     }
 }
