@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Seguridad;
 
 use App\Seguridad\Casouso;
 use App\Seguridad\Departamento;
+use App\Seguridad\Permiso;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,17 @@ class CasousoController extends Controller
             $casouso=new Casouso;
             $casouso->nombre=$nombreCU;
             $casouso->depto_id=$depto_id;
-            $casouso->save();
+            if($casouso->save())
+            {
+                $permiso= new Permiso;
+                $permiso->casouso_id=$casouso->id;
+                $permiso->rol_id=1;//rol Administrador
+                $permiso->leer=1;
+                $permiso->crear=1;
+                $permiso->editar=1;
+                $permiso->eliminar=1;
+                $permiso->save();
+            }
         }
         return Redirect::to('/admin/casouso');
     }

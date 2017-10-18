@@ -1,16 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 /* VISTA INICIAL */
 Route::get('/', function () {
     return view('vistaPrincipal.home');
@@ -63,8 +51,13 @@ Route::post('/admin/editarEmpresa', 'DashboardController@guardarEmpresa');
 Route::post('/register', 'Seguridad\AdminController@crear');
 
 //Route::resource('/admin/empleados', 'Seguridad\EmpleadoController');
-//Resource de EmpleadoController
-//caso deuso id=1 en la BD ,gest de empleados
+/*
+ * Para asignar el middleware a una ruta se sigue el siguiente esquema:
+ * id es el id de la tabla Casouso
+ * accion = solo hay 4 acciones (ver la tabla permisos) leer,crear,editar,eliminar
+ * Ejemplo: Route::get('empleados', 'EmpleadoController@index')->middleware('permisos:id,accion');
+ */
+
 Route::post('/admin/empleados', 'Seguridad\EmpleadoController@store');
 Route::get('/admin/empleados', 'Seguridad\EmpleadoController@index')->middleware('permisos:3,leer');
 Route::get('/admin/empleados/create', 'Seguridad\EmpleadoController@create')->middleware('permisos:3,crear');
@@ -75,21 +68,21 @@ Route::get('/admin/empleados/{id}', 'Seguridad\EmpleadoController@show');
 
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
-//Gest. De Permisos
-Route::get('/admin/casouso', 'Seguridad\CasousoController@index');
+//Gest. De Permisos id=5
+Route::get('/admin/casouso', 'Seguridad\CasousoController@index')->middleware('permisos:5,leer');
 Route::post('/admin/casouso/buscar', 'Seguridad\CasousoController@buscar');
-Route::post('/admin/casouso/guardar', 'Seguridad\CasousoController@guardar');
+Route::post('/admin/casouso/guardar', 'Seguridad\CasousoController@guardar')->middleware('permisos:5,crear');;
 
-Route::get('/admin/rol', 'Seguridad\RolController@index');
+Route::get('/admin/rol', 'Seguridad\RolController@index')->middleware('permisos:6,leer');;
 Route::post('/admin/rol/buscar','Seguridad\RolController@buscar');
 
-Route::get('/admin/acciones/{id1}/{id2}', 'Seguridad\RolController@editarAcciones');
+Route::get('/admin/acciones/{id1}/{id2}', 'Seguridad\RolController@editarAcciones')->middleware('permisos:6,editar');;
 Route::post('/admin/actualizar-acciones', 'Seguridad\RolController@actualizarAcciones');
-Route::get('/admin/rol/lista-roles', 'Seguridad\RolController@listaRoles');
-Route::post('/admin/rol/guardar', 'Seguridad\RolController@guardar');
+Route::get('/admin/rol/lista-roles', 'Seguridad\RolController@listaRoles')->middleware('permisos:6,leer');
+Route::post('/admin/rol/guardar', 'Seguridad\RolController@guardar')->middleware('permisos:6,crear');
 Route::get('/admin/rol/actualizar-cu/{id}', 'Seguridad\RolController@actualizarCus');
-Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus');
-Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus');
+Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus')->middleware('permisos:6,editar');;
+Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus')->middleware('permisos:6,editar');
 
 
 
