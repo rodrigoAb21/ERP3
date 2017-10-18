@@ -59,7 +59,18 @@ Route::post('/admin/editarEmpresa', 'DashboardController@guardarEmpresa');
 // ------------------- SGURIDAD ----------------------------------
 
 Route::post('/register', 'Seguridad\AdminController@crear');
-Route::resource('/admin/empleados', 'Seguridad\EmpleadoController');
+
+//Route::resource('/admin/empleados', 'Seguridad\EmpleadoController');
+//Resource de EmpleadoController
+//caso deuso id=1 gest de empleados
+Route::post('/admin/empleados', 'EmpleadoController@store');
+Route::get('/admin/empleados', 'EmpleadoController@index')->middleware('permisos:1,leer');
+Route::get('/admin/empleados/create', 'EmpleadoController@create')->middleware('permisos:1,crear');
+Route::delete('/admin/empleados/{id}', 'EmpleadoController@destroy')->middleware('permisos:1,eliminar');
+Route::put('/admin/empleados/{id}', 'EmpleadoController@update');
+Route::get('/admin/empleados/{id}/edit', 'EmpleadoController@edit')->middleware('permisos:1,editar');
+Route::get('/admin/empleados/{id}', 'EmpleadoController@show');
+
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
 
