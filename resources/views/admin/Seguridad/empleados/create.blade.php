@@ -58,7 +58,16 @@
                     <input type="password" name="password" class="form-control" required >
                 </div>
             </div>
-
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="rol_id">Rol :</label>
+                    <select name="rol_id" class="btn btn-info form-control">
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}">{{$role->nombre}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
