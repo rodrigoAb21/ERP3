@@ -41,6 +41,7 @@ CREATE TABLE cliente (
     idEmpresa INT NOT NULL
 );
 
+
 alter table cliente add FOREIGN KEY (idCategoria) REFERENCES categoria_cliente (id);
 
 CREATE TABLE users (
