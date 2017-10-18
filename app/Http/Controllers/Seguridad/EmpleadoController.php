@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Seguridad;
 
 use App\Bitacora;
+use App\Modelos\Seguridad\Empleado;
+use App\Seguridad\Rol;
 use App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
-use App\Modelos\Seguridad\Empleado;
 use App\User;
 use DB;
 
@@ -23,7 +24,7 @@ class EmpleadoController extends Controller
     {
         if ($request){
             $query = trim($request -> get('searchText'));
-            $empleado=DB::table('empleado')->where('nombre','LIKE','%'.$query.'%')
+            $empleado=Empleado::where('nombre','LIKE','%'.$query.'%')
                 ->where('tipo','!=','Administrador')
                 ->orderBy('id','asc')
                 ->paginate(25);
@@ -39,7 +40,8 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        return view("admin.Seguridad.empleados.create");
+        $roles= Rol::where('id','>',1)->get();
+        return view("admin.Seguridad.empleados.create",compact('roles'));
     }
 
     /**
@@ -66,11 +68,12 @@ class EmpleadoController extends Controller
             $empleado -> ocupacion = $request -> get('ocupacion');
             $empleado -> telefono = $request -> get('telefono');
             $empleado -> tipo = 'Empleado';
+            $empleado -> rol_id =$request->rol_id ;
             $empleado -> idEmpresa = Auth::user()->idEmpresa;
             if($empleado -> save())
             {
                 $user2 -> idEmpleado = $empleado->id;
-                $user2->save();
+                $user2->update();
                 Bitacora::registrarCreate(Utils::$TABLA_EMPLEADO,$empleado->id);
             }
 
@@ -101,19 +104,14 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        return view("admin.Seguridad.empleados.edit",["empleado"=>empleado::findOrFail($id)]);
+        $empleado=Empleado::findOrFail($id);
+        $roles= Rol::where('id','>',1)->get();
+        return view("admin.Seguridad.empleados.edit",compact('empleado','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id=$request->empleado_id;
         $ultimo2 = DB::table('users')
         ->where('idEmpleado', '=', $id)
         ->first();
@@ -129,7 +127,7 @@ class EmpleadoController extends Controller
             $empleado -> ocupacion = $request -> get('ocupacion');
             $empleado -> telefono = $request -> get('telefono');
             $empleado -> tipo = 'Empleado';
-
+            $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
             Bitacora::registrarUpdate(Utils::$TABLA_EMPLEADO,$empleado->id);
         }
@@ -144,6 +142,7 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
+        
         Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
     }
 }
