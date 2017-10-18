@@ -24,7 +24,7 @@
                     <td>{{ $emple->ci}}</td>
                     <td>{{ $emple->nombre}}</td>
                     <td>{{ $emple->direccion}}</td>
-                    <td>{{ $emple->tipo}}</td>
+                    <td>{{  $emple->rol->nombre}}</td>
                     <td>{{ $emple->ocupacion}}</td>
 					<td>
 						<a href="{{URL::action('Seguridad\EmpleadoController@edit',$emple->id)}}"><button class="btn btn-info">Editar</button></a>
