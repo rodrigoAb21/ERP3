@@ -18,7 +18,7 @@ class CasousoController extends Controller
         $casousoSearch='';
         $cus=Casouso::all();
         $deptos=Departamento::all();
-        return view('admin.seguridad.casouso.index',
+        return view('admin.Seguridad.casouso.index',
             compact('cus','deptos',
                 'deptoSeach','casousoSearch'));
     }
@@ -38,7 +38,7 @@ class CasousoController extends Controller
         {
             $cus=Casouso::where('nombre','like','%'.$casousoSearch.'%')->get();
         }
-        return view('admin.seguridad.casouso.index',
+        return view('admin.Seguridad.casouso.index',
             compact('cus','deptos',
                 'deptoSeach','casousoSearch'));
     }
