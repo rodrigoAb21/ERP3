@@ -143,6 +143,9 @@
                       <ul class="treeview-menu">
                           <li><a href="{{asset('/admin/empleados')}}"><i class="fa fa-arrow-right"></i> Gestionar Empleados</a></li>
                           <li><a href="{{asset('/admin/cuentaEmpleados')}}"><i class="fa fa-arrow-right"></i> Gestionar Cuentas</a></li>
+                          <li><a href="{{asset('/admin/casouso')}}"><i class="fa fa-arrow-right"></i> Gest. Casos de uso</a></li>
+                          <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. de Roles</a></li>
+                          <li><a href="{{asset('/admin/rol')}}"><i class="fa fa-arrow-right"></i> Gest. de Permisos</a></li>
                       </ul>
                   </li>
                   <li class="treeview">
