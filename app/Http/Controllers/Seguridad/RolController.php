@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Seguridad;
 
-use App\Seguridad\Casouso;
 use App\Seguridad\Permiso;
 use App\Seguridad\Rol;
 use Illuminate\Http\Request;
@@ -17,7 +16,7 @@ class RolController extends Controller
     {
         $roles = Rol::all();
         $rolSearch = Rol::where('nombre', '=', 'ADMINISTRADOR')->firstOrFail();
-        return view('admin.seguridad.rol.index',
+        return view('admin.Seguridad.rol.index',
             compact('roles', 'rolSearch'));
     }
 
@@ -31,7 +30,7 @@ class RolController extends Controller
             return Redirect::to('/admin/rol');
         }
         $roles = Rol::all();
-        return view('admin.seguridad.rol.index',
+        return view('admin.Seguridad.rol.index',
             compact('roles', 'rolSearch'));
     }
     //id1=casouso_id
@@ -43,7 +42,7 @@ class RolController extends Controller
 
             foreach ($rol->casousos as $cu) {
                 if ($cu->id == $id1) {
-                    return view('admin.seguridad.rol.edit-acciones',
+                    return view('admin.Seguridad.rol.edit-acciones',
                         compact('rol', 'cu'));
                 }
             }
@@ -78,7 +77,7 @@ class RolController extends Controller
     public function listaRoles()
     {
         $roles = Rol::paginate(6);
-        return view('admin.seguridad.rol.lista-rol',compact('roles'));
+        return view('admin.Seguridad.rol.lista-rol',compact('roles'));
     }
     //guardar un rol
     public function guardar(Request $request)
@@ -90,9 +89,7 @@ class RolController extends Controller
             $rol->nombre=$nombre;
             if($rol->save())
             {
-                $roles=Rol::all();
-                return view('admin.seguridad.rol.lista-rol',
-                    compact('roles'));
+                return redirect('/admin/rol/lista-roles');
             }
 
 
@@ -111,7 +108,7 @@ FROM roles,casousos,permisos
 WHERE roles.id=?
 and roles.id=permisos.rol_id
 and casousos.id=permisos.casouso_id)',[$rol->id]);
-          return view('admin.seguridad.rol.editar-rol',compact('rol','cuDisponibles'));
+          return view('admin.Seguridad.rol.editar-rol',compact('rol','cuDisponibles'));
         }
     }
     public function removerCus(Request $request)
@@ -132,6 +129,10 @@ and casousos.id=permisos.casouso_id)',[$rol->id]);
             $permiso=new Permiso();
             $permiso->rol_id=$rol;
             $permiso->casouso_id=$cu;
+            $permiso->leer=1;
+            $permiso->crear=1;
+            $permiso->editar=1;
+            $permiso->eliminar=1;
             $permiso->save();
         }
         return Redirect::to('/admin/rol/actualizar-cu/'.$rol);
