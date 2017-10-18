@@ -7,25 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckPermisos
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
+
     public function handle($request, Closure $next,$cu,$accion)
     {
 
-        if(!$this->checkPermiso($cu, $accion))
-        {
-            $request->session()->flash('mensaje', 'Usted no tiene permisos para '.$accion.' los registros de esta seccion');
-            return redirect('/admin/mensaje');
+        if(Auth::user()->empleado->rol->id!=1){
+            if(!$this->checkPermiso($cu, $accion))
+            {
+                $request->session()->flash('mensaje', 'Usted no tiene permisos para '.$accion.' los registros de esta seccion');
+                return redirect('/admin/mensaje');
+            }
         }
 
         return $next($request);
     }
-
     /**
      * @param $cu
      * @param $accion

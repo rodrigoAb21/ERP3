@@ -21,6 +21,7 @@ class AdminController extends RegisterController
         $admin -> ocupacion = 'Administrador';
         $admin -> telefono = $request -> get('telefono');
         $admin -> tipo = 'Administrador';
+        $admin -> rol_id=1;//rol Administrador
         $admin -> idEmpresa = null;
         $admin -> save();
 
@@ -48,7 +49,9 @@ class AdminController extends RegisterController
 
         $user2 -> idEmpresa = $empresa -> id;
         $user2 -> update();
-
+        /*
+         * Asignando roles
+         */
         return Redirect::to('login');
     }
 }
