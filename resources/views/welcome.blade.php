@@ -63,6 +63,8 @@
                 margin-bottom: 30px;
             }
         </style>
+        <link rel="stylesheet" href="{{asset('plantilla/css/impresora.css')}}">
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">

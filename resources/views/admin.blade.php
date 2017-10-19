@@ -22,6 +22,9 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="{{asset('plantilla/css/_all-skins.min.css')}}">
+
+      <link rel="stylesheet" href="{{asset('plantilla/css/impresora.css')}}">
+
       <link rel="apple-touch-icon" href="{{asset('plantilla/img/apple-touch-icon.png')}}">
     <!-- CSS para centrar todas las tablas tanto titulos como textos -->
       <style>
