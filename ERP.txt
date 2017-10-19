@@ -252,4 +252,41 @@ INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'AGENTE');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'EMPLEADO');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'CLIENTE');
 
------------------------------------------------------------------------------------------
+-- Casos de uso
+
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Empresa', '1');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Empleados', '1');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Control de acceso', '1');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Visualizar Bitacora', '1');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Backup', '1');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Configuraciones', '1');
+
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Proveedores', '2');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Productos', '2');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Categorizacion de Productos', '2');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Compras', '2');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Administracion de Inventarios', '2');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reabastecimiento de Productos', '2');
+
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Registro de Puntos de Venta', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Clientes', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Registro de Pagos', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Pago al contado', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Facturacion', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Pago al Credito', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestionar Garante', '3');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Registro de cancelacion de cuotas', '3');
+
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Categorizacion de Clientes', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Beneficios', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Promociones', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Asignacion de Promociones', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Posibles Clientes', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Planificacion de Tareas', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Gestion de Tareas', '4');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Actualizacion de Estado', '4');
+
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de reabastecimiento de tiendas', '5');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de resultados de seguimientos', '5');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de productos mas bendidos', '5');
+

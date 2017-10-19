@@ -35,6 +35,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <th>Nro</th>
                 <th>Caso de uso</th>
                 <th>Departamento</th>
             </tr>
@@ -42,6 +43,8 @@
             <tbody>
             @foreach($cus as $cu)
                 <tr>
+
+                    <td>{{$cu->id}}</td>
                     <td>{{$cu->nombre}}</td>
                     <td>{{$cu->depto->nombre}}</td>
 

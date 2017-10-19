@@ -85,11 +85,6 @@ Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus')->midd
 Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus')->middleware('permisos:6,editar');
 
 
-
-
-
-
-
 // ------------------- COMPRAS ----------------------------------
 
 
