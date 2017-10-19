@@ -2,8 +2,8 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Beneficios <a href="{{URL::action('BeneficioController@create')}}"><button class="btn btn-success">Nuevo</button></a></h3>
-		@include('admin.beneficios.search')
+		<h3>Beneficios <a href="{{URL::action('CRM\BeneficioController@create')}}"><button class="btn btn-success">Nuevo</button></a></h3>
+		@include('admin.CRM.beneficios.search')
 	</div>
 </div>
 
@@ -23,11 +23,11 @@
 					<td>{{ $tar->nombre}}</td>
                     <td>{{ $tar->descripcion}}</td>
 					<td>
-						<a href="{{URL::action('BeneficioController@edit',$tar->id)}}"><button class="btn btn-info">Editar</button></a>
+						<a href="{{URL::action('CRM\BeneficioController@edit',$tar->id)}}"><button class="btn btn-info">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$tar->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
-				@include('admin.beneficios.modal')
+				@include('admin.CRM.beneficios.modal')
 				@endforeach
 			</table>
 		</div>

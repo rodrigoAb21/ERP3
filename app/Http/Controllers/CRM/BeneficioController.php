@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CRM;
 
+use App\Modelos\CRM\Beneficio;
 use Illuminate\Http\Request;
-use App\Beneficio;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Controller;
 use DB;
 
 class BeneficioController extends Controller
@@ -22,7 +23,7 @@ class BeneficioController extends Controller
                 ->orderBy('id','asc')
                 ->where('visible','1')
                 ->paginate();
-            return view('admin.beneficios.index',["beneficio" => $beneficio, "searchText" => $query]);
+            return view('admin.CRM.beneficios.index',["beneficio" => $beneficio, "searchText" => $query]);
         }
     }
 
@@ -33,7 +34,7 @@ class BeneficioController extends Controller
      */
     public function create()
     {
-        return view('admin.beneficios.create');
+        return view('admin.CRM.beneficios.create');
     }
 
     /**
@@ -72,7 +73,7 @@ class BeneficioController extends Controller
      */
     public function edit($id)
     {
-        return view("admin.beneficios.edit",["beneficio"=>beneficio::findOrFail($id)]);
+        return view("admin.CRM.beneficios.edit",["beneficio"=>beneficio::findOrFail($id)]);
     }
 
     /**

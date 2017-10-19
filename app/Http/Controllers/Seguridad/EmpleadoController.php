@@ -26,6 +26,7 @@ class EmpleadoController extends Controller
             $query = trim($request -> get('searchText'));
             $empleado=Empleado::where('nombre','LIKE','%'.$query.'%')
                 ->where('tipo','!=','Administrador')
+                ->where('visible', '=', '1')
                 ->orderBy('id','asc')
                 ->paginate(25);
 
@@ -142,7 +143,10 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-
-        Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
+        $empleado = Empleado::findOrFail($id);
+        $empleado -> visible = 0;
+        $empleado -> update();
+        return Redirect::to('admin/empleados');
+        //Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
     }
 }

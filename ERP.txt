@@ -13,6 +13,7 @@ CREATE TABLE empleado (
     ocupacion VARCHAR(255),
     telefono VARCHAR(255) NOT NULL,
     tipo VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL DEFAULT '1',
     idEmpresa INT
 );
 
@@ -39,7 +40,7 @@ CREATE TABLE cliente (
     email VARCHAR(255),
     tipo VARCHAR(255) NOT NULL,
     idCategoria INT,
-    visible char NOT NULL,
+    visible CHAR NOT NULL,
     idEmpresa INT NOT NULL
 );
 
@@ -197,45 +198,54 @@ CREATE TABLE seguimiento (
         REFERENCES empleado (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
---GESTION DE PERMISOS-------------------------------------------------------------
-create table departamentos(
-id int unsigned primary key,
-nombre varchar(50) not null
+
+-- GESTION DE PERMISOS-------------------------------------------------------------
+CREATE TABLE departamentos (
+    id INT UNSIGNED PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE casousos(
-id int unsigned AUTO_INCREMENT PRIMARY KEY,
-nombre varchar(50) not null,
-depto_id int unsigned,
-FOREIGN KEY(depto_id) REFERENCES departamentos(id)
+CREATE TABLE casousos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    depto_id INT UNSIGNED,
+    FOREIGN KEY (depto_id)
+        REFERENCES departamentos (id)
 );
 
-CREATE TABLE roles(
-id int unsigned AUTO_INCREMENT PRIMARY KEY,
-nombre varchar(50) not null
+CREATE TABLE roles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
 );
+
 alter table empleado add column rol_id int unsigned;
 alter table empleado add foreign key(rol_id) references roles(id);
 
 
-CREATE TABLE permisos(
-rol_id int unsigned ,
-casouso_id int unsigned ,
-leer int DEFAULT 0,
-crear int DEFAULT 0,
-editar int DEFAULT 0,
-eliminar int DEFAULT 0,
-FOREIGN KEY(rol_id) REFERENCES roles(id),
-FOREIGN KEY(casouso_id) REFERENCES casousos(id),
-    PRIMARY KEY(rol_id,casouso_id)
+CREATE TABLE permisos (
+    rol_id INT UNSIGNED,
+    casouso_id INT UNSIGNED,
+    leer INT DEFAULT 0,
+    crear INT DEFAULT 0,
+    editar INT DEFAULT 0,
+    eliminar INT DEFAULT 0,
+    FOREIGN KEY (rol_id)
+        REFERENCES roles (id),
+    FOREIGN KEY (casouso_id)
+        REFERENCES casousos (id),
+    PRIMARY KEY (rol_id , casouso_id)
 );
---Departamentos
+
+-- Departamentos
+
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (1, 'SEGURIDAD');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (2, 'COMPRAS');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (3, 'VENTAS');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (4, 'CRM');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (5, 'REPORTES');
---Roles
+
+-- Roles
+
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'ADMINISTRADOR');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'ENCARGADO');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'AGENTE');

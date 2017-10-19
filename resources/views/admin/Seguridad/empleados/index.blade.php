@@ -28,9 +28,10 @@
                     <td>{{ $emple->ocupacion}}</td>
 					<td>
 						<a href="{{URL::action('Seguridad\EmpleadoController@edit',$emple->id)}}"><button class="btn btn-info">Editar</button></a>
-
+                        <a href="" data-target="#modal-delete-{{$emple->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
+                    @include('admin.Seguridad.empleados.modal')
 				@endforeach
 			</table>
 		</div>
