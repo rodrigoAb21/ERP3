@@ -22,6 +22,9 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="{{asset('plantilla/css/_all-skins.min.css')}}">
+
+      <link rel="stylesheet" href="{{asset('plantilla/css/impresora.css')}}">
+
       <link rel="apple-touch-icon" href="{{asset('plantilla/img/apple-touch-icon.png')}}">
     <!-- CSS para centrar todas las tablas tanto titulos como textos -->
       <style>
@@ -145,11 +148,8 @@
                           <li><a href="{{asset('/admin/casouso')}}"><i class="fa fa-arrow-right"></i> Gest. Casos de uso</a></li>
                           <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. de Roles</a></li>
                           <li><a href="{{asset('/admin/rol')}}"><i class="fa fa-arrow-right"></i> Gest. de Permisos</a></li>
-<<<<<<< HEAD
                           <li><a href="{{asset('/backup')}}"><i class="fa fa-arrow-right"></i> Backup y Restore</a></li>
-=======
                           <li><a href="{{url('/admin/bitacora')}}"><i class="fa fa-arrow-right"></i> Bitacora</a></li>
->>>>>>> 0a2ae939a42dbaf1178c23020342841012bed897
 
                       </ul>
                   </li>

@@ -19,6 +19,9 @@
 
         <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{asset('css/signin.css')}}">
+
+	<link rel="stylesheet" href="{{asset('plantilla/css/impresora.css')}}">
+
     <!-- =======================================================
         Theme Name: Day
         Theme URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
