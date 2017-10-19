@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Compras;
 
-use App\Modelos\Compras\Producto;
+use App\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

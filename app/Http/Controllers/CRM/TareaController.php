@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\CRM;
 
+use App\Bitacora;
+use App\Utils;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -49,7 +51,9 @@ class TareaController extends Controller
         $tarea -> nombre = $request->get('nombre');
         $tarea -> descripcion = $request->get('descripcion');
         $tarea -> visible = '1';
-        $tarea -> save();
+        if ($tarea -> save()){
+            Bitacora::registrarCreate(Utils::$TABLA_TAREA, $tarea -> id);
+        }
         return Redirect::to('admin/tareas');
     }
 
@@ -87,7 +91,9 @@ class TareaController extends Controller
         $tarea = tarea::findOrFail($id);
         $tarea -> nombre = $request->get('nombre');
         $tarea -> descripcion = $request->get('descripcion');
-        $tarea -> update();
+        if ($tarea -> update()){
+            Bitacora::registrarUpdate(Utils::$TABLA_TAREA,$id);
+        }
         return Redirect::to('admin/tareas');
     }
 
@@ -101,7 +107,9 @@ class TareaController extends Controller
     {
         $tarea = tarea::findOrFail($id);
         $tarea -> visible = '0';
-        $tarea -> update();
+        if ($tarea -> update()){
+            Bitacora::registrarDelete(Utils::$TABLA_TAREA,$id);
+        }
         return Redirect::to('admin/tareas');
     }
 }
