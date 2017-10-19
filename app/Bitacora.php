@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Seguridad\Rol;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,11 @@ class Bitacora extends Model
         'user_id',
         'fechaEntrada'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 
     public static function ingreso()
     {

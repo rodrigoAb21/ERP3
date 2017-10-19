@@ -36,10 +36,10 @@
                 @foreach($rolSearch->casousos as $cu)
                     <tr>
                         <td>{{$cu->nombre}}({{$cu->depto->nombre}})</td>
-                        <td><input type="checkbox" @if($cu->pivot->leer==1) checked @endif></td>
-                        <td><input type="checkbox" @if($cu->pivot->crear==1) checked @endif></td>
-                        <td><input type="checkbox" @if($cu->pivot->editar==1) checked @endif></td>
-                        <td><input type="checkbox" @if($cu->pivot->eliminar==1) checked @endif></td>
+                        <td><input onclick="return false;" type="checkbox" @if($cu->pivot->leer==1) checked  @endif></td>
+                        <td><input onclick="return false;" type="checkbox" @if($cu->pivot->crear==1) checked @endif></td>
+                        <td><input onclick="return false;" type="checkbox" @if($cu->pivot->editar==1) checked @endif></td>
+                        <td><input onclick="return false;" type="checkbox" @if($cu->pivot->eliminar==1) checked @endif></td>
                         <td><a href="{{url('/admin/acciones/'.$cu->id.'/'.$rolSearch->id)}}"
                                class="btn btn-warning">Editar Acciones</a>
                         </td>

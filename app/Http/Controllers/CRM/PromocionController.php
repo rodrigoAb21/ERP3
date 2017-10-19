@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\DetallePromo;
-use App\Producto;
-use App\Promocion;
+
+use App\Modelos\CRM\DetallePromo;
+use App\Modelos\CRM\Promocion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +16,7 @@ class PromocionController extends Controller
         $promociones = DB::table('promocion')
             ->where('visible','=',1)
         ->get();
-        return view('promocion.index',compact('promociones','title'));
+        return view('admin.CRM.promocion.index',compact('promociones','title'));
     }
 
     /**
@@ -28,7 +28,7 @@ class PromocionController extends Controller
     {
         $title = 'Nueva Promocion';
 
-        return view('promocion.create',compact('title'));
+        return view('admin.CRM.promocion.create',compact('title'));
     }
     public function productos($id)
     {
@@ -40,7 +40,7 @@ FROM producto
 WHERE producto.visible=1
  and producto.id not in(SELECT detalle_promo.producto from detalle_promo WHERE detalle_promo.promo=? and detalle_promo.visible=1)',
             [$id]);
-        return view('promocion.productos', compact('promocion', 'productos','otros_productos'));
+        return view('admin.CRM.promocion.productos', compact('promocion', 'productos','otros_productos'));
     }
     public function agregarProductos(Request $request, $id)
     {
@@ -74,25 +74,15 @@ WHERE producto.visible=1
         }
         return redirect('/admin/promocion/'.$id.'/productos');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $promocion = new Promocion;
         $promocion->nombre = $request->nombre;
-        $promocion->fechaEmpieza=$request->comienzo;
-        $promocion->fechaTermina=$request->final;
-        if($promocion->save())
-        {
+        $promocion->fechaEmpieza=$request->fechaComienzo;
+        $promocion->fechaTermina=$request->fechaFinal;
+        $promocion->visible=1;
+        $promocion->save();
 
-        }else
-        {
-
-        }
         return redirect('admin/promocion');
 
     }
@@ -108,50 +98,5 @@ WHERE producto.visible=1
                 dd('error');
         }
         return redirect('/admin/promocion/'.$id.'/productos');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
     }
 }

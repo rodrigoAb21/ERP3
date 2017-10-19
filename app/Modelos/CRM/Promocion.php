@@ -19,7 +19,7 @@ class Promocion extends Model
     ];
     public function productos()
     {
-        return $this->belongsToMany('App\Producto','detalle_promo',
+        return $this->belongsToMany('App\Modelos\Compras\Producto','detalle_promo',
             'promo', 'producto')->withPivot('cantidad')->where('detalle_promo.visible','=',1);
     }
 }

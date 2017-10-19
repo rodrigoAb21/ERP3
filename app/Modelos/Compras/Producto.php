@@ -1,18 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Modelos\Compras;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
 
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'product';
+    protected $table = 'producto';
+    public $timestamps = false;
 
     /**
      * The database primary key value.
@@ -26,7 +28,10 @@ class Producto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'especificacion', 'garantia', 'puntosEquivale', 'puntosPorVenta', 'precioUCompra', 'precioUVenta', 'precioActual', 'categoria_id', 'visible'];
+    protected $fillable = ['nombre', 'especificacion',
+        'garantia', 'puntosEquivale', 'puntosPorVenta',
+        'precioUCompra', 'precioUVenta',
+        'precioActual', 'categoria_id', 'visible'];
 
 
 }

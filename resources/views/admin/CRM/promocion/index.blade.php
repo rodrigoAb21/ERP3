@@ -27,12 +27,6 @@
 						<a href="{{ url('admin/promocion/'.$promocione->id.'/productos') }}  ">
 							<button class="btn btn-info">Ver Productos</button>
 						</a>
-
-							<button class="btn btn-info" data-toggle="modal" data-target="#myModal">Editar</button>
-
-						<a href="#">
-							<button class="btn btn-info">Eliminar</button>
-						</a>
 					</td>
 
 				</tr>
@@ -41,18 +35,5 @@
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
-			</div>
-
-		</div>
-	</div>
-</div>
 @endsection
