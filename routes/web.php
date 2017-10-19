@@ -59,11 +59,11 @@ Route::post('/register', 'Seguridad\AdminController@crear');
  */
 
 Route::post('/admin/empleados', 'Seguridad\EmpleadoController@store');
-Route::get('/admin/empleados', 'Seguridad\EmpleadoController@index')->middleware('permisos:1,leer');
-Route::get('/admin/empleados/create', 'Seguridad\EmpleadoController@create')->middleware('permisos:1,crear');
-Route::delete('/admin/empleados/{id}', 'Seguridad\EmpleadoController@destroy')->middleware('permisos:1,eliminar');
+Route::get('/admin/empleados', 'Seguridad\EmpleadoController@index')->middleware('permisos:2,leer');
+Route::get('/admin/empleados/create', 'Seguridad\EmpleadoController@create')->middleware('permisos:2,crear');
+Route::delete('/admin/empleados/{id}', 'Seguridad\EmpleadoController@destroy')->middleware('permisos:2,eliminar');
 Route::put('/admin/empleados', 'Seguridad\EmpleadoController@update');
-Route::get('/admin/empleados/{id}/edit', 'Seguridad\EmpleadoController@edit')->middleware('permisos:1,editar');
+Route::get('/admin/empleados/{id}/edit', 'Seguridad\EmpleadoController@edit')->middleware('permisos:2,editar');
 Route::get('/admin/empleados/{id}', 'Seguridad\EmpleadoController@show');
 
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
@@ -99,9 +99,14 @@ Route::resource('/admin/producto','Compras\ProductoController');
 
 
 // ------------------- VENTAS ----------------------------------
-Route::resource('/admin/clientes', 'Ventas\ClienteController');
+//Route::resource('/admin/clientes', 'Ventas\ClienteController');
 
-
+Route::post('/admin/clientes', 'Ventas\ClienteController@store');
+Route::get('/admin/clientes', 'Ventas\ClienteController@index')->middleware('permisos:14,leer');
+Route::get('/admin/clientes/create', 'Ventas\ClienteController@create')->middleware('permisos:14,crear');
+Route::delete('/admin/clientes/{id}', 'Ventas\ClienteController@destroy')->middleware('permisos:14,eliminar');
+Route::put('/admin/clientes', 'Ventas\ClienteController@update');
+Route::get('/admin/clientes/{id}/edit', 'Ventas\ClienteController@edit')->middleware('permisos:14,editar');
 
 
 
@@ -110,9 +115,16 @@ Route::resource('/admin/clientes', 'Ventas\ClienteController');
 
 // ------------------- CRM ----------------------------------
 Route::resource('/admin/beneficios', 'CRM\BeneficioController');
-Route::resource('/admin/tareas', 'CRM\TareaController');
 Route::resource('/admin/seguimientos', 'CRM\SeguimientoController');
 
+//Route::resource('/admin/tareas', 'CRM\TareaController');
+
+Route::post('/admin/tareas', 'CRM\TareaController@store');
+Route::get('/admin/tareas', 'CRM\TareaController@index')->middleware('permisos:27,leer');
+Route::get('/admin/tareas/create', 'CRM\TareaController@create')->middleware('permisos:27,crear');
+Route::delete('/admin/tareas/{id}', 'CRM\TareaController@destroy')->middleware('permisos:27,eliminar');
+Route::put('/admin/tareas', 'CRM\TareaController@update');
+Route::get('/admin/tareas/{id}/edit', 'CRM\TareaController@edit')->middleware('permisos:27,editar');
 
 
 

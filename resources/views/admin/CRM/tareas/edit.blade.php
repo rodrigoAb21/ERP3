@@ -13,8 +13,10 @@
 			</div>
 			@endif
 
-			{!!Form::model($tarea,['method'=>'PATCH','route'=>['tareas.update',$tarea -> id]])!!}
-            {{Form::token()}}
+            <form method="POST" action="{{url('admin/tareas')}}">
+                {{ csrf_field() }}{{ method_field('PUT') }}
+
+                <input value="{{$tarea->id}}" name="id" type="hidden">
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="form-group">
@@ -38,7 +40,7 @@
 			</div>
 
 
-			{!!Form::close()!!}		
+            </form>
             
 		</div>
 	</div>

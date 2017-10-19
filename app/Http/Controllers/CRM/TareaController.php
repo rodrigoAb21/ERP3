@@ -86,13 +86,13 @@ class TareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $tarea = tarea::findOrFail($id);
+        $tarea = tarea::findOrFail($request -> id);
         $tarea -> nombre = $request->get('nombre');
         $tarea -> descripcion = $request->get('descripcion');
         if ($tarea -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_TAREA,$id);
+            Bitacora::registrarUpdate(Utils::$TABLA_TAREA,$request -> id);
         }
         return Redirect::to('admin/tareas');
     }
