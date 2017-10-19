@@ -119,7 +119,7 @@ CREATE TABLE producto (
     puntosPorVenta INT NOT NULL,
     precioUCompra DECIMAL(8 , 2 ) NOT NULL,
     precioUVenta DECIMAL(8 , 2 ) NOT NULL,
-    precioActual DECIMAL(8 , 2 ) NOT NULL,
+    precionActual DECIMAL(8 , 2 ) NOT NULL,
     categoria_id INT NOT NULL,
     visible INT,
     PRIMARY KEY (id)
@@ -242,8 +242,8 @@ INSERT INTO `departamentos` (`id`, `nombre`) VALUES (3, 'VENTAS');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (4, 'CRM');
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (5, 'REPORTES');
 
--- Roles
 
+-- Roles
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'ADMINISTRADOR');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'ENCARGADO');
 INSERT INTO `roles` (`id`, `nombre`) VALUES (NULL, 'AGENTE');
@@ -288,3 +288,69 @@ INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de re
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de resultados de seguimientos', '5');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de productos mas bendidos', '5');
 
+create table punto_de_venta(
+id int auto_increment primary key,
+nombre varchar(255) not null,
+ubicacion varchar(255) not null
+);
+
+
+CREATE TABLE pago(
+    id INT AUTO_INCREMENT primary key,
+    montoTotal float not null,
+    fecha datetime not null,
+    nombre varchar(255),
+    tipo varchar(255),
+    nit int,
+    idPuntoVenta int not null,
+    idCliente int not null,
+    idEmpleado int not null,
+
+    foreign key(idPuntoVenta) references punto_de_venta(id) on update cascade on delete cascade,
+    foreign key(idCliente) references cliente(id) on update cascade on delete cascade,
+    foreign key(idEmpleado) references empleado(id) on update cascade on delete cascade
+);
+
+create table detalle_venta(
+	idPago int not null,
+	idProducto int not null,
+	cantidad int not null,
+	subtotal int not null,
+	detalle varchar(255),
+
+    primary key(idPago,idProducto),
+	foreign key(idPago) references pago(id) on update cascade on delete cascade,
+    foreign key(idProducto) references producto(id)  on update cascade on delete cascade
+);
+
+
+create table stock_puntoVenta(
+idPuntoVenta int not null,
+idProducto int not null,
+stock int not null,
+stock_minimo int not null,
+primary key(idPuntoVenta, idProducto),
+foreign key (idPuntoVenta) references punto_de_venta(id) on update cascade on delete cascade,
+foreign key (idProducto) references producto(id) on update cascade on delete cascade
+);
+
+
+INSERT INTO producto VALUES ( null,'Z2', 'celular con camara de 20 pxls', '2 años', 500000, 20, 450, 800, 80, 1, 1);
+INSERT INTO producto VALUES ( null,'S7', 'celular con camara de 20 pxls', '2 años', 500000, 20, 450, 800, 80, 1, 1);
+
+INSERT INTO punto_de_venta VALUES (null,'PuntoA','Calle X...');
+INSERT INTO punto_de_venta VALUES (null,'PuntoB','Calle Y...');
+INSERT INTO punto_de_venta VALUES (null,'PuntoC','Calle Z...');
+
+
+INSERT INTO cliente VALUES (null,8595199,12545,'Ernesto Castillo',50,'Calle Suarez de Figueroa','', 'cliente',null,1,123);
+select * from empleado;
+INSERT INTO empleado VALUES (null,'125','Cecilia Tellez','Cuarto Anillo','Cajero',45145,'empleado',1,123,1);
+
+INSERT INTO pago VALUES (null,0,'2017-10-08','Ernesto Castillo','contado',72145,1,1,1);
+INSERT INTO pago VALUES (null,0,'2017-10-08','Ever Castillo','contado',72145,1,1,1);
+
+INSERT INTO detalle_venta VALUES (1,2,5,10,'fgh');
+INSERT INTO detalle_venta VALUES (1,1,5,10,'fgh');
+
+INSERT INTO detalle_venta VALUES (2,1,5,10,'fh');
