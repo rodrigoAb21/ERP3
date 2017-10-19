@@ -98,9 +98,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $cliente = cliente::findOrFail($id);
+        $cliente = cliente::findOrFail($request -> id);
         $cliente -> ci = $request->get('ci');
         $cliente -> nit = $request->get('nit');
         $cliente -> nombre = $request->get('nombre');

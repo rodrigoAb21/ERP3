@@ -16,6 +16,7 @@
                 {{ csrf_field() }}{{ method_field('PUT') }}
 
         <input value="{{$empleado->id}}" name="empleado_id" type="hidden">
+
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="ci">CI</label>

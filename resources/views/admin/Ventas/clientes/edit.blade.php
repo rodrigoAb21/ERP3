@@ -13,8 +13,11 @@
 			</div>
 			@endif
 
-			{!!Form::model($cliente,['method'=>'PATCH','route'=>['clientes.update',$cliente -> id]])!!}
-            {{Form::token()}}
+            <form method="POST" action="{{url('admin/clientes')}}">
+                {{ csrf_field() }}{{ method_field('PUT') }}
+
+                <input value="{{$cliente->id}}" name="id" type="hidden">
+
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="ci">Nro de Carnet</label>
@@ -46,7 +49,15 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="tipo">Tipo</label>
-                    <input type="text" name="tipo" class="form-control"   value="{{$cliente -> tipo}}" >
+                    <select name="tipo" id="tipo" class="form-control">
+                        @if($cliente -> tipo == "Cliente")
+                        <option value="Cliente" selected>Cliente</option>
+                        <option value="Posible Cliente">Posible Cliente</option>
+                        @else
+                            <option value="Posible Cliente" selected>Posible Cliente</option>
+                            <option value="Cliente">Cliente</option>
+                        @endif
+                    </select>
                 </div>
             </div>
 
@@ -80,7 +91,7 @@
                 </div>
             </div>
 
-			{!!Form::close()!!}		
+			</form>
             
 		</div>
 	</div>
