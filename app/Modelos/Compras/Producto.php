@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Modelos\Compras;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Producto extends Model
      *
      * @var string
      */
-    protected $table = 'product';
+    protected $table = 'producto';
 
     /**
      * The database primary key value.

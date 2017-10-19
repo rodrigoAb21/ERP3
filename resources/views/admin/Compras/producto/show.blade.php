@@ -1,19 +1,17 @@
-@extends('layouts.app')
-
-@section('content')
+@extends ('admin')
+@section ('contenido')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Post {{ $post->id }}</div>
+                    <div class="panel-heading">Post {{ $producto->id }}</div>
                     <div class="panel-body">
 
-                        <a href="{{ url('/admin/posts') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/posts/' . $post->id . '/edit') }}" title="Edit Post"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/producto') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/producto/' . $producto->id . '/edit') }}" title="Edit Post"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                        <form method="POST" action="{{ url('admin/posts' . '/' . $post->id) }}" accept-charset="UTF-8" style="display:inline">
+                        <form method="POST" action="{{ url('admin/producto' . '/' . $producto->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger btn-xs" title="Delete Post" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
@@ -25,9 +23,9 @@
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $post->id }}</td>
+                                        <th>ID</th><td>{{ $producto->id }}</td>
                                     </tr>
-                                    <tr><th> Nombre </th><td> {{ $post->nombre }} </td></tr><tr><th> Especificacion </th><td> {{ $post->especificacion }} </td></tr><tr><th> Garantia </th><td> {{ $post->garantia }} </td></tr>
+                                    <tr><th> Nombre </th><td> {{ $producto->nombre }} </td></tr><tr><th> Especificacion </th><td> {{ $producto->especificacion }} </td></tr><tr><th> Garantia </th><td> {{ $producto->garantia }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

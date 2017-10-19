@@ -1,17 +1,14 @@
-@extends('layouts.app')
-
-@section('content')
+@extends ('admin')
+@section ('contenido')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Posts</div>
+                    <div class="panel-heading">Productos</div>
                     <div class="panel-body">
                         <a href="{{ url('/admin/producto/create') }}" class="btn btn-success btn-sm" title="Add New Post">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+                            <i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo              </a>
 
                         <form method="GET" action="{{ url('/admin/posts') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
                             <div class="input-group">
@@ -34,25 +31,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($posts as $item)
+                                @foreach($productos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td>{{ $item->nombre }}</td><td>{{ $item->especificacion }}</td><td>{{ $item->garantia }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/producto/' . $item->id) }}" title="View Post"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/producto/' . $item->id . '/edit') }}" title="Edit Post"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/admin/producto/' . $item->id) }}" title="Detalle"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/admin/producto/' . $item->id . '/edit') }}" title="Editar Producto"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
                                             <form method="POST" action="{{ url('/admin/producto' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-xs" title="Delete Post" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-xs" title="Eliminar Producto" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $posts->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $productos->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>
