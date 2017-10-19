@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Seguridad;
 
 use App\Bitacora;
-use App\Modelos\Seguridad\AsignacionPermisos\Rol;
 use App\Modelos\Seguridad\Empleado;
+use App\Seguridad\Rol;
 use App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,18 +15,12 @@ use DB;
 
 class EmpleadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if ($request){
             $query = trim($request -> get('searchText'));
             $empleado=Empleado::where('nombre','LIKE','%'.$query.'%')
                 ->where('tipo','!=','Administrador')
-                ->where('visible', '=', '1')
                 ->orderBy('id','asc')
                 ->paginate(25);
 
@@ -34,23 +28,12 @@ class EmpleadoController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles= Rol::where('id','>',1)->get();
         return view("admin.Seguridad.empleados.create",compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user2 = new User();
@@ -73,9 +56,11 @@ class EmpleadoController extends Controller
             $empleado -> idEmpresa = Auth::user()->idEmpresa;
             if($empleado -> save())
             {
+                Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id
+            );
                 $user2 -> idEmpleado = $empleado->id;
                 $user2->update();
-                //Bitacora::registrarCreate(Utils::$TABLA_EMPLEADO,$empleado->id);
+
             }
 
         }
@@ -86,23 +71,11 @@ class EmpleadoController extends Controller
         return Redirect::to('admin/empleados');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $empleado=Empleado::findOrFail($id);
@@ -121,6 +94,8 @@ class EmpleadoController extends Controller
         $user4->name = $request->get('nombre');
         if($user4->update())
         {
+            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id
+        );
             $empleado = Empleado::findOrFail($id);
             $empleado -> ci = $request -> get('ci');
             $empleado -> nombre = $request -> get('nombre');
@@ -130,7 +105,7 @@ class EmpleadoController extends Controller
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
-            //Bitacora::registrarUpdate(Utils::$TABLA_EMPLEADO,$empleado->id);
+
         }
         return Redirect::to('admin/empleados');
     }
@@ -143,10 +118,7 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        $empleado = Empleado::findOrFail($id);
-        $empleado -> visible = 0;
-        $empleado -> update();
-        return Redirect::to('admin/empleados');
-        //Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
+
+        Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
     }
 }
