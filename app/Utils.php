@@ -6,7 +6,7 @@
  * Time: 02:10 PM
  */
 
-namespace app;
+namespace App;
 
 
 class Utils
@@ -21,5 +21,9 @@ class Utils
 
 
     public static $TABLA_EMPLEADO='empleado';
+    public static $TABLA_CLIENTE='cliente';
+    public static $TABLA_SEGUIMIENTO='seguimiento';
+    public static $TABLA_TAREA='tarea';
+
 
 }
