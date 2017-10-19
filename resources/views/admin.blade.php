@@ -145,6 +145,8 @@
                           <li><a href="{{asset('/admin/casouso')}}"><i class="fa fa-arrow-right"></i> Gest. Casos de uso</a></li>
                           <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. de Roles</a></li>
                           <li><a href="{{asset('/admin/rol')}}"><i class="fa fa-arrow-right"></i> Gest. de Permisos</a></li>
+                          <li><a href="{{asset('/backup')}}"><i class="fa fa-arrow-right"></i> Backup y Restore</a></li>
+
                       </ul>
                   </li>
                   <li class="treeview">

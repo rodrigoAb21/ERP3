@@ -145,3 +145,13 @@ Route::group(['middleware'=> 'web'],function(){
 });
 
 
+//-----------backup
+Route::get('/backup','backupController@index');
+
+Route::get('/backup/restore','backupController@restaurar');
+
+Route::get('/backup/create/{id}','backupController@save');   
+
+// Route::post('/backup/restore','backupController@show');
+
+ Route::get('/backup/backup','backupController@backup');
