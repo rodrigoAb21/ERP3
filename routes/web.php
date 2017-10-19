@@ -137,7 +137,7 @@ Route::get('/admin/tareas/{id}/edit', 'CRM\TareaController@edit')->middleware('p
 Route::get('admin/reportes/ReporteVentas', 'Reportes\ReporteController@index');
 Route::post('admin/reportes/ReporteVentas', 'Reportes\ReporteController@ventas');
 Route::post('admin/reportes/ReporteVentas/PDF', 'Reportes\ReporteController@ventasPDF');
-Route::post('admin/reportes/ReporteVentas/Imprimir', 'Reportes\ReporteController@ventasImprimir');
+//Route::post('admin/reportes/ReporteVentas/Imprimir', 'Reportes\ReporteController@ventasImprimir');
 
 
 

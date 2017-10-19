@@ -52,12 +52,18 @@
 
 			</table>
             <div class="">
-                <a href="{{URL::action('Reportes\ReporteController@ventasPDF')}}"><button class="btn btn-info">Descargar<i class="fa fa-download"></i></button></a>
-                <a href="{{URL::action('Reportes\ReporteController@ventasImprimir')}}"><button class="btn btn-danger">Imprimir<i class="fa fa-print"></i></button></a>
-
+                <a ><button class="btn btn-danger" onclick="printHTML()" >Imprimir<i class="fa fa-print"></i></button></a>
             </div>
 		</div>
 		</body>
 	</div>
 </div>
+
+    <script>
+        function printHTML() {
+            if (window.print) {
+                window.print();
+            }
+        }
+    </script>
 @endsection

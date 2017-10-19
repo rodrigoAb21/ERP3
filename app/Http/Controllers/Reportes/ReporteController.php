@@ -29,7 +29,7 @@ class ReporteController extends Controller
         return view('admin.reportes.ReporteVentas',["mV" => $mV]);
     }
 
-    public function ventasPDF(){
+    public function ventasPDF(Request $request){
         $mV = DB::select('select producto.id, producto.nombre,
                           SUM(detalle_venta.cantidad) as cantidad,
                           producto.precioUVenta as precioV, 

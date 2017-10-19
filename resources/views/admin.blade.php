@@ -190,7 +190,7 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
-                          <li><a href="#"><i class="fa fa-arrow-right"></i> Reporte de Clientes</a></li>
+                          <li><a href="{{asset('admin/reportes/ReporteVentas')}}"><i class="fa fa-arrow-right"></i> Reporte de Ventas</a></li>
                       </ul>
                   </li>
               </ul>
