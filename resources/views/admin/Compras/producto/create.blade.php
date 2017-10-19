@@ -5,7 +5,7 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Crear Nuevo Producto</div>
+                    <div class="panel-heading">Crear Producto</div>
                     <div class="panel-body">
                         <a href="{{ url('/admin/producto') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
