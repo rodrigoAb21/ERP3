@@ -5,7 +5,11 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
+<<<<<<< HEAD
                     <div class="panel-heading">Edit Post #{{ $producto->id }}</div>
+=======
+                    <div class="panel-heading">Edit Producto #{{ $producto->id }}</div>
+>>>>>>> 90c3b7178fce38a950330177153f0889109c1b6f
                     <div class="panel-body">
                         <a href="{{ url('/admin/producto') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
