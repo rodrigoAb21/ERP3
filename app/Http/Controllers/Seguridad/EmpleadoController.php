@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Seguridad;
 
 use App\Bitacora;
+use App\Modelos\Seguridad\AsignacionPermisos\Rol;
 use App\Modelos\Seguridad\Empleado;
-use App\Seguridad\Rol;
 use App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
