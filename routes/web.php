@@ -84,9 +84,11 @@ Route::get('/admin/rol/actualizar-cu/{id}', 'Seguridad\RolController@actualizarC
 Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus')->middleware('permisos:6,editar');;
 Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus')->middleware('permisos:6,editar');
 
-
+Route::get('/admin/bitacora' ,'Seguridad\BitacoraController@index');
+Route::get('/admin/bitacora/{id}' ,'Seguridad\BitacoraController@show');
 // ------------------- COMPRAS ----------------------------------
 
+Route::resource('/admin/producto','Compras\ProductoController');
 
 
 
