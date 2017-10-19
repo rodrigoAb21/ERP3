@@ -56,10 +56,11 @@ class EmpleadoController extends Controller
             $empleado -> idEmpresa = Auth::user()->idEmpresa;
             if($empleado -> save())
             {
+                Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id
+            );
                 $user2 -> idEmpleado = $empleado->id;
                 $user2->update();
-                Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id
-                );
+
             }
 
         }
@@ -93,6 +94,8 @@ class EmpleadoController extends Controller
         $user4->name = $request->get('nombre');
         if($user4->update())
         {
+            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id
+        );
             $empleado = Empleado::findOrFail($id);
             $empleado -> ci = $request -> get('ci');
             $empleado -> nombre = $request -> get('nombre');
@@ -102,8 +105,7 @@ class EmpleadoController extends Controller
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
-            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id
-            );
+
         }
         return Redirect::to('admin/empleados');
     }
