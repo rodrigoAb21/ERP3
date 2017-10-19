@@ -145,7 +145,11 @@
                           <li><a href="{{asset('/admin/casouso')}}"><i class="fa fa-arrow-right"></i> Gest. Casos de uso</a></li>
                           <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. de Roles</a></li>
                           <li><a href="{{asset('/admin/rol')}}"><i class="fa fa-arrow-right"></i> Gest. de Permisos</a></li>
+<<<<<<< HEAD
                           <li><a href="{{asset('/backup')}}"><i class="fa fa-arrow-right"></i> Backup y Restore</a></li>
+=======
+                          <li><a href="{{url('/admin/bitacora')}}"><i class="fa fa-arrow-right"></i> Bitacora</a></li>
+>>>>>>> 0a2ae939a42dbaf1178c23020342841012bed897
 
                       </ul>
                   </li>
@@ -155,8 +159,7 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
-
-
+                          <li><a href="{{asset('/admin/producto')}}"><i class="fa fa-arrow-right"></i> Gestionar Productos</a></li>
                       </ul>
                   </li>
                   <li class="treeview">

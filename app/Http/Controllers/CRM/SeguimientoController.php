@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\CRM;
 
+use App\Bitacora;
+use App\Utils;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,7 +66,10 @@ class SeguimientoController extends Controller
         $seguimiento -> idEmpleado = $request->get('idEmpleado');
         $seguimiento -> idEstado = $request->get('idEstado');
         $seguimiento -> visible = '1';
-        $seguimiento -> save();
+        if ($seguimiento -> save()){
+            Bitacora::registrarCreate(Utils::$TABLA_SEGUIMIENTO, $seguimiento->id);
+        }
+
         return Redirect::to('admin/seguimientos');
     }
 
@@ -106,7 +111,9 @@ class SeguimientoController extends Controller
         $seguimiento -> idCliente = $request->get('idCliente');
         $seguimiento -> idEmpleado = $request->get('idEmpleado');
         $seguimiento -> idEstado = $request->get('idEstado');
-        $seguimiento -> update();
+        if ($seguimiento -> update()){
+            Bitacora::registrarUpdate(Utils::$TABLA_SEGUIMIENTO, $id);
+        }
         return Redirect::to('admin/seguimientos');
     }
 
@@ -120,7 +127,9 @@ class SeguimientoController extends Controller
     {
         $seguimiento = seguimiento::findOrFail($id);
         $seguimiento -> visible = '0';
-        $seguimiento -> update();
+        if ($seguimiento -> update()){
+            Bitacora::registrarDelete(Utils::$TABLA_SEGUIMIENTO, $id);
+        }
         return Redirect::to('admin/seguimientos');
     }
 }

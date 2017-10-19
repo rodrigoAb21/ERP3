@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Ventas;
 
+use App\Bitacora;
 use App\Http\Controllers\Controller;
 use App\Modelos\Ventas\Cliente;
+use App\Utils;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -58,7 +60,9 @@ class ClienteController extends Controller
         $cliente -> idEmpresa = 123456;
         $cliente -> visible = 1;
         $cliente -> idCategoria = $request->get('idCategoria');
-        $cliente -> save();
+        if ($cliente -> save()){
+            Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id);
+        }
 
         return Redirect::to('admin/clientes');
     }
@@ -106,7 +110,9 @@ class ClienteController extends Controller
         $cliente -> tipo = $request->get('tipo');
         $cliente -> idEmpresa = 123456;
         $cliente -> idCategoria = $request->get('idCategoria');
-        $cliente -> update();
+        if ($cliente -> update()){
+            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);
+        }
 
         return Redirect::to('admin/clientes');
     }
@@ -121,8 +127,9 @@ class ClienteController extends Controller
     {
         $cliente = cliente::findOrFail($id);
         $cliente -> visible = 0;
-        $cliente ->update();
-
+        if ($cliente ->update()){
+            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
+        }
         return Redirect::to('admin/clientes');
     }
 }

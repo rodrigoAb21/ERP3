@@ -21,6 +21,7 @@ class EmpleadoController extends Controller
             $query = trim($request -> get('searchText'));
             $empleado=Empleado::where('nombre','LIKE','%'.$query.'%')
                 ->where('tipo','!=','Administrador')
+                ->where('visible','=','1')
                 ->orderBy('id','asc')
                 ->paginate(25);
 
@@ -94,8 +95,6 @@ class EmpleadoController extends Controller
         $user4->name = $request->get('nombre');
         if($user4->update())
         {
-            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id
-        );
             $empleado = Empleado::findOrFail($id);
             $empleado -> ci = $request -> get('ci');
             $empleado -> nombre = $request -> get('nombre');
@@ -105,6 +104,7 @@ class EmpleadoController extends Controller
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
+            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id);
 
         }
         return Redirect::to('admin/empleados');
@@ -118,7 +118,11 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-
-        Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
+        $empleado = Empleado::findOrFail($id);
+        $empleado -> visible = 0;
+        if ($empleado -> update()){
+            Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
+        }
+        return Redirect::to('admin/empleados');
     }
 }
