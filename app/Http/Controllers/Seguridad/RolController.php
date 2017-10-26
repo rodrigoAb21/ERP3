@@ -118,9 +118,11 @@ and casousos.id=permisos.casouso_id)',[$rol->id]);
     {
         $rol=$request->rol;
         $cus=$request->remover;
-        foreach ($cus as $cu){
-            $permiso=Permiso::where([['casouso_id','=',$cu],['rol_id','=',$rol]])->firstOrFail();
-            $permiso->delete();
+        if(!is_null($cus)){
+            foreach ($cus as $cu){
+                $permiso=Permiso::where([['casouso_id','=',$cu],['rol_id','=',$rol]])->firstOrFail();
+                $permiso->delete();
+            }
         }
         return Redirect::to('/admin/rol/actualizar-cu/'.$rol);
     }
@@ -128,6 +130,7 @@ and casousos.id=permisos.casouso_id)',[$rol->id]);
     {
         $rol=$request->rol;
         $cus=$request->agregar;
+        if(!is_null($cus)){
         foreach ($cus as $cu){
             $permiso=new Permiso();
             $permiso->rol_id=$rol;
@@ -137,6 +140,7 @@ and casousos.id=permisos.casouso_id)',[$rol->id]);
             $permiso->editar=1;
             $permiso->eliminar=1;
             $permiso->save();
+            }
         }
         return Redirect::to('/admin/rol/actualizar-cu/'.$rol);
     }
