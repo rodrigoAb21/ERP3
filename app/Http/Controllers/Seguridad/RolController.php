@@ -109,6 +109,9 @@ WHERE roles.id=?
 and roles.id=permisos.rol_id
 and casousos.id=permisos.casouso_id)',[$rol->id]);
           return view('admin.Seguridad.rol.editar-rol',compact('rol','cuDisponibles'));
+        }else
+        {
+         return redirect('/admin/rol/lista-roles');
         }
     }
     public function removerCus(Request $request)
