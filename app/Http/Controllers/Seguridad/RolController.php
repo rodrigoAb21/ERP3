@@ -23,9 +23,9 @@ class RolController extends Controller
     public function buscar(Request $request)
     {
 
-        $depto_id = $request->depto;
-        if (!is_null($depto_id)) {
-            $rolSearch = Rol::where('id', '=', $depto_id)->firstOrFail();
+        $rol_id = $request->rol;
+        if (!is_null($rol_id)) {
+            $rolSearch = Rol::where('id', '=', $rol_id)->firstOrFail();
         } else {
             return Redirect::to('/admin/rol');
         }
