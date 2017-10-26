@@ -6,8 +6,8 @@
             <form method="post" class="form-inline well" action="{{url('/admin/rol/buscar')}}">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="depto">Busqueda por Rol:</label>
-                    <select name="depto" class="btn-info">
+                    <label for="rol">Busqueda por Rol:</label>
+                    <select name="rol" class="btn-info">
                         @foreach($roles as $rol)
                             <option value="{{$rol->id}}"
                             @if($rolSearch->id==$rol->id) selected @endif
