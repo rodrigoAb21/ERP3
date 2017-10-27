@@ -155,16 +155,19 @@
                   </li>
                   <li class="treeview">
                       <a href="#">
-                          <i class="fa fa-shopping-cart"></i> <span>Compra</span>
+                          <i class="fa fa-shopping-cart"></i> <span>Compras</span>
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
-                          <li><a href="{{asset('/admin/producto')}}"><i class="fa fa-arrow-right"></i> Gestionar Productos</a></li>
+                          <li><a href="{{asset('/admin/proveedores')}}"><i class="fa fa-arrow-right"></i> Gestionar Proveedores</a></li>
+                          <li><a href="{{asset('/admin/productos')}}"><i class="fa fa-arrow-right"></i> Gestionar Productos</a></li>
+                          <li><a href="{{asset('/admin/categoriaProducto')}}"><i class="fa fa-arrow-right"></i> Gest Categorias de Productos </a></li>
+                          <li><a href="{{asset('/admin/tipos')}}"><i class="fa fa-arrow-right"></i> Gestionar Tipos </a></li>
                       </ul>
                   </li>
                   <li class="treeview">
                       <a href="#">
-                          <i class="fa fa-money"></i> <span>Venta</span>
+                          <i class="fa fa-money"></i> <span>Ventas</span>
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">

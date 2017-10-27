@@ -14,7 +14,7 @@ body, #contenido, #principal, #pie {
     display: none;
   }
 
-  body { color: #000; font: 100%/150% Georgia, "Times New Roman", Times, serif; }
+  body { color: #000; font: 130% "Trebuchet MS", Helvetica, sans-serif; }
 
   @media print {
     body {

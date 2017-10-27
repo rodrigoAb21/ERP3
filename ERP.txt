@@ -25,6 +25,7 @@ CREATE TABLE categoria_cliente (
     montoRequerido INT NOT NULL,
     cantDiasReserva INT NOT NULL,
     cantProdReserva INT NOT NULL,
+    visible CHAR NOT NULL,
     idEmpresa INT NOT NULL
 );
 
@@ -102,6 +103,7 @@ CREATE TABLE accion (
         REFERENCES bitacora (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE promocion (
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
@@ -110,6 +112,40 @@ CREATE TABLE promocion (
     visible INT NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE proveedor (
+    id INT NOT NULL AUTO_INCREMENT,
+    ci VARCHAR(255) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    telefono VARCHAR(255) NOT NULL,
+    empresa VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE categoria_producto (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipo (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL,
+    idCategoriaProd INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (idCategoriaProd)
+        REFERENCES categoria_producto (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
 CREATE TABLE producto (
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
@@ -119,11 +155,17 @@ CREATE TABLE producto (
     puntosPorVenta INT NOT NULL,
     precioUCompra DECIMAL(8 , 2 ) NOT NULL,
     precioUVenta DECIMAL(8 , 2 ) NOT NULL,
-    precionActual DECIMAL(8 , 2 ) NOT NULL,
-    categoria_id INT NOT NULL,
-    visible INT,
-    PRIMARY KEY (id)
+    precioActual DECIMAL(8 , 2 ) NOT NULL,
+    imagen VARCHAR(255) NOT NULL,
+    tipo_id INT NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (tipo_id)
+        REFERENCES tipo (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE detalle_promo (
     promo INT,
     producto INT,
@@ -145,8 +187,6 @@ CREATE TABLE beneficio (
     PRIMARY KEY (id),
     visible INT NOT NULL
 );
-ALTER TABLE categoria_cliente
-    add COLUMN visible int not null;
 
 CREATE TABLE categoria_beneficio (
     beneficio INT,
@@ -234,6 +274,66 @@ CREATE TABLE permisos (
     PRIMARY KEY (rol_id , casouso_id)
 );
 
+CREATE TABLE punto_de_venta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    ubicacion VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE pago (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    montoTotal FLOAT NOT NULL,
+    fecha DATETIME NOT NULL,
+    nombre VARCHAR(255),
+    tipo VARCHAR(255),
+    nit INT,
+    idPuntoVenta INT NOT NULL,
+    idCliente INT NOT NULL,
+    idEmpleado INT NOT NULL,
+    FOREIGN KEY (idPuntoVenta)
+        REFERENCES punto_de_venta (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (idCliente)
+        REFERENCES cliente (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (idEmpleado)
+        REFERENCES empleado (id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE detalle_venta (
+    idPago INT NOT NULL,
+    idProducto INT NOT NULL,
+    cantidad INT NOT NULL,
+    subtotal INT NOT NULL,
+    detalle VARCHAR(255),
+    PRIMARY KEY (idPago , idProducto),
+    FOREIGN KEY (idPago)
+        REFERENCES pago (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (idProducto)
+        REFERENCES producto (id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE stock_puntoVenta (
+    idPuntoVenta INT NOT NULL,
+    idProducto INT NOT NULL,
+    stock INT NOT NULL,
+    stock_minimo INT NOT NULL,
+    PRIMARY KEY (idPuntoVenta , idProducto),
+    FOREIGN KEY (idPuntoVenta)
+        REFERENCES punto_de_venta (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (idProducto)
+        REFERENCES producto (id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
 -- Departamentos
 
 INSERT INTO `departamentos` (`id`, `nombre`) VALUES (1, 'SEGURIDAD');
@@ -287,70 +387,3 @@ INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Actualizacion
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de reabastecimiento de tiendas', '5');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de resultados de seguimientos', '5');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (NULL, 'Reporte de productos mas bendidos', '5');
-
-create table punto_de_venta(
-id int auto_increment primary key,
-nombre varchar(255) not null,
-ubicacion varchar(255) not null
-);
-
-
-CREATE TABLE pago(
-    id INT AUTO_INCREMENT primary key,
-    montoTotal float not null,
-    fecha datetime not null,
-    nombre varchar(255),
-    tipo varchar(255),
-    nit int,
-    idPuntoVenta int not null,
-    idCliente int not null,
-    idEmpleado int not null,
-
-    foreign key(idPuntoVenta) references punto_de_venta(id) on update cascade on delete cascade,
-    foreign key(idCliente) references cliente(id) on update cascade on delete cascade,
-    foreign key(idEmpleado) references empleado(id) on update cascade on delete cascade
-);
-
-create table detalle_venta(
-	idPago int not null,
-	idProducto int not null,
-	cantidad int not null,
-	subtotal int not null,
-	detalle varchar(255),
-
-    primary key(idPago,idProducto),
-	foreign key(idPago) references pago(id) on update cascade on delete cascade,
-    foreign key(idProducto) references producto(id)  on update cascade on delete cascade
-);
-
-
-create table stock_puntoVenta(
-idPuntoVenta int not null,
-idProducto int not null,
-stock int not null,
-stock_minimo int not null,
-primary key(idPuntoVenta, idProducto),
-foreign key (idPuntoVenta) references punto_de_venta(id) on update cascade on delete cascade,
-foreign key (idProducto) references producto(id) on update cascade on delete cascade
-);
-
-
-INSERT INTO producto VALUES ( null,'Z2', 'celular con camara de 20 pxls', '2 años', 500000, 20, 450, 800, 80, 1, 1);
-INSERT INTO producto VALUES ( null,'S7', 'celular con camara de 20 pxls', '2 años', 500000, 20, 450, 800, 80, 1, 1);
-
-INSERT INTO punto_de_venta VALUES (null,'PuntoA','Calle X...');
-INSERT INTO punto_de_venta VALUES (null,'PuntoB','Calle Y...');
-INSERT INTO punto_de_venta VALUES (null,'PuntoC','Calle Z...');
-
-
-INSERT INTO cliente VALUES (null,8595199,12545,'Ernesto Castillo',50,'Calle Suarez de Figueroa','', 'cliente',null,1,123);
-select * from empleado;
-INSERT INTO empleado VALUES (null,'125','Cecilia Tellez','Cuarto Anillo','Cajero',45145,'empleado',1,123,1);
-
-INSERT INTO pago VALUES (null,0,'2017-10-08','Ernesto Castillo','contado',72145,1,1,1);
-INSERT INTO pago VALUES (null,0,'2017-10-08','Ever Castillo','contado',72145,1,1,1);
-
-INSERT INTO detalle_venta VALUES (1,2,5,10,'fgh');
-INSERT INTO detalle_venta VALUES (1,1,5,10,'fgh');
-
-INSERT INTO detalle_venta VALUES (2,1,5,10,'fh');

@@ -26,7 +26,10 @@ class Producto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'especificacion', 'garantia', 'puntosEquivale', 'puntosPorVenta', 'precioUCompra', 'precioUVenta', 'precioActual', 'categoria_id', 'visible'];
+
+    public $timestamps = false;
+
+    protected $fillable = ['nombre', 'especificacion', 'garantia', 'puntosEquivale', 'puntosPorVenta', 'precioUCompra', 'precioUVenta', 'precioActual', 'imagen', 'tipo_id', 'visible', 'idEmpresa'];
 
 
 }

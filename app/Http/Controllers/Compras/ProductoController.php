@@ -2,71 +2,149 @@
 
 namespace App\Http\Controllers\Compras;
 
-use App\Modelos\Compras\Producto;
-use Illuminate\Http\Request;
+use App\Bitacora;
 use App\Http\Controllers\Controller;
+use App\Modelos\Compras\Producto;
+use App\Utils;
+use Illuminate\Http\Request;
+use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductoController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $productos = Producto::where('nombre', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
-        } else {
-            $productos = Producto::paginate($perPage);
+        if ($request){
+            $query = trim($request -> get('searchText'));
+            $producto = DB::table('producto')->where('producto.nombre','LIKE','%'.$query.'%')
+                ->join('tipo', 'tipo.id', '=', 'producto.tipo_id')
+                ->where('producto.visible','=','1')
+                ->select('producto.id', 'producto.nombre', 'producto.precioActual', 'producto.imagen','tipo.nombre as tipo')
+                ->orderBy('producto.id','asc')
+                ->paginate(25);
+            return view('admin.Compras.productos.index',["producto" => $producto, "searchText" => $query]);
         }
-
-        return view('admin.Compras.producto.index', compact('productos'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('admin.Compras.producto.create');
+        $tipo = DB::table('tipo')
+            ->where('visible', '=', '1') -> get();
+        return view("admin.Compras.productos.create",["tipo" => $tipo]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
+        $producto = new Producto();
+        $producto -> nombre = $request -> nombre;
+        $producto -> especificacion = $request -> especificacion;
+        $producto -> garantia = $request -> garantia;
+        $producto -> puntosEquivale = $request -> puntosEquivale;
+        $producto -> puntosPorVenta = $request -> puntosPorVenta;
+        $producto -> precioUCompra = $request -> precioUCompra;
+        $producto -> precioUVenta = $request -> precioUVenta;
+        $producto -> precioActual = $request -> precioActual;
+        $producto -> tipo_id = $request -> tipo_id;
+        $producto -> visible = 1;
+        $producto -> idEmpresa = Auth::user() -> idEmpresa;
+        if (Input::hasFile('imagen')) {
+            $file = Input::file('imagen');
+            $file -> move(public_path().'/img/productos/', $file->getClientOriginalName());
+            $producto -> imagen = $file->getClientOriginalName();
+        }
+        if ($producto -> save()){
+            Bitacora::registrarCreate( Utils::$TABLA_PRODUCTO,$producto->id);
+        }
 
-        $requestData = $request->all();
-
-        Producto::create($requestData);
-
-
-        return redirect('admin/producto');
+        return Redirect::to('admin/productos');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        $producto = Producto::findOrFail($id);
-
-        return view('admin.Compras.producto.show', compact('producto'));
+        //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $producto = Producto::findOrFail($id);
-
-        return view('admin.Compras.producto.edit', compact('producto'));
+        $tipo = DB::table('tipo')
+            ->where('visible', '=', '1') -> get();
+        return view("admin.Compras.productos.edit",["tipo" => $tipo, "producto" => Producto::findOrFail($id)]);
     }
 
-    public function update($id, Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
     {
+        $producto = Producto::findOrFail($request -> id);
+        $producto -> nombre = $request -> nombre;
+        $producto -> especificacion = $request -> especificacion;
+        $producto -> garantia = $request -> garantia;
+        $producto -> puntosEquivale = $request -> puntosEquivale;
+        $producto -> puntosPorVenta = $request -> puntosPorVenta;
+        $producto -> precioUCompra = $request -> precioUCompra;
+        $producto -> precioUVenta = $request -> precioUVenta;
+        $producto -> precioActual = $request -> precioActual;
+        $producto -> tipo_id = $request -> tipo_id;
+        if (Input::hasFile('imagen')) {
+            $file = Input::file('imagen');
+            $file -> move(public_path().'/img/productos/',$file -> getClientOriginalName());
+            $producto -> imagen = $file -> getClientOriginalName();
+        }
+        if ($producto -> update()){
+            Bitacora::registrarUpdate(Utils::$TABLA_PRODUCTO, $producto -> id);
+        }
 
-        $requestData = $request->all();
-
-        $producto = Producto::findOrFail($id);
-        $producto->update($requestData);
-
-
-        return redirect('admin/producto');
+        return Redirect::to('admin/productos');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        Producto::destroy($id);
-        return redirect('admin/producto');
+        $producto = Producto::findOrFail($id);
+        $producto -> visible = 0;
+        if ($producto ->update()){
+            Bitacora::registrarDelete(Utils::$TABLA_PRODUCTO, $id);
+        }
+        return Redirect::to('admin/productos');
     }
 }

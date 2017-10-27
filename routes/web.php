@@ -88,9 +88,36 @@ Route::get('/admin/bitacora' ,'Seguridad\BitacoraController@index');
 Route::get('/admin/bitacora/{id}' ,'Seguridad\BitacoraController@show');
 // ------------------- COMPRAS ----------------------------------
 
-Route::resource('/admin/producto','Compras\ProductoController');
+Route::post('/admin/productos', 'Compras\ProductoController@store');
+Route::get('/admin/productos', 'Compras\ProductoController@index')->middleware('permisos:8,leer');
+Route::get('/admin/productos/create', 'Compras\ProductoController@create')->middleware('permisos:8,crear');
+Route::delete('/admin/productos/{id}', 'Compras\ProductoController@destroy')->middleware('permisos:8,eliminar');
+Route::put('/admin/productos', 'Compras\ProductoController@update');
+Route::get('/admin/productos/{id}/edit', 'Compras\ProductoController@edit')->middleware('permisos:8,editar');
 
 
+Route::post('/admin/proveedores', 'Compras\ProveedorController@store');
+Route::get('/admin/proveedores', 'Compras\ProveedorController@index')->middleware('permisos:7,leer');
+Route::get('/admin/proveedores/create', 'Compras\ProveedorController@create')->middleware('permisos:7,crear');
+Route::delete('/admin/proveedores/{id}', 'Compras\ProveedorController@destroy')->middleware('permisos:7,eliminar');
+Route::put('/admin/proveedores', 'Compras\ProveedorController@update');
+Route::get('/admin/proveedores/{id}/edit', 'Compras\ProveedorController@edit')->middleware('permisos:7,editar');
+
+
+Route::post('/admin/categoriaProducto', 'Compras\CategoriaProductoController@store');
+Route::get('/admin/categoriaProducto', 'Compras\CategoriaProductoController@index')->middleware('permisos:9,leer');
+Route::get('/admin/categoriaProducto/create', 'Compras\CategoriaProductoController@create')->middleware('permisos:9,crear');
+Route::delete('/admin/categoriaProducto/{id}', 'Compras\CategoriaProductoController@destroy')->middleware('permisos:9,eliminar');
+Route::put('/admin/categoriaProducto', 'Compras\CategoriaProductoController@update');
+Route::get('/admin/categoriaProducto/{id}/edit', 'Compras\CategoriaProductoController@edit')->middleware('permisos:9,editar');
+
+
+Route::post('/admin/tipos', 'Compras\TipoController@store');
+Route::get('/admin/tipos', 'Compras\TipoController@index')->middleware('permisos:9,leer');
+Route::get('/admin/tipos/create', 'Compras\TipoController@create')->middleware('permisos:9,crear');
+Route::delete('/admin/tipos/{id}', 'Compras\TipoController@destroy')->middleware('permisos:9,eliminar');
+Route::put('/admin/tipos', 'Compras\TipoController@update');
+Route::get('/admin/tipos/{id}/edit', 'Compras\TipoController@edit')->middleware('permisos:9,editar');
 
 
 
