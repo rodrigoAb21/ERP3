@@ -183,6 +183,7 @@
                       <ul class="treeview-menu">
                           <li><a href="{{asset('/admin/beneficios')}}"><i class="fa fa-arrow-right"></i> Gestionar Beneficios</a></li>
                           <li><a href="{{asset('/admin/tareas')}}"><i class="fa fa-arrow-right"></i> Gestionar Tareas</a></li>
+                          <li><a href="{{asset('/admin/estados')}}"><i class="fa fa-arrow-right"></i> Gestionar Estados</a></li>
                           <li><a href="{{asset('/admin/seguimientos')}}"><i class="fa fa-arrow-right"></i> Gestionar Seguimientos</a></li>
                           <li><a href="{{asset('/admin/categoria')}}"><i class="fa fa-arrow-right"></i> Gestionar Categoria</a></li>
                       </ul>
