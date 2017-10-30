@@ -116,9 +116,6 @@ class ProductoController extends Controller
         $producto -> garantia = $request -> garantia;
         $producto -> puntosEquivale = $request -> puntosEquivale;
         $producto -> puntosPorVenta = $request -> puntosPorVenta;
-        $producto -> precioUCompra = $request -> precioUCompra;
-        $producto -> precioUVenta = $request -> precioUVenta;
-        $producto -> precioActual = $request -> precioActual;
         $producto -> tipo_id = $request -> tipo_id;
         if (Input::hasFile('imagen')) {
             $file = Input::file('imagen');

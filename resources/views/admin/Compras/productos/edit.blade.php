@@ -37,7 +37,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                        <label for="garantia">Garantia</label>
+                        <label for="garantia">Garantia (Meses)</label>
                         <input type="number" name="garantia" class="form-control" value="{{$producto -> garantia}}"   required >
                     </div>
                 </div>
@@ -58,41 +58,6 @@
                     </div>
                 </div>
 
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label for="precioUCompra">Precio Unitario Compra</label>
-                        <input type="number" name="precioUCompra" class="form-control" value="{{$producto -> precioUCompra}}"   required >
-                    </div>
-                </div>
-
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label for="precioUVenta">Precion Unitario Venta</label>
-                        <input type="number" name="precioUVenta" class="form-control" value="{{$producto -> precioUVenta}}"   required >
-                    </div>
-                </div>
-
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label for="precioActual">Precio Actual</label>
-                        <input type="number" name="precioActual" class="form-control" value="{{$producto -> precioActual}}"   required >
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label for="imagen">Imagen</label>
-                        <input type="file" name="imagen" class="form-control"  value="{{$producto -> imagen}}">
-                    </div>
-                    @if (($producto -> imagen)!="")
-                        <img src="{{asset('img/productos/'.$producto -> imagen)}}" height="150px" width="150px" class="img-thumbnail"  >
-                    @endif
-
-                </div>
-
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                         <label>Tipo</label>
@@ -105,6 +70,16 @@
                                 @endif
                             @endforeach
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" name="imagen" class="form-control"  value="{{$producto -> imagen}}">
+                    @if (($producto -> imagen)!="")
+                        <img src="{{asset('img/productos/'.$producto -> imagen)}}" height="150px" width="150px" class="img-thumbnail"  >
+                    @endif
                     </div>
                 </div>
 
