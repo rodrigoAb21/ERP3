@@ -30,4 +30,8 @@ class Empleado extends Model
     {
         return $this->belongsTo('App\Modelos\Seguridad\AsignacionPermisos\Rol', 'rol_id','id');
     }
+    public function user()
+    {
+        return $this->hasOne('App\User','idEmpleado');
+    }
 }
