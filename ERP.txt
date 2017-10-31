@@ -210,6 +210,11 @@ CREATE TABLE estado (
     descripcion VARCHAR(255),
     color varchar(20)
 );
+INSERT INTO estado VALUES(1,'abierto','recientemente creado','green');
+INSERT INTO estado VALUES(2,'realizado','realizado','blue');
+INSERT INTO estado VALUES(3,'cancelado','cancelado','red');
+INSERT INTO estado VALUES(4,'pospuesto','pospuesto','purple');
+INSERT INTO estado VALUES(5,'sin confirmar','sin confirmar','yellow');
 
 CREATE TABLE tarea (
     id INT AUTO_INCREMENT NOT NULL,
