@@ -154,14 +154,6 @@ Route::put('/admin/tareas', 'CRM\TareaController@update');
 Route::get('/admin/tareas/{id}/edit', 'CRM\TareaController@edit')->middleware('permisos:27,editar');
 
 
-Route::post('/admin/estados', 'CRM\EstadoController@store');
-Route::get('/admin/estados', 'CRM\EstadoController@index')->middleware('permisos:26,leer');
-Route::get('/admin/estados/create', 'CRM\EstadoController@create')->middleware('permisos:26,crear');
-Route::delete('/admin/estados/{id}', 'CRM\EstadoController@destroy')->middleware('permisos:26,eliminar');
-Route::put('/admin/estados', 'CRM\EstadoController@update');
-Route::get('/admin/estados/{id}/edit', 'CRM\EstadoController@edit')->middleware('permisos:26,editar');
-
-
 
 
 
