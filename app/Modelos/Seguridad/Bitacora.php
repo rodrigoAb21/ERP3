@@ -38,7 +38,17 @@ class Bitacora extends Model
         else
             dd('Error en bitacora');
     }
-
+    public static function registrarListar($tabla)
+    {
+        $accion1=new Accion;
+        $accion1->accion=Utils::$ACTION_LISTAR;
+        $accion1->bitacora_id=Session::get(Utils::$BITACORA_ID_SESSION);
+        $accion1->fecha=Carbon::now();
+        $accion1->tabla=$tabla;
+        $accion1->tupla=null;
+        if(!$accion1->save())
+            dd('Error en bitacora accion');
+    }
     public static function registrarUpdate($tabla,$tupla)
     {
         $accion1=new Accion();
