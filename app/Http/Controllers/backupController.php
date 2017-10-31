@@ -142,8 +142,8 @@ class backupController extends Controller
         //mysql -u usuario -p basededatos < basededatos.sql
         $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datosN";
 
-        system($dump, $output);
+        $resultado=system($dump, $output);
 
-        return view('backup.index');//.$output.$dump;
+        return $resultado; //view('backup.index');//.$output.$dump;
     }
 }
