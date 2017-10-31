@@ -199,8 +199,8 @@ Route::get('/backup','backupController@index');
 
 Route::get('/backup/restore','backupController@restaurar');
 
-Route::get('/backup/create/{id}','backupController@save');   
+Route::get('/backup/create/{id}','backupController@save');
 
 // Route::post('/backup/restore','backupController@show');
 
- Route::get('/backup/backup','backupController@backup');
+Route::get('/backup/backup','backupController@backup');

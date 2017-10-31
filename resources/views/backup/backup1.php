@@ -1,4 +1,3 @@
-
 <?php
 
 // $du="mysqldump --version";
@@ -34,4 +33,3 @@ if($return !== 0) {
     echo "- $message\n\n";
 }
 ?>
-
