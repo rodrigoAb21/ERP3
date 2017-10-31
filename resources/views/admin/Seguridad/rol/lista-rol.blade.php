@@ -1,16 +1,9 @@
 @extends ('admin')
 @section ('contenido')
     <div class="col-sm-10">
-        <div class="col-sm-8">
             <h3>Roles de Usuario del Sistema</h3>
-        </div>
-        <div class="col-sm-2"><br><br>
-            <button data-toggle="modal" class="btn btn-primary"
-                    data-target="#crearRol">Crear Rol</button>
-
-        </div>
-
-            <table class="table table-hover">
+    
+           <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>Nombre del Rol</th>
