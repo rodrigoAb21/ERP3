@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Ventas;
 
-use App\Bitacora;
+use App\Modelos\Seguridad\Bitacora;
 use App\Http\Controllers\Controller;
 use App\Modelos\Ventas\Cliente;
 use App\Utils;
