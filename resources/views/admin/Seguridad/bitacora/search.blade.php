@@ -1,17 +1,5 @@
 <form action="{{url('/admin/bitacora')}}" class="form-inline" method="GET">
-	<div class="form-group">
-		<label for="empleado_id">Empleado:</label><br>
-		<select name="empleado_id" class="btn btn-default form-control">
-			<option value="0">--Todos--</option>
-			@foreach($empleados as $empleado)
-				<option value="{{$empleado->id}}"
-				@if($user_id==$empleado->id)
-					selected
-						@endif
-				>{{$empleado->nombre}}({{$empleado->rol->nombre}})</option>
-			@endforeach
-		</select>
-	</div>
+	
 	<div class="form-group">
 		<label for="tiempo">Desde :</label><br>
 		<select name="tiempo" class="btn btn-default form-control">
