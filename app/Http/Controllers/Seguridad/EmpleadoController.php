@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Seguridad;
 
-use App\Bitacora;
+use App\Modelos\Seguridad\Bitacora;
 use App\Modelos\Seguridad\AsignacionPermisos\Rol;
 use App\Modelos\Seguridad\Empleado;
 use App\Utils;
@@ -24,7 +24,7 @@ class EmpleadoController extends Controller
                 ->where('visible','=','1')
                 ->orderBy('id','asc')
                 ->paginate(25);
-
+            Bitacora::registrarListar(Utils::$TABLA_EMPLEADO);
             return view('admin.Seguridad.empleados.index',["empleado" => $empleado, "searchText" => $query]);
         }
     }
@@ -93,6 +93,11 @@ class EmpleadoController extends Controller
 
         $user4 = User::findOrFail($ultimo2->id);
         $user4->name = $request->get('nombre');
+        $user4->email=$request->get('email');
+        if($request->get('password')!=null){
+            $user4->password=bcrypt($request->get('password'));
+        }
+
         if($user4->update())
         {
             $empleado = Empleado::findOrFail($id);
@@ -103,6 +108,7 @@ class EmpleadoController extends Controller
             $empleado -> telefono = $request -> get('telefono');
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
+
             $empleado -> update();
             Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id);
 
