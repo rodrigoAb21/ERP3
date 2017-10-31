@@ -143,6 +143,7 @@ class backupController extends Controller
         $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datos";
 
         system($dump, $output);
-        return redirect('backup.index');;//.$output.$dump;
+
+        return redirect('backup.index');//.$output.$dump;
     }
 }
