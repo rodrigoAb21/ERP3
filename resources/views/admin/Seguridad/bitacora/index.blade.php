@@ -29,7 +29,6 @@
 				@endforeach
 			</table>
 		</div>
-{{$bitacoras->links()}}
 	</div>
 </div>
 @endsection
