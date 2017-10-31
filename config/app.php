@@ -179,7 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Anchu\Ftp\FtpServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
+        //Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 
