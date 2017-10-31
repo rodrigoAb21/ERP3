@@ -128,7 +128,7 @@ class backupController extends Controller
         //obtenemos el campo file definido en el formulario
 
         $datos= backupTable::where('id','=',$id)->firstOrFail();
-        $datos= $datos->nombre;
+        $datosN= $datos->nombre;
         set_time_limit(300);
 
         $db_host   = "sistemaspractica-mysqldbserver.mysql.database.azure.com";
@@ -140,10 +140,10 @@ class backupController extends Controller
         $fichero_sql;
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
         //mysql -u usuario -p basededatos < basededatos.sql
-        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datos";
+        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datosN";
 
         system($dump, $output);
 
-        return redirect('index');//.$output.$dump;
+        return view('backup.index');//.$output.$dump;
     }
 }
