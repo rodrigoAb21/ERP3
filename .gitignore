@@ -8,5 +8,6 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+.env
 yarn-error.log
 public/img/productos/Thumbs.db
