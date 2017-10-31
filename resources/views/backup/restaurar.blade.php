@@ -37,3 +37,4 @@
             {{--  <a href="{{URL::action('backupController@index')}}" class="btn btn-primary">Cancelar</a>  --}}
         </div>
     </div>
+@endsection
