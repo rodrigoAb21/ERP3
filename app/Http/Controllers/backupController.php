@@ -144,6 +144,6 @@ class backupController extends Controller
 
         system($dump, $output);
 
-        return redirect('backup.restaurar');//.$output.$dump;
+        return redirect('index');//.$output.$dump;
     }
 }
