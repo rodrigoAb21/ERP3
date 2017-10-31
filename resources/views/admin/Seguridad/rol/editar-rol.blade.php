@@ -1,7 +1,10 @@
 @extends ('admin')
 @section ('contenido')
+
     <div class="col-sm-10">
+
         <div class="col-sm-6 well">
+            <a href="{{asset('/admin/rol/lista-roles')}}" class="btn btn-info btn-md"><i class="fa fa-arrow-left"></i>Atras</a>
             <form method="post" class="form-inline " action="{{url('/admin/rol/remover-cu')}}">
                 <div class="row">
                     <div class="col-sm-9">
@@ -16,6 +19,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th>Caso de uso</th>
                         <th>Opcion</th>
                     </tr>
@@ -24,6 +28,7 @@
 
                     @foreach($rol->casousos as $cu)
                         <tr>
+                            <td>{{$cu->id}}</td>
                             <td>{{$cu->nombre}}({{$cu->depto->nombre}})</td>
                             <td><input type="checkbox" name="remover[]" value="{{$cu->id}}"></td>
                         </tr>
@@ -48,6 +53,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th>Caso de uso</th>
                         <th>Opcion</th>
                     </tr>
@@ -56,6 +62,7 @@
 
                     @foreach($cuDisponibles as $cu)
                         <tr>
+                            <td>{{$cu->id}}</td>
                             <td>{{$cu->nombre}}</td>
                             <td><input type="checkbox" name="agregar[]" value="{{$cu->id}}"></td>
                         </tr>
