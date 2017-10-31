@@ -68,21 +68,20 @@ Route::get('/admin/empleados/{id}', 'Seguridad\EmpleadoController@show');
 
 Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
 
-//Gest. De Permisos id=5
-Route::get('/admin/casouso', 'Seguridad\CasousoController@index')->middleware('permisos:5,leer');
-Route::post('/admin/casouso/buscar', 'Seguridad\CasousoController@buscar');
-Route::post('/admin/casouso/guardar', 'Seguridad\CasousoController@guardar')->middleware('permisos:5,crear');;
 
-Route::get('/admin/rol', 'Seguridad\RolController@index')->middleware('permisos:6,leer');;
+Route::get('/admin/casouso', 'Seguridad\CasousoController@index');
+Route::post('/admin/casouso/buscar', 'Seguridad\CasousoController@buscar');
+
+Route::get('/admin/rol', 'Seguridad\RolController@index')->middleware('permisos:3,leer');;
 Route::post('/admin/rol/buscar','Seguridad\RolController@buscar');
 
-Route::get('/admin/acciones/{id1}/{id2}', 'Seguridad\RolController@editarAcciones')->middleware('permisos:6,editar');;
+Route::get('/admin/acciones/{id1}/{id2}', 'Seguridad\RolController@editarAcciones')->middleware('permisos:3,editar');
 Route::post('/admin/actualizar-acciones', 'Seguridad\RolController@actualizarAcciones');
-Route::get('/admin/rol/lista-roles', 'Seguridad\RolController@listaRoles')->middleware('permisos:6,leer');
-Route::post('/admin/rol/guardar', 'Seguridad\RolController@guardar')->middleware('permisos:6,crear');
-Route::get('/admin/rol/actualizar-cu/{id}', 'Seguridad\RolController@actualizarCus');
-Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus')->middleware('permisos:6,editar');;
-Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus')->middleware('permisos:6,editar');
+Route::get('/admin/rol/lista-roles', 'Seguridad\RolController@listaRoles')->middleware('permisos:3,leer');
+Route::post('/admin/rol/guardar', 'Seguridad\RolController@guardar')->middleware('permisos:3,crear');
+Route::get('/admin/rol/actualizar-cu/{id}', 'Seguridad\RolController@actualizarCus')->middleware('permisos:3,editar');
+Route::post('/admin/rol/remover-cu', 'Seguridad\RolController@removerCus');
+Route::post('/admin/rol/agregar-cu', 'Seguridad\RolController@agregarCus');
 
 Route::get('/admin/bitacora' ,'Seguridad\BitacoraController@index');
 Route::get('/admin/bitacora/{id}' ,'Seguridad\BitacoraController@show');
@@ -154,6 +153,13 @@ Route::put('/admin/tareas', 'CRM\TareaController@update');
 Route::get('/admin/tareas/{id}/edit', 'CRM\TareaController@edit')->middleware('permisos:27,editar');
 
 
+Route::get('admin/seguimientos','CRM\SeguimientoController@index')->middleware('permisos:26,leer');
+Route::get('admin/seguimientos/cliente/{cliente}','CRM\SeguimientoController@cliente');
+Route::post('admin/seguimientos','CRM\SeguimientoController@store')->middleware('permisos:26,crear');
+
+Route::get('admin/asignacion/{id}','CRM\AsignacionController@index');
+Route::post('admin/asignacion/{id}','CRM\AsignacionController@store');
+Route::get('admin/asignacion/destroy/{tarea}/{seguimiento}','CRM\AsignacionController@destroy');
 
 
 
