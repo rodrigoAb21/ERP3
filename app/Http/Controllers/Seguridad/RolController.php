@@ -23,9 +23,9 @@ class RolController extends Controller
     public function buscar(Request $request)
     {
 
-        $rol_id = $request->rol;
-        if (!is_null($rol_id)) {
-            $rolSearch = Rol::where('id', '=', $rol_id)->firstOrFail();
+        $depto_id = $request->depto;
+        if (!is_null($depto_id)) {
+            $rolSearch = Rol::where('id', '=', $depto_id)->firstOrFail();
         } else {
             return Redirect::to('/admin/rol');
         }
@@ -109,20 +109,15 @@ WHERE roles.id=?
 and roles.id=permisos.rol_id
 and casousos.id=permisos.casouso_id)',[$rol->id]);
           return view('admin.Seguridad.rol.editar-rol',compact('rol','cuDisponibles'));
-        }else
-        {
-         return redirect('/admin/rol/lista-roles');
         }
     }
     public function removerCus(Request $request)
     {
         $rol=$request->rol;
         $cus=$request->remover;
-        if(!is_null($cus)){
-            foreach ($cus as $cu){
-                $permiso=Permiso::where([['casouso_id','=',$cu],['rol_id','=',$rol]])->firstOrFail();
-                $permiso->delete();
-            }
+        foreach ($cus as $cu){
+            $permiso=Permiso::where([['casouso_id','=',$cu],['rol_id','=',$rol]])->firstOrFail();
+            $permiso->delete();
         }
         return Redirect::to('/admin/rol/actualizar-cu/'.$rol);
     }
@@ -130,7 +125,7 @@ and casousos.id=permisos.casouso_id)',[$rol->id]);
     {
         $rol=$request->rol;
         $cus=$request->agregar;
-        if(!is_null($cus)){
+        if($cus!=null){
         foreach ($cus as $cu){
             $permiso=new Permiso();
             $permiso->rol_id=$rol;
