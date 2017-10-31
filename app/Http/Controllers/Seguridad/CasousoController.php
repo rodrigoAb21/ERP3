@@ -44,28 +44,5 @@ class CasousoController extends Controller
                 'deptoSeach','casousoSearch'));
     }
 
-    public function guardar(Request $request)
-    {
-        $nombreCU=$request->nombre;
-        $depto_id=$request->depto;
-        if($nombreCU!='' && $depto_id!=0)
-        {
-            $casouso=new Casouso;
-            $casouso->nombre=$nombreCU;
-            $casouso->depto_id=$depto_id;
-            if($casouso->save())
-            {
-                $permiso= new Permiso;
-                $permiso->casouso_id=$casouso->id;
-                $permiso->rol_id=1;//rol Administrador
-                $permiso->leer=1;
-                $permiso->crear=1;
-                $permiso->editar=1;
-                $permiso->eliminar=1;
-                $permiso->save();
-            }
-        }
-        return Redirect::to('/admin/casouso');
-    }
 
 }
