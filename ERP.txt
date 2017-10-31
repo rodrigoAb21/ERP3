@@ -341,7 +341,7 @@ INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (28, 'Actualizacion d
 
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (29, 'Reporte de reabastecimiento de tiendas', '5');
 INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (30, 'Reporte de resultados de seguimientos', '5');
-INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (31, 'Reporte de productos mas bendidos', '5');
+INSERT INTO `casousos` (`id`, `nombre`, `depto_id`) VALUES (31, 'Reporte de productos mas vendidos', '5');
 
 
 insert into permisos VALUES (1,1,1,1,1,1);
