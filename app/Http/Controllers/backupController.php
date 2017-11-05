@@ -138,7 +138,7 @@ class backupController extends Controller
         $db_pass      = "Sistemas2";
         $db_name = "sistemas2";
         $fecha   = date("Ymd");
-        $direccion = "/site/".public_path();
+        $direccion = "/site/public/";
       //  $fichero_sql;
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
         //mysql -u usuario -p basededatos < basededatos.sql
