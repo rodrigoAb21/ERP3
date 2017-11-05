@@ -146,7 +146,7 @@ class backupController extends Controller
         //           mysql -u $db_user -p $db_pass -e "source /ruta/a/respaldo.sql"
         //mysql -uroot -psa -h 127.0.0.1 Aperco < c:\backup\Bckarchio.sql
        // set_time_limit(200);  //-h$db_host
-        $dump = "mysql -u$db_user -p$db_pass $db_name < $direccion.$datosA";
+        $dump = "mysql -u$db_user -p$db_pass $db_name < ".$direccion."$datosA";
         system($dump, $output);
 
 
