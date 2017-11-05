@@ -150,6 +150,6 @@ class backupController extends Controller
         system($dump, $output);
 
 
-        return $output."SALIDA DEL DUMP".$dump;   //redirect('/backup');//
+        return redirect('/backup');//$output."SALIDA DEL DUMP".$dump;   //
     }
 }
