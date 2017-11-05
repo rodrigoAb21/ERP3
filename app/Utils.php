@@ -17,6 +17,10 @@ class Utils
     public static $TABLA_CLIENTE='cliente';
     public static $TABLA_SEGUIMIENTO='seguimiento';
     public static $TABLA_TAREA='tarea';
-
+    
+    public static $TABLA_PROVEEDOR='proveedor';
+    public static $TABLA_CATEGORIA_PRODUCTO='categoria_producto';
+    public static $TABLA_TIPO='tipo';
+    public static $TABLA_PRODUCTO='producto';
 
 }
