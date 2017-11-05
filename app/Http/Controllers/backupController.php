@@ -138,13 +138,14 @@ class backupController extends Controller
         $db_pass      = "Sistemas2";
         $db_name = "sistemas2";
         $fecha   = date("Ymd");
+        $direccion = "/site/public";
       //  $fichero_sql;
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
         //mysql -u usuario -p basededatos < basededatos.sql
 
         //           mysql -u $db_user -p $db_pass -e "source /ruta/a/respaldo.sql"
         //mysql -uroot -psa -h 127.0.0.1 Aperco < c:\backup\Bckarchio.sql
-        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < public_path().$datos";
+        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $direccion.$datos";
         system($dump, $output);
         return redirect('/backup');//.$output.$dump;   //
     }
