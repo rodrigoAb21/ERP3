@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\backupTable;
-use App\Requests\backupRequest;
+use App\Http\Requests\backupRequest;
 use DB;
 
 class backupController extends Controller
@@ -33,7 +32,7 @@ class backupController extends Controller
 
         // $fecha = date("Tmd-His");
 
-
+        set_time_limit(300);
 
         $db_host   = "sistemaspractica-mysqldbserver.mysql.database.azure.com";
         $db_user      = "JhordanF1@sistemaspractica-mysqldbserver";
@@ -49,7 +48,8 @@ class backupController extends Controller
         $backupSave->save();
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
 
-        $dump = "mysqldump --add-drop-database --databases -h$db_host -u$db_user -p$db_pass --opt $db_name > $salida_sql";
+        //$dump = "mysqldump --add-drop-database --databases -h$db_host -u$db_user -p$db_pass --opt $db_name > $salida_sql";
+        $dump = "mysqldump --hex-blob --routines --skip-lock-tables --log-error=mysqldump_error.log -h$db_host -u$db_user -p$db_pass --opt $db_name > $salida_sql";
 
         system($dump, $output);
 
@@ -127,8 +127,10 @@ class backupController extends Controller
 
         //obtenemos el campo file definido en el formulario
 
+        //obtenemos el campo file definido en el formulario
+
         $datos= backupTable::where('id','=',$id)->firstOrFail();
-        $datosN= $datos->nombre;
+        $datos= $datos->nombre;
         set_time_limit(300);
 
         $db_host   = "sistemaspractica-mysqldbserver.mysql.database.azure.com";
@@ -136,14 +138,14 @@ class backupController extends Controller
         $db_pass      = "Sistemas2";
         $db_name = "sistemas2";
         $fecha   = date("Ymd");
-
-        $fichero_sql;
+      //  $fichero_sql;
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
         //mysql -u usuario -p basededatos < basededatos.sql
-        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datosN";
 
-        $resultado=system($dump, $output);
-
-        return $resultado; //view('backup.index');//.$output.$dump;
+        //           mysql -u $db_user -p $db_pass -e "source /ruta/a/respaldo.sql"
+        //mysql -uroot -psa -h 127.0.0.1 Aperco < c:\backup\Bckarchio.sql
+        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < public_path().$datos";
+        system($dump, $output);
+        return redirect('/backup');//.$output.$dump;   //
     }
 }

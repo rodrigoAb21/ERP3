@@ -439,3 +439,8 @@ CREATE TABLE stock_puntoVenta (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+
+CREATE TABLE backup (
+	id INT AUTO_INCREMENT NOT NULL primary key,
+    nombre varchar (250)
+);
