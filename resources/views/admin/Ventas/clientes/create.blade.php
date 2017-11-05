@@ -45,16 +45,6 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label for="tipo">Tipo</label>
-                    <select name="tipo" id="tipo" class="form-control">
-                        <option value="Cliente">Cliente</option>
-                        <option value="Posible Cliente">Posible Cliente</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
                     <label>Categoria</label>
                     <select name="idCategoria" class="form-control selectpicker" data-live-search="true">
                         @foreach ($categoria as $cat)

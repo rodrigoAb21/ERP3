@@ -50,7 +50,6 @@ class EmpleadoController extends Controller
             $empleado -> ci = $request -> get('ci');
             $empleado -> nombre = $request -> get('nombre');
             $empleado -> direccion = $request -> get('direccion');
-            $empleado -> ocupacion = $request -> get('ocupacion');
             $empleado -> telefono = $request -> get('telefono');
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id =$request->rol_id ;
@@ -93,22 +92,15 @@ class EmpleadoController extends Controller
 
         $user4 = User::findOrFail($ultimo2->id);
         $user4->name = $request->get('nombre');
-        $user4->email=$request->get('email');
-        if($request->get('password')!=null){
-            $user4->password=bcrypt($request->get('password'));
-        }
-
         if($user4->update())
         {
             $empleado = Empleado::findOrFail($id);
             $empleado -> ci = $request -> get('ci');
             $empleado -> nombre = $request -> get('nombre');
             $empleado -> direccion = $request -> get('direccion');
-            $empleado -> ocupacion = $request -> get('ocupacion');
             $empleado -> telefono = $request -> get('telefono');
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
-
             $empleado -> update();
             Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id);
 

@@ -45,29 +45,6 @@
                 </div>
             </div>
 
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
-                    <label for="tipo">Tipo</label>
-                    <select name="tipo" id="tipo" class="form-control">
-                        @if($cliente -> tipo == "Cliente")
-                        <option value="Cliente" selected>Cliente</option>
-                        <option value="Posible Cliente">Posible Cliente</option>
-                        @else
-                            <option value="Posible Cliente" selected>Posible Cliente</option>
-                            <option value="Cliente">Cliente</option>
-                        @endif
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
-                    <label for="puntosAcumulados">Puntos Acumulados</label>
-                    <input type="text" name="puntosAcumulados" class="form-control"  value="{{$cliente -> puntosAcumulados}}"  >
-                </div>
-            </div>
-
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label>Categoria</label>
@@ -82,7 +59,6 @@
                     </select>
                 </div>
             </div>
-
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">

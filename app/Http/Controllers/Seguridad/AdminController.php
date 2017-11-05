@@ -18,7 +18,6 @@ class AdminController extends RegisterController
         $admin -> ci = $request -> get('ci');
         $admin -> nombre = $request -> get('nombre');
         $admin -> direccion = $request -> get('direccion');
-        $admin -> ocupacion = 'Administrador';
         $admin -> telefono = $request -> get('telefono');
         $admin -> tipo = 'Administrador';
         $admin -> rol_id=1;//rol Administrador

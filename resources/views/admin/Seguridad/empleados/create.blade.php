@@ -35,14 +35,8 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label for="ocupacion">Ocupacion</label>
-                    <input type="text" name="ocupacion" class="form-control" required >
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
                     <label for="telefono">Telefono</label>
-                    <input type="text" name="telefono" class="form-control" required >
+                    <input type="number" name="telefono" class="form-control" required >
                 </div>
             </div>
 

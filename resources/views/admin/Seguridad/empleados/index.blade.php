@@ -16,7 +16,6 @@
                     <th>Nombre</th>
                     <th>Direccion</th>
                     <th>Tipo</th>
-                    <th>Ocupacion</th>
 					<th>Opciones</th>
 				</thead>
                @foreach ($empleado as $emple)
@@ -25,7 +24,6 @@
                     <td>{{ $emple->nombre}}</td>
                     <td>{{ $emple->direccion}}</td>
                     <td>{{  $emple->rol->nombre}}</td>
-                    <td>{{ $emple->ocupacion}}</td>
 					<td>
 						<a href="{{URL::action('Seguridad\EmpleadoController@edit',$emple->id)}}"><button class="btn btn-info">Editar</button></a>
                         <a href="" data-target="#modal-delete-{{$emple->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>

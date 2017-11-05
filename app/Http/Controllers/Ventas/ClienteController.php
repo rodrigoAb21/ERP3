@@ -8,6 +8,7 @@ use App\Modelos\Ventas\Cliente;
 use App\Utils;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class ClienteController extends Controller
@@ -23,6 +24,8 @@ class ClienteController extends Controller
             $query = trim($request -> get('searchText'));
             $cliente=DB::table('cliente')->where('cliente.nombre','LIKE','%'.$query.'%')
                 ->where('visible','=','1')
+                ->where('tipo','=','Cliente')
+                ->where('idEmpresa','=',Auth::user()->idEmpresa)
                 ->orderBy('cliente.id','asc')
                 ->paginate(25);
             return view('admin.Ventas.clientes.index',["cliente" => $cliente, "searchText" => $query]);
@@ -56,8 +59,8 @@ class ClienteController extends Controller
         $cliente -> puntosAcumulados = 0;
         $cliente -> direccion = $request->get('direccion');
         $cliente -> email = $request->get('email');
-        $cliente -> tipo = $request->get('tipo');
-        $cliente -> idEmpresa = 123456;
+        $cliente -> tipo = 'Cliente';
+        $cliente -> idEmpresa = Auth::user() -> idEmpresa;
         $cliente -> visible = 1;
         $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> save()){
@@ -104,11 +107,8 @@ class ClienteController extends Controller
         $cliente -> ci = $request->get('ci');
         $cliente -> nit = $request->get('nit');
         $cliente -> nombre = $request->get('nombre');
-        $cliente -> puntosAcumulados = $request->get('puntosAcumulados');
         $cliente -> direccion = $request->get('direccion');
         $cliente -> email = $request->get('email');
-        $cliente -> tipo = $request->get('tipo');
-        $cliente -> idEmpresa = 123456;
         $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> update()){
             Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);
