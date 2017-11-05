@@ -32,7 +32,7 @@ class backupController extends Controller
 
         // $fecha = date("Tmd-His");
 
-        set_time_limit(300);
+       // set_time_limit(300);
 
         $db_host   = "sistemaspractica-mysqldbserver.mysql.database.azure.com";
         $db_user      = "JhordanF1@sistemaspractica-mysqldbserver";
@@ -49,7 +49,7 @@ class backupController extends Controller
         //  mysqldump --add-drop-database --databases -hhost -uusuario -ppassword basededatos > basededatos.sql
 
         //$dump = "mysqldump --add-drop-database --databases -h$db_host -u$db_user -p$db_pass --opt $db_name > $salida_sql";
-        $dump = "mysqldump --hex-blob --routines --skip-lock-tables --log-error=mysqldump_error.log -h$db_host -u$db_user -p$db_pass --opt $db_name > $salida_sql";
+        $dump = "mysqldump --opt -h$db_host -u$db_user -p$db_pass $db_name > $salida_sql";
 
         system($dump, $output);
 
@@ -64,7 +64,7 @@ class backupController extends Controller
         //         unlink($salida_sql); // elimina el archivo salida_sql
 
 
-        header("Content-disposition: attachment; filename= $salida_sql");
+        header("Content-disposition: attachment; filename= $salida_sql");  // si quiero indicarle en donde guardar solo tengo que escribir    /Ubicacion/$salida_sql
         header("Content-type: application/sql");
         readfile("$salida_sql");
         //   //  header("Location: $salida_sql"); //hace que luego de convertirlo en zip me lo descargue
@@ -130,8 +130,8 @@ class backupController extends Controller
         //obtenemos el campo file definido en el formulario
 
         $datos= backupTable::where('id','=',$id)->firstOrFail();
-        $datos= $datos->nombre;
-        set_time_limit(300);
+        $datosA= $datos->nombre;
+
 
         $db_host   = "sistemaspractica-mysqldbserver.mysql.database.azure.com";
         $db_user      = "JhordanF1@sistemaspractica-mysqldbserver";
@@ -145,8 +145,11 @@ class backupController extends Controller
 
         //           mysql -u $db_user -p $db_pass -e "source /ruta/a/respaldo.sql"
         //mysql -uroot -psa -h 127.0.0.1 Aperco < c:\backup\Bckarchio.sql
-        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $direccion.$datos";
+        set_time_limit(200);
+        $dump = "mysql -h$db_host -u$db_user -p$db_pass $db_name < $datosA";
         system($dump, $output);
-        return redirect('/backup');//.$output.$dump;   //
+
+
+        return $output."SALIDA DEL DUMP".$dump;   //redirect('/backup');//
     }
 }
