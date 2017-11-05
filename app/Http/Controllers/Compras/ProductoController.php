@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Compras;
 
-use App\Bitacora;
+
 use App\Http\Controllers\Controller;
 use App\Modelos\Compras\Producto;
+use App\Modelos\Seguridad\Bitacora;
 use App\Utils;
 use Illuminate\Http\Request;
 use DB;

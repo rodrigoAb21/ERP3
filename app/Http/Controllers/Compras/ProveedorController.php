@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Compras;
 
-use App\Bitacora;
+
 use App\Modelos\Compras\Proveedor;
+use App\Modelos\Seguridad\Bitacora;
 use App\Utils;
-use Hamcrest\Util;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

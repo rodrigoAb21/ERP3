@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CRM;
 
-use App\Bitacora;
+use App\Modelos\Seguridad\Bitacora;
 use App\Utils;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
