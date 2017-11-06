@@ -13,13 +13,14 @@
 				<thead>
                     <th>#</th>
                     <th>Empleado</th>
-                    <th>FechaIngreso</th>
+                    <th>FechaIngreso / Hora </th>
 					<th>Opciones</th>
 				</thead>
                @foreach ($bitacoras as $bitacora)
 				<tr>
                     <td>{{ $bitacora->id}}</td>
-                    <td>{{ $bitacora->user->name}}</td>
+
+                    <td>{{ $bitacora->user->name.' ( '.$bitacora->user->empleado->rol->nombre.' )'}}</td>
                     {{--<td>{{ $bitacora->fechaEntrada}}</td>--}}
 					<td>{{Carbon\Carbon::parse($bitacora->fechaEntrada)->format('d-m-Y h:i A')}}</td>
 					<td>
