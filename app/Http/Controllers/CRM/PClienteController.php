@@ -5,6 +5,8 @@ namespace App\Http\Controllers\CRM;
 use App\Http\Controllers\Controller;
 use App\Modelos\Seguridad\Bitacora;
 use App\Modelos\Ventas\Cliente;
+use App\Utils;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -26,7 +28,7 @@ class PClienteController extends Controller
                 ->where('idEmpresa','=',Auth::user()->idEmpresa)
                 ->orderBy('cliente.id','asc')
                 ->paginate(25);
-            return view('admin.Ventas.clientes.index',["cliente" => $cliente, "searchText" => $query]);
+            return view('admin.CRM.pclientes.index',["cliente" => $cliente, "searchText" => $query]);
         }
     }
 
@@ -37,9 +39,7 @@ class PClienteController extends Controller
      */
     public function create()
     {
-        $categoria = DB::table('categoria_cliente')
-            ->where('visible', '=', '1') -> get();
-        return view("admin.Ventas.clientes.create",["categoria" => $categoria]);
+        return view("admin.CRM.pclientes.create");
     }
 
     /**
@@ -57,15 +57,14 @@ class PClienteController extends Controller
         $cliente -> puntosAcumulados = 0;
         $cliente -> direccion = $request->get('direccion');
         $cliente -> email = $request->get('email');
-        $cliente -> tipo = 'Cliente';
+        $cliente -> tipo = 'Posible Cliente';
         $cliente -> idEmpresa = Auth::user() -> idEmpresa;
         $cliente -> visible = 1;
-        $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> save()){
             Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id);
         }
 
-        return Redirect::to('admin/clientes');
+        return Redirect::to('admin/posiblesClientes');
     }
 
     /**
@@ -89,7 +88,7 @@ class PClienteController extends Controller
     {
         $categoria = DB::table('categoria_cliente')
             ->where('visible', '=', '1') -> get();
-        return view("admin.Ventas.clientes.edit",["categoria" => $categoria, "cliente" => cliente::findOrFail($id)]);
+        return view("admin.CRM.pclientes.edit",["categoria" => $categoria, "cliente" => cliente::findOrFail($id)]);
     }
 
     /**
@@ -107,12 +106,11 @@ class PClienteController extends Controller
         $cliente -> nombre = $request->get('nombre');
         $cliente -> direccion = $request->get('direccion');
         $cliente -> email = $request->get('email');
-        $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> update()){
             Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);
         }
 
-        return Redirect::to('admin/clientes');
+        return Redirect::to('admin/posiblesClientes');
     }
 
     /**
@@ -128,6 +126,16 @@ class PClienteController extends Controller
         if ($cliente ->update()){
             Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
         }
-        return Redirect::to('admin/clientes');
+        return Redirect::to('admin/posiblesClientes');
+    }
+
+    public function promover($id)
+    {
+        $cliente = cliente::findOrFail($id);
+        $cliente -> tipo = 'Cliente';
+        if ($cliente ->update()){
+            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
+        }
+        return Redirect::to('admin/posiblesClientes');
     }
 }

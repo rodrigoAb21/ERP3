@@ -181,6 +181,7 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
+                          <li><a href="{{asset('/admin/posiblesClientes')}}"><i class="fa fa-arrow-right"></i> Gest. Posibles Clientes</a></li>
                           <li><a href="{{asset('/admin/beneficios')}}"><i class="fa fa-arrow-right"></i> Gestionar Beneficios</a></li>
                           <li><a href="{{asset('/admin/tareas')}}"><i class="fa fa-arrow-right"></i> Gestionar Tareas</a></li>
                           <li><a href="{{asset('/admin/seguimientos')}}"><i class="fa fa-arrow-right"></i> Gestionar Seguimientos</a></li>

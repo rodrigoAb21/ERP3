@@ -163,6 +163,16 @@ Route::get('admin/asignacion/destroy/{tarea}/{seguimiento}','CRM\AsignacionContr
 
 
 
+Route::post('/admin/posiblesClientes', 'CRM\PClienteController@store');
+Route::get('/admin/posiblesClientes', 'CRM\PClienteController@index')->middleware('permisos:25,leer');
+Route::get('/admin/posiblesClientes/create', 'CRM\PClienteController@create')->middleware('permisos:25,crear');
+Route::delete('/admin/posiblesClientes/{id}', 'CRM\PClienteController@destroy')->middleware('permisos:25,eliminar');
+Route::put('/admin/posiblesClientes', 'CRM\PClienteController@update');
+Route::get('/admin/posiblesClientes/{id}/edit', 'CRM\PClienteController@edit')->middleware('permisos:25,editar');
+Route::put('/admin/posiblesClientes/{id}', 'CRM\PClienteController@promover');
+
+
+
 
 // ------------------- REPORTES ----------------------------------
 
