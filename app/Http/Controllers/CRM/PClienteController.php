@@ -56,6 +56,7 @@ class PClienteController extends Controller
         $cliente -> nombre = $request->get('nombre');
         $cliente -> puntosAcumulados = 0;
         $cliente -> direccion = $request->get('direccion');
+        $cliente -> telefono = $request->get('telefono');
         $cliente -> email = $request->get('email');
         $cliente -> tipo = 'Posible Cliente';
         $cliente -> idEmpresa = Auth::user() -> idEmpresa;
@@ -105,6 +106,7 @@ class PClienteController extends Controller
         $cliente -> nit = $request->get('nit');
         $cliente -> nombre = $request->get('nombre');
         $cliente -> direccion = $request->get('direccion');
+        $cliente -> telefono = $request->get('telefono');
         $cliente -> email = $request->get('email');
         if ($cliente -> update()){
             Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);

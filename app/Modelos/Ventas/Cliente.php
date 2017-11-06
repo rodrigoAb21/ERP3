@@ -18,6 +18,7 @@ class Cliente extends Model
         'nombre',
         'puntosAcumulados',
         'direccion',
+        'telefono',
         'email',
         'tipo',
         'idCategoria',

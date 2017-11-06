@@ -15,7 +15,7 @@
 					<th>ID</th>
 					<th>Carnet</th>
 					<th>Nombre</th>
-                    <th>Direccion</th>
+                    <th>Telefono</th>
                     <th>Opciones</th>
 				</thead>
                @foreach ($cliente as $cli)
@@ -23,7 +23,7 @@
 					<td>{{ $cli->id}}</td>
 					<td>{{ $cli->ci}}</td>
 					<td>{{ $cli->nombre}}</td>
-					<td>{{ $cli->direccion}}</td>
+					<td>{{ $cli->telefono}}</td>
 					<td>
 						<a href="{{URL::action('CRM\PClienteController@edit',$cli->id)}}"><button class="btn btn-info">Editar</button></a>
                         <a href="" data-target="#modal-promover-{{$cli->id}}" data-toggle="modal"><button class="btn btn-success">Promover</button></a>

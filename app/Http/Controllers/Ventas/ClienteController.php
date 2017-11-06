@@ -58,6 +58,7 @@ class ClienteController extends Controller
         $cliente -> nombre = $request->get('nombre');
         $cliente -> puntosAcumulados = 0;
         $cliente -> direccion = $request->get('direccion');
+        $cliente -> telefono = $request->get('telefono');
         $cliente -> email = $request->get('email');
         $cliente -> tipo = 'Cliente';
         $cliente -> idEmpresa = Auth::user() -> idEmpresa;
@@ -108,6 +109,7 @@ class ClienteController extends Controller
         $cliente -> nit = $request->get('nit');
         $cliente -> nombre = $request->get('nombre');
         $cliente -> direccion = $request->get('direccion');
+        $cliente -> telefono = $request->get('telefono');
         $cliente -> email = $request->get('email');
         $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> update()){

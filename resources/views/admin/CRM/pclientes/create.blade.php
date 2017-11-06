@@ -18,7 +18,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="ci">Nro de Carnet</label>
-                    <input type="text" name="ci" class="form-control" required >
+                    <input type="text" name="ci" class="form-control" autofocus>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -32,6 +32,13 @@
                 <div class="form-group">
                     <label for="direccion">Direccion</label>
                     <input type="text" name="direccion" class="form-control"  >
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input type="number" name="telefono" class="form-control"  >
                 </div>
             </div>
 
