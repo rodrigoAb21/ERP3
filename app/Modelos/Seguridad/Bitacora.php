@@ -18,7 +18,8 @@ class Bitacora extends Model
 
     protected $fillable = [
         'user_id',
-        'fechaEntrada'
+        'fechaEntrada',
+        'empresa_id'
     ];
     public function user()
     {
@@ -33,6 +34,7 @@ class Bitacora extends Model
         $bitacora= new Bitacora;
         $bitacora->user_id=Auth::user()->id;
         $bitacora->fechaEntrada= Carbon::now();
+        $bitacora->empresa_id=Auth::user()->empleado->idEmpresa;
         if($bitacora->save())
             Session::put(Utils::$BITACORA_ID_SESSION,$bitacora->id);
         else
@@ -46,10 +48,12 @@ class Bitacora extends Model
         $accion1->fecha=Carbon::now();
         $accion1->tabla=$tabla;
         $accion1->tupla=null;
+        $accion1->descripcion='';
+
         if(!$accion1->save())
             dd('Error en bitacora accion');
     }
-    public static function registrarUpdate($tabla,$tupla)
+    public static function registrarUpdate($tabla,$tupla,$descripcion)
     {
         $accion1=new Accion();
         $accion1->accion=Utils::$ACTION_UPDATE;
@@ -57,10 +61,11 @@ class Bitacora extends Model
         $accion1->fecha=Carbon::now();
         $accion1->tabla=$tabla;
         $accion1->tupla=$tupla;
+        $accion1->descripcion=$descripcion;
         if(!$accion1->save())
             dd('Error en bitacora accion');
     }
-    public static function registrarCreate($tabla,$tupla)
+    public static function registrarCreate($tabla,$tupla,$descripcion)
     {
         $accion1=new Accion();
         $accion1->accion=Utils::$ACTION_CREATE;
@@ -68,10 +73,11 @@ class Bitacora extends Model
         $accion1->fecha=Carbon::now();
         $accion1->tabla=$tabla;
         $accion1->tupla=$tupla;
+        $accion1->descripcion=$descripcion;
         if(!$accion1->save())
             dd('Error en bitacora accion');
     }
-    public static function registrarDelete($tabla,$tupla)
+    public static function registrarDelete($tabla,$tupla,$descripcion)
     {
         $accion1=new Accion;
         $accion1->accion=Utils::$ACTION_DELETE;
@@ -79,6 +85,7 @@ class Bitacora extends Model
         $accion1->fecha=Carbon::now();
         $accion1->tabla=$tabla;
         $accion1->tupla=$tupla;
+        $accion1->descripcion=$descripcion;
         if(!$accion1->save())
             dd('Error en bitacora accion');
     }

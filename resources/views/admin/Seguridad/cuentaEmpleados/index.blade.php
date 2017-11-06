@@ -23,7 +23,7 @@
                     <td>{{ $usu->email}}</td>
                     <td>{{ $usu->tipo}}</td>
 					<td>
-						<a href="{{URL::action('Seguridad\CuentaEmpleadoController@edit',$usu->id)}}"><button class="btn btn-info">Editar</button></a>
+						<a href="{{url('admin/cuentaEmpleados/'.$usu->id.'/edit')}}"><button class="btn btn-info">Editar</button></a>
 					</td>
 				</tr>
 				@endforeach

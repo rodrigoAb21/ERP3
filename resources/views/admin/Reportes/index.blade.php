@@ -17,8 +17,12 @@
 			{{Form::token()}}
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="form-group">
-					<label for="nombre">Punto de Venta</label>
-					<input type="text" name="puntoVenta" class="form-control" required autofocus>
+					<label>Punto de Venta</label>
+					<select name="punto_id" class="form-control selectpicker" data-live-search="true">
+						@foreach ($punto as $p)
+							<option value="{{$p -> id}}">{{$p -> nombre}}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 

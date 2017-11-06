@@ -65,7 +65,7 @@ class ClienteController extends Controller
         $cliente -> visible = 1;
         $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> save()){
-            Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id);
+            Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id,'se creo al cliente '.$cliente -> nombre);
         }
 
         return Redirect::to('admin/clientes');
@@ -113,7 +113,7 @@ class ClienteController extends Controller
         $cliente -> email = $request->get('email');
         $cliente -> idCategoria = $request->get('idCategoria');
         if ($cliente -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id,'se actualizo al cliente '.$cliente -> nombre);
         }
 
         return Redirect::to('admin/clientes');
@@ -130,7 +130,7 @@ class ClienteController extends Controller
         $cliente = cliente::findOrFail($id);
         $cliente -> visible = 0;
         if ($cliente ->update()){
-            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id,'se elimino al cliente '.$cliente -> nombre);
         }
         return Redirect::to('admin/clientes');
     }

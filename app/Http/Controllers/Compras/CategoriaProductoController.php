@@ -55,7 +55,7 @@ class CategoriaProductoController extends Controller
         $categoria -> visible = 1;
         $categoria -> idEmpresa = Auth::user() -> idEmpresa;
         if ($categoria -> save()){
-            Bitacora::registrarCreate(Utils::$TABLA_CATEGORIA_PRODUCTO, $categoria -> id);
+            Bitacora::registrarCreate(Utils::$TABLA_CATEGORIA_PRODUCTO, $categoria -> id,'se creo la categoria.producto '.$categoria -> nombre );
         }
 
         return Redirect::to('admin/categoriaProducto');
@@ -95,7 +95,7 @@ class CategoriaProductoController extends Controller
         $categoria = CategoriaProducto::findOrFail( $request->id);
         $categoria -> nombre = $request->get('nombre');
         if ($categoria -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_CATEGORIA_PRODUCTO, $request -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_CATEGORIA_PRODUCTO, $request -> id,'se actualizo la categoria.producto '. $categoria -> nombre);
         }
 
 
@@ -113,7 +113,7 @@ class CategoriaProductoController extends Controller
         $categoria = CategoriaProducto::findOrFail($id);
         $categoria -> visible = '0';
         if ($categoria -> update()){
-            Bitacora::registrarDelete(Utils::$TABLA_CATEGORIA_PRODUCTO, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_CATEGORIA_PRODUCTO, $id,'se elimino la categoria.producto '.$categoria -> nombre);
         }
 
         return Redirect::to('admin/categoriaProducto');

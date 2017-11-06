@@ -60,7 +60,7 @@ class ProveedorController extends Controller
         $proveedor -> visible = 1;
         $proveedor -> idEmpresa = Auth::user() -> idEmpresa;
         if ($proveedor -> save()){
-            Bitacora::registrarCreate(Utils::$TABLA_PROVEEDOR, $proveedor -> id);
+            Bitacora::registrarCreate(Utils::$TABLA_PROVEEDOR, $proveedor -> id,'se creo el proveedor '. $proveedor -> nombre );
         }
 
         return Redirect::to('admin/proveedores');
@@ -104,7 +104,7 @@ class ProveedorController extends Controller
         $proveedor -> telefono = $request->get('telefono');
         $proveedor -> empresa = $request->get('empresa');
         if ($proveedor -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_PROVEEDOR, $request ->id);
+            Bitacora::registrarUpdate(Utils::$TABLA_PROVEEDOR, $request ->id,'se actualizo el proveedor '. $proveedor -> nombre);
         }
 
         return Redirect::to('admin/proveedores');
@@ -121,7 +121,7 @@ class ProveedorController extends Controller
         $proveedor = proveedor::findOrFail($id);
         $proveedor -> visible = '0';
         if ($proveedor -> update()){
-            Bitacora::registrarDelete(Utils::$TABLA_PROVEEDOR, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_PROVEEDOR, $id,'se elimino el proveedor '. $proveedor -> nombre);
         }
 
         return Redirect::to('admin/proveedores');

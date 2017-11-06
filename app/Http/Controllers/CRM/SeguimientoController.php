@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\CRM;
 
 use App\Modelos\CRM\Seguimiento;
+use App\Modelos\Seguridad\Bitacora;
+use App\Utils;
 use App\Modelos\Ventas\Cliente;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
@@ -25,6 +27,7 @@ class SeguimientoController extends Controller
         $fechaActual = $date->format('Y-m-d');
 
         $clientes=Cliente::all();
+        //Bitacora::registrarListar(Utils::$TABLA_SEGUIMIENTO);
         return view('admin.CRM.seguimientos.index',compact('seguimientos','fechaActual','clientes'));
         
     }
@@ -36,6 +39,7 @@ class SeguimientoController extends Controller
                                     ->orderBy('fechaInicio')
                                     ->get();
         $cliente=Cliente::find($id);
+        //Bitacora::registrarListar(Utils::$TABLA_SEGUIMIENTO);
         return view('admin.CRM.seguimientos.cliente',compact('seguimientos','cliente'));
 
     }
@@ -51,6 +55,10 @@ class SeguimientoController extends Controller
         $seguimiento->visible=1;
         $seguimiento->proposito=$request->proposito;
         $seguimiento->save();
+
+        $cliente=Cliente::findOrFail($request->cliente_id);
+
+        Bitacora::registrarCreate( Utils::$TABLA_SEGUIMIENTO,$seguimiento->id,'se creo el seguimiento al cliente '. $cliente -> nombre );
         flash('Seguimiento registrado exitosamente ...!! ')->success();
         return redirect('admin/seguimientos');
     }

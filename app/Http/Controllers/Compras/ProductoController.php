@@ -27,6 +27,7 @@ class ProductoController extends Controller
             $producto = DB::table('producto')->where('producto.nombre','LIKE','%'.$query.'%')
                 ->join('tipo', 'tipo.id', '=', 'producto.tipo_id')
                 ->where('producto.visible','=','1')
+                ->where('producto.idEmpresa','=', Auth::user() -> idEmpresa)
                 ->select('producto.id', 'producto.nombre', 'producto.precioActual', 'producto.imagen','tipo.nombre as tipo')
                 ->orderBy('producto.id','asc')
                 ->paginate(25);
@@ -72,7 +73,7 @@ class ProductoController extends Controller
             $producto -> imagen = $file->getClientOriginalName();
         }
         if ($producto -> save()){
-            Bitacora::registrarCreate( Utils::$TABLA_PRODUCTO,$producto->id);
+            Bitacora::registrarCreate( Utils::$TABLA_PRODUCTO,$producto->id,'se creo el producto '.$producto -> nombre);
         }
 
         return Redirect::to('admin/productos');
@@ -124,7 +125,7 @@ class ProductoController extends Controller
             $producto -> imagen = $file -> getClientOriginalName();
         }
         if ($producto -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_PRODUCTO, $producto -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_PRODUCTO, $producto -> id,'se actualizo el producto '.$producto -> nombre);
         }
 
         return Redirect::to('admin/productos');
@@ -141,7 +142,7 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $producto -> visible = 0;
         if ($producto ->update()){
-            Bitacora::registrarDelete(Utils::$TABLA_PRODUCTO, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_PRODUCTO, $id,'se elimino el producto '.$producto -> nombre);
         }
         return Redirect::to('admin/productos');
     }

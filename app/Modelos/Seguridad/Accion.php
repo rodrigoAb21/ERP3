@@ -17,7 +17,8 @@ class Accion extends Model
         'tupla',
         'fecha',
         'bitacora_id',
-        'accion'
+        'accion',
+        'descripcion'
     ];
 
 }

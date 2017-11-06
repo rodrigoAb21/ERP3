@@ -62,7 +62,7 @@ class PClienteController extends Controller
         $cliente -> idEmpresa = Auth::user() -> idEmpresa;
         $cliente -> visible = 1;
         if ($cliente -> save()){
-            Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id);
+            Bitacora::registrarCreate( Utils::$TABLA_CLIENTE,$cliente->id,'se creo al posible.cliente '. $cliente -> nombre );
         }
 
         return Redirect::to('admin/posiblesClientes');
@@ -109,7 +109,7 @@ class PClienteController extends Controller
         $cliente -> telefono = $request->get('telefono');
         $cliente -> email = $request->get('email');
         if ($cliente -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id,'se actualizo el posible.cliente '. $cliente -> nombre );
         }
 
         return Redirect::to('admin/posiblesClientes');
@@ -126,7 +126,7 @@ class PClienteController extends Controller
         $cliente = cliente::findOrFail($id);
         $cliente -> visible = 0;
         if ($cliente ->update()){
-            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id,'se elimino al posible.cliente '. $cliente -> nombre );
         }
         return Redirect::to('admin/posiblesClientes');
     }
@@ -136,7 +136,7 @@ class PClienteController extends Controller
         $cliente = cliente::findOrFail($id);
         $cliente -> tipo = 'Cliente';
         if ($cliente ->update()){
-            Bitacora::registrarDelete(Utils::$TABLA_CLIENTE, $id);
+            Bitacora::registrarUpdate(Utils::$TABLA_CLIENTE, $cliente -> id,'se actualizo el posible.cliente '. $cliente -> nombre );
         }
         return Redirect::to('admin/posiblesClientes');
     }

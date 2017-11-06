@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ReporteController extends Controller
 {
     public function index(){
-        return view('admin.reportes.index');
+        $punto = DB::table('punto_de_venta')
+               ->where('visible', '=', '1') -> get();
+        return view('admin.reportes.index',["punto" => $punto]);
     }
 
     public function ventas(Request $request){

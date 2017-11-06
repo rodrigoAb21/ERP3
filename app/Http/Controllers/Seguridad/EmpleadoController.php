@@ -17,6 +17,7 @@ class EmpleadoController extends Controller
 {
     public function index(Request $request)
     {
+
         if ($request){
             $query = trim($request -> get('searchText'));
             $empleado=Empleado::where('nombre','LIKE','%'.$query.'%')
@@ -24,7 +25,7 @@ class EmpleadoController extends Controller
                 ->where('visible','=','1')
                 ->orderBy('id','asc')
                 ->paginate(25);
-            Bitacora::registrarListar(Utils::$TABLA_EMPLEADO);
+            //Bitacora::registrarListar(Utils::$TABLA_EMPLEADO);
             return view('admin.Seguridad.empleados.index',["empleado" => $empleado, "searchText" => $query]);
         }
     }
@@ -56,9 +57,10 @@ class EmpleadoController extends Controller
             $empleado -> idEmpresa = Auth::user()->idEmpresa;
             if($empleado -> save())
             {
-                Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id
-            );
+
+                Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id,'se creo al empleado '.$empleado -> nombre);
                 $user2 -> idEmpleado = $empleado->id;
+                $user2 -> idEmpresa = Auth::user()->idEmpresa;
                 $user2->update();
 
             }
@@ -102,7 +104,7 @@ class EmpleadoController extends Controller
             $empleado -> tipo = 'Empleado';
             $empleado -> rol_id = $request->rol_id;
             $empleado -> update();
-            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id);
+            Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id,'se actualizo datos del empleado '.$empleado -> nombre);
 
         }
         return Redirect::to('admin/empleados');
@@ -119,7 +121,7 @@ class EmpleadoController extends Controller
         $empleado = Empleado::findOrFail($id);
         $empleado -> visible = 0;
         if ($empleado -> update()){
-            Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id);
+            Bitacora::registrarDelete(Utils::$TABLA_EMPLEADO,$id,'se elimino al empleado '.$empleado -> nombre);
         }
         return Redirect::to('admin/empleados');
     }

@@ -66,7 +66,10 @@ Route::put('/admin/empleados', 'Seguridad\EmpleadoController@update');
 Route::get('/admin/empleados/{id}/edit', 'Seguridad\EmpleadoController@edit')->middleware('permisos:2,editar');
 Route::get('/admin/empleados/{id}', 'Seguridad\EmpleadoController@show');
 
-Route::resource('/admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController');
+Route::get('admin/cuentaEmpleados', 'Seguridad\CuentaEmpleadoController@index')->middleware('permisos:2,leer');;
+Route::get('admin/cuentaEmpleados/{id}/edit', 'Seguridad\CuentaEmpleadoController@edit')->middleware('permisos:2,editar');
+Route::post('admin/cuentaEmpleados/{id}', 'Seguridad\CuentaEmpleadoController@update');
+
 
 
 Route::get('/admin/casouso', 'Seguridad\CasousoController@index');
@@ -180,28 +183,6 @@ Route::get('admin/reportes/ReporteVentas', 'Reportes\ReporteController@index');
 Route::post('admin/reportes/ReporteVentas', 'Reportes\ReporteController@ventas');
 Route::post('admin/reportes/ReporteVentas/PDF', 'Reportes\ReporteController@ventasPDF');
 //Route::post('admin/reportes/ReporteVentas/Imprimir', 'Reportes\ReporteController@ventasImprimir');
-
-
-
-
-
-
-Route::group(['middleware'=> 'web'],function(){
-    Route::resource('/admin/promocion','PromocionController');
-    Route::get('/admin/promocion/{id}/productos','PromocionController@productos');
-    Route::post('/admin/promocion/{id}/update','PromocionController@update');
-    Route::post('/admin/promocion/{id}/edit','PromocionController@edit');
-    Route::post('/admin/promocion/{id}/agregarProductos','PromocionController@agregarProductos');
-    Route::post('/admin/promocion/{id}/actualizarCantidad','PromocionController@actualizarCantidad');
-    Route::post('/admin/promocion/{id}/removerProducto','PromocionController@removerProducto');
-});
-
-Route::group(['middleware'=> 'web'],function(){
-    Route::resource('/admin/categoria','CRM\CategoriaClienteController');
-    Route::get('/admin/categoria/{id}/beneficios','CRM\CategoriaClienteController@beneficios');
-    Route::post('/admin/categoria/{id}/agregar','CRM\CategoriaClienteController@agregar');
-    Route::post('/admin/categoria/{id}/remover','CRM\CategoriaClienteController@remover');
-});
 
 
 //-----------backup

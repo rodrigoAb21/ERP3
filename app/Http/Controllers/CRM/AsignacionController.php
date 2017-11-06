@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Modelos\Seguridad\Bitacora;
+use App\Utils;
 class AsignacionController extends Controller
 {
     public function index($id)
@@ -44,6 +45,7 @@ class AsignacionController extends Controller
             }else
             {
                 flash('Tarea registrada exitosamente...!!')->success();
+
             }
         }
         else
@@ -100,6 +102,7 @@ class AsignacionController extends Controller
 
             if($asignacion->save())
             {
+                Bitacora::registrarCreate( Utils::$TABLA_TAREA,$tarea->id,'se creo la tarea '.$tarea -> nombre);
                 return true;
             }
             else{

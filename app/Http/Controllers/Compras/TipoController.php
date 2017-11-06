@@ -58,7 +58,7 @@ class TipoController extends Controller
         $tipo -> idEmpresa = Auth::user() -> idEmpresa;
         $tipo -> idCategoriaProd = $request->get('idCategoriaProd');
         if ($tipo -> save()){
-            Bitacora::registrarCreate( Utils::$TABLA_TIPO,$tipo->id);
+            Bitacora::registrarCreate( Utils::$TABLA_TIPO,$tipo->id,'se creo el tipo.Producto '.$tipo -> nombre);
         }
 
         return Redirect::to('admin/tipos');
@@ -101,7 +101,7 @@ class TipoController extends Controller
         $tipo -> nombre = $request->get('nombre');
         $tipo -> idCategoriaProd = $request->get('idCategoriaProd');
         if ($tipo -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_TIPO, $tipo -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_TIPO, $tipo -> id,'se creo el tipo.Producto '.$tipo -> nombre);
         }
 
         return Redirect::to('admin/tipos');
@@ -118,7 +118,7 @@ class TipoController extends Controller
         $tipo = Tipo::findOrFail($id);
         $tipo -> visible = 0;
         if ($tipo ->update()){
-            Bitacora::registrarDelete(Utils::$TABLA_TIPO, $id);
+            Bitacora::registrarDelete(Utils::$TABLA_TIPO, $id,'se creo el tipo.Producto '.$tipo -> nombre);
         }
         return Redirect::to('admin/tipos');
     }

@@ -13,9 +13,10 @@
 			</div>
 			@endif
 
-			{!!Form::model($usuario,['method'=>'PATCH','route'=>['cuentaEmpleados.update',$usuario -> id]])!!}
-            {{Form::token()}}
-
+			{{--{!!Form::model($usuario,['method'=>'PATCH','route'=>['cuentaEmpleados.update',$usuario -> id]])!!}
+            {{Form::token()}}--}}
+			<form action="{{url('admin/cuentaEmpleados/'.$usuario -> id)}}" method="post">
+				{{ csrf_field() }}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -35,9 +36,9 @@
 					<button class="btn btn-danger" type="reset">Cancelar</button>
 				</div>
 			</div>
+			</form>
 
-
-			{!!Form::close()!!}		
+			{{--{!!Form::close()!!}		--}}
             
 		</div>
 	</div>

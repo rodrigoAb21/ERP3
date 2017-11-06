@@ -11,22 +11,25 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">
 			@if($bitacora->acciones=='[]')
-				<h3>El usuario no ha realizado acciones.</h3>
+				<h4>El usuario no ha realizado acciones.</h4>
 			@else
 				<table class="table table-striped table-condensed table-hover table-bordered">
 					<thead>
 					<th>#</th>
 					<th>Accion Realizada</th>
+					<th>Fecha/hora</th>
 					<th>Tabla Afectada</th>
 					<th>Tupla Afectada</th>
+					<th>Detalle</th>
 					</thead>
 					@foreach ($bitacora->acciones as $accione)
 						<tr>
 							<td>{{ $accione->id}}</td>
 							<td>{{ $accione->accion}}</td>
+							<td>{{Carbon\Carbon::parse($accione->fecha)->format('d-m-Y h:i A')}}</td>
 							<td>{{$accione->tabla}}</td>
 							<td>{{$accione->tupla}}</td>
-
+							<td>{{$accione->descripcion}}</td>
 						</tr>
 					@endforeach
 				</table>
