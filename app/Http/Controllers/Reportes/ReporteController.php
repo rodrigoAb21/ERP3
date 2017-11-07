@@ -8,63 +8,63 @@ use Illuminate\Http\Request;
 class ReporteController extends Controller
 {
     public function index(){
-        $punto = DB::table('punto_de_venta')
+        $punto = DB::table('punto')
                ->where('visible', '=', '1') -> get();
         return view('admin.reportes.index',["punto" => $punto]);
     }
 
     public function ventas(Request $request){
         $mV = DB::select('select producto.id, producto.nombre,
-                          SUM(detalle_venta.cantidad) as cantidad,
+                          SUM(detallev.cantidad) as cantidad,
                           producto.precioUVenta as precioV, 
-                          SUM(detalle_venta.cantidad)*producto.precioUVenta as ganancia,
-                          SUM(detalle_venta.cantidad)*producto.precioUCompra as ganancia_neta 
+                          SUM(detallev.cantidad)*producto.precioUVenta as ganancia,
+                          SUM(detallev.cantidad)*producto.precioUCompra as ganancia_neta 
                           from producto 
-                          inner join detalle_venta on producto.id = detalle_venta.idProducto 
-                          inner join pago on detalle_venta.idPago = pago.id,punto_de_venta
-                          where pago.idPuntoVenta = punto_de_venta.id and
-                                punto_de_venta.nombre= ? and 
+                          inner join detallev on producto.id = detallev.idProducto 
+                          inner join pago on detallev.idPago = pago.id,punto
+                          where pago.idPuntoVenta = punto.id and
+                                punto.nombre= ? and 
                                 month (pago.fecha) = ?
                                 group  by producto.id
-                                order by SUM(detalle_venta.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
+                                order by SUM(detallev.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
 
         return view('admin.reportes.ReporteVentas',["mV" => $mV]);
     }
 
     public function ventasPDF(Request $request){
         $mV = DB::select('select producto.id, producto.nombre,
-                          SUM(detalle_venta.cantidad) as cantidad,
+                          SUM(detallev.cantidad) as cantidad,
                           producto.precioUVenta as precioV, 
-                          SUM(detalle_venta.cantidad)*producto.precioUVenta as ganancia,
-                          SUM(detalle_venta.cantidad)*producto.precioUCompra as ganancia_neta 
+                          SUM(detallev.cantidad)*producto.precioUVenta as ganancia,
+                          SUM(detallev.cantidad)*producto.precioUCompra as ganancia_neta 
                           from producto 
-                          inner join detalle_venta on producto.id = detalle_venta.idProducto 
-                          inner join pago on detalle_venta.idPago = pago.id,punto_de_venta
-                          where pago.idPuntoVenta = punto_de_venta.id and
-                                punto_de_venta.nombre= ? and 
+                          inner join detallev on producto.id = detallev.idProducto 
+                          inner join pago on detallev.idPago = pago.id,punto
+                          where pago.idPuntoVenta = punto.id and
+                                punto.nombre= ? and 
                                 month (pago.fecha) = ?
                                 group  by producto.id
-                                order by SUM(detalle_venta.cantidad) desc;',
+                                order by SUM(detallev.cantidad) desc;',
                           [$request -> puntoVenta, $request ->mes]);
 
         $pdf = \PDF::loadView('admin.reportes.ReporteVentas',["mV" => $mV]);
         return $pdf->download('ReporteVentas.pdf');
     }
 
-    public function ventasImprimir(){
+    public function ventasImprimir(Request $request){
         $mV = DB::select('select producto.id, producto.nombre,
-                          SUM(detalle_venta.cantidad) as cantidad,
+                          SUM(detallev.cantidad) as cantidad,
                           producto.precioUVenta as precioV, 
-                          SUM(detalle_venta.cantidad)*producto.precioUVenta as ganancia,
-                          SUM(detalle_venta.cantidad)*producto.precioUCompra as ganancia_neta 
+                          SUM(detallev.cantidad)*producto.precioUVenta as ganancia,
+                          SUM(detallev.cantidad)*producto.precioUCompra as ganancia_neta 
                           from producto 
-                          inner join detalle_venta on producto.id = detalle_venta.idProducto 
-                          inner join pago on detalle_venta.idPago = pago.id,punto_de_venta
-                          where pago.idPuntoVenta = punto_de_venta.id and
-                                punto_de_venta.nombre= ? and 
+                          inner join detallev on producto.id = detallev.idProducto 
+                          inner join pago on detallev.idPago = pago.id,punto
+                          where pago.idPuntoVenta = punto.id and
+                                punto.nombre= ? and 
                                 month (pago.fecha) = ?
                                 group  by producto.id
-                                order by SUM(detalle_venta.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
+                                order by SUM(detallev.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
 
         $pdf = \PDF::loadView('admin.reportes.ReporteVentas',["mV" => $mV]);
         return $pdf->download('ReporteVentas.pdf');

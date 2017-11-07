@@ -30,8 +30,8 @@ CREATE TABLE categoria_cliente (
 
 CREATE TABLE cliente (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    ci VARCHAR(255),
-    nit VARCHAR(255),
+    ci INT,
+    nit INT,
     nombre VARCHAR(255) NOT NULL,
     puntosAcumulados INT NOT NULL,
     direccion VARCHAR(255),
@@ -398,6 +398,8 @@ CREATE TABLE pago (
     fecha DATETIME NOT NULL,
     nombre VARCHAR(255),
     tipo VARCHAR(255),
+    estado VARCHAR(255) NOT NULL,
+    idEmpresa INT NOT NULL,
     nit INT,
     idPuntoVenta INT NOT NULL,
     idCliente INT NOT NULL,
@@ -413,13 +415,13 @@ CREATE TABLE pago (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE detalle_venta (
+CREATE TABLE detalleV (
+	id INT NOT NULL PRIMARY KEY,
     idPago INT NOT NULL,
     idProducto INT NOT NULL,
     cantidad INT NOT NULL,
     subtotal INT NOT NULL,
     detalle VARCHAR(255),
-    PRIMARY KEY (idPago , idProducto),
     FOREIGN KEY (idPago)
         REFERENCES pago (id)
         ON UPDATE CASCADE ON DELETE CASCADE,

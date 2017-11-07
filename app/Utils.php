@@ -24,6 +24,7 @@ class Utils
     public static $TABLA_PRODUCTO='producto';
     public static $TABLA_CUENTA_EMPLEADO='cuenta.empleado';
     public static $TABLA_PUNTO='punto_de_venta';
+    public static $TABLA_PAGO='pago';
 
 //Bitacora::registrarListar(Utils::$TABLA_EMPLEADO);
 //Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id

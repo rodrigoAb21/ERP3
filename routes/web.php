@@ -144,9 +144,7 @@ Route::delete('/admin/puntosVenta/{id}', 'Ventas\PuntoController@destroy')->midd
 Route::put('/admin/puntosVenta', 'Ventas\PuntoController@update');
 Route::get('/admin/puntosVenta/{id}/edit', 'Ventas\PuntoController@edit')->middleware('permisos:13,editar');
 
-
-
-
+Route::resource('/admin/pagos', 'Ventas\PagoController');
 
 
 

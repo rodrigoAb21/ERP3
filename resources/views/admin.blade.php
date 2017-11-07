@@ -34,6 +34,7 @@
           }
 
       </style>
+
   </head>
   <body
           @if(Auth::user()->color == 'Morado' && Auth::user()->fondo == 'Oscuro')
@@ -146,7 +147,7 @@
                           <li><a href="{{asset('/admin/empleados')}}"><i class="fa fa-arrow-right"></i> Gestionar Empleados</a></li>
                           <li><a href="{{asset('/admin/cuentaEmpleados')}}"><i class="fa fa-arrow-right"></i> Gestionar Cuentas</a></li>
                          <li><a href="{{asset('/admin/casouso')}}"><i class="fa fa-arrow-right"></i> Lista de Cu </a></li>
-                       <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. los CU de un Rol</a</li>
+                       <li><a href="{{asset('/admin/rol/lista-roles')}}"><i class="fa fa-arrow-right"></i> Gest. los CU de un Rol</a></li>
                           <li><a href="{{asset('/admin/rol')}}"><i class="fa fa-arrow-right"></i> Gest. Acciones Segun El Rol</a></li>
                           <li><a href="{{asset('/backup')}}"><i class="fa fa-arrow-right"></i> Backup y Restore</a></li>
                           <li><a href="{{url('/admin/bitacora')}}"><i class="fa fa-arrow-right"></i> Bitacora</a></li>
@@ -173,6 +174,7 @@
                       <ul class="treeview-menu">
                           <li><a href="{{asset('/admin/clientes')}}"><i class="fa fa-arrow-right"></i> Gestionar Clientes</a></li>
                           <li><a href="{{asset('/admin/puntosVenta')}}"><i class="fa fa-arrow-right"></i> Gestionar Punto de Venta</a></li>
+                          <li><a href="{{asset('/admin/pagos')}}"><i class="fa fa-arrow-right"></i> Pagos al Contado</a></li>
 
                       </ul>
                   </li>
