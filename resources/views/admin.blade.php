@@ -188,7 +188,8 @@
                           <li><a href="{{asset('/admin/beneficios')}}"><i class="fa fa-arrow-right"></i> Gestionar Beneficios</a></li>
                           <li><a href="{{asset('/admin/tareas')}}"><i class="fa fa-arrow-right"></i> Gestionar Tareas</a></li>
                           <li><a href="{{asset('/admin/seguimientos')}}"><i class="fa fa-arrow-right"></i> Gestionar Seguimientos</a></li>
-                          <li><a href="{{asset('/admin/categoria')}}"><i class="fa fa-arrow-right"></i> Gestionar Categoria</a></li>
+                           <li><a href="{{url('admin/categoria')}}"><i class="fa fa-arrow-right"></i> Gestionar Categoria</a></li>
+                          <li><a href="{{url('admin/promocion')}}"><i class="fa fa-arrow-right"></i> Gestionar Promocion</a></li>
                       </ul>
                   </li>
                   <li class="treeview">
