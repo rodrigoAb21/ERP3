@@ -180,6 +180,31 @@ Route::put('/admin/posiblesClientes', 'CRM\PClienteController@update');
 Route::get('/admin/posiblesClientes/{id}/edit', 'CRM\PClienteController@edit')->middleware('permisos:25,editar');
 Route::put('/admin/posiblesClientes/{id}', 'CRM\PClienteController@promover');
 
+Route::get('admin/categoria', 'CRM\CategoriaClienteController@index')->middleware('permisos:14,leer');
+Route::get('admin/categoria/create', 'CRM\CategoriaClienteController@create')->middleware('permisos:14,crear');
+Route::get('admin/categoria/{id}/edit', 'CRM\CategoriaClienteController@edit')->middleware('permisos:14,editar');
+Route::delete('admin/categoria/{id}', 'CRM\CategoriaClienteController@destroy')->middleware('permisos:14,eliminar');
+Route::POST('admin/categoria/{id}', 'CRM\CategoriaClienteController@update');
+Route::post('/admin/categoria', 'CRM\CategoriaClienteController@store');
+
+Route::get('admin/promocion', 'CRM\PromocionController@index')->middleware('permisos:23,leer');
+Route::get('admin/promocion/create', 'CRM\PromocionController@create')->middleware('permisos:23,crear');
+Route::post('admin/promocion', 'CRM\PromocionController@store');
+Route::get('admin/promocion/{id}/edit', 'CRM\PromocionController@edit')->middleware('permisos:23,editar');
+Route::post('admin/promocion/update', 'CRM\PromocionController@update');
+Route::get('admin/promocion/{id}/delete', 'CRM\PromocionController@destroy')->middleware('permisos:23,eliminar');
+Route::get('admin/promocion/{id}/editarProductos', 'CRM\DetallePromoController@editarProductos');
+Route::post('admin/promocion/actualizarPrecio', 'CRM\DetallePromoController@actualizarPrecio');
+Route::post('admin/promocion/{promo}/remover', 'CRM\DetallePromoController@remover');
+Route::post('admin/promocion/{promo}/agregar', 'CRM\DetallePromoController@agregar');
+
+Route::get('admin/categoriaCliente/{id}/beneficios','CRM\CategoriaBeneficioController@editarBeneficios');
+Route::post('admin/categoriaCliente/{id}/agregar','CRM\CategoriaBeneficioController@agregar');
+Route::post('admin/categoriaCliente/{id}/remover','CRM\CategoriaBeneficioController@remover');
+
+Route::get('admin/categoriaCliente/{id}/promociones','CRM\CategoriaPromocionController@editarPromociones');
+Route::post('admin/categoriaCliente/{id}/agregarPromo','CRM\CategoriaPromocionController@agregarPromo');
+Route::post('admin/categoriaCliente/{id}/removerPromo','CRM\CategoriaPromocionController@removerPromo');
 
 
 
