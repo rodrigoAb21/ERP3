@@ -15,11 +15,11 @@
                         </div>
                         <div class="col-sm-6">
                             <button type="button" class="btn btn-adn"
-                                    data-toggle="modal" data-target="#myModal">AgregarBeneficio
+                                    data-toggle="modal" data-target="#myModal">AgregarPromocion
                             </button>
 
                             <button type="button" class="btn btn-adn"
-                                    data-toggle="modal" data-target="#myModal2">QuitarBeneficios
+                                    data-toggle="modal" data-target="#myModal2">QuitarPromociones
                             </button>
                         </div>
                     </div>
@@ -33,10 +33,11 @@
 
                     </thead>
                     <tbody>
-                    @foreach ($categoria->beneficios as $beneficio)
+                    @foreach ($categoria->promociones as $promocione)
                         <tr>
-                            <td>{{ $beneficio->nombre}}</td>
-                            <td>{{ $beneficio->descripcion}}</td>
+                            <td>{{ $promocione->nombre}}</td>
+                            <td>{{ $promocione->fechaEmpieza}}</td>
+                            <td>{{ $promocione->fechaTermina}}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -44,7 +45,7 @@
             </div>
         </div>
     </div>
-    @include('admin.CRM.categoria.agregar')
-    @include('admin.CRM.categoria.remover')
 
+    @include('admin.CRM.categoria.agregarPromo')
+    @include('admin.CRM.categoria.removerPromo')
 @endsection

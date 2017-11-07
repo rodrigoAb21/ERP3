@@ -26,7 +26,10 @@
 					<td>
                         <a href="{{URL::action('CRM\CategoriaClienteController@edit',$categoria->id)}}"><button class="btn btn-info">Editar</button></a>
                         <a href="" data-target="#modal-delete-{{$categoria->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
-					</td>
+                        <a href="{{url('admin/categoriaCliente/'.$categoria->id.'/beneficios')}}"><button class="btn btn-info">EditarBeneficios</button></a>
+                        <a href="{{url('admin/categoriaCliente/'.$categoria->id.'/promociones')}}"><button class="btn btn-warning">EditarPromociones</button></a>
+
+                    </td>
 				</tr>
                     @include('admin.CRM.categoria.modal')
 				@endforeach

@@ -13,9 +13,9 @@
 			</div>
 			@endif
 
-			{!!Form::model($categoria,['method'=>'PATCH','route'=>['categoria.update',$categoria -> id]])!!}
-            {{Form::token()}}
 
+            <form action="{{url('admin/categoria/'.$categoria ->id)}}" method="POST">
+                {{ csrf_field() }}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
