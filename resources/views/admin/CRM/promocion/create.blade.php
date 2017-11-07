@@ -21,8 +21,8 @@
 			</div>
 			@endif
 
-			{!!Form::open(array('url'=>'admin/promocion','method'=>'POST','autocomplete'=>'off'))!!}
-            {{Form::token()}}
+
+            <form action="{{url('admin/promocion')}}" method="post">{{ csrf_field() }}
                 <div class="form-group">
                     <label for="ci">Nombre</label>
                     <input type="text" name="nombre" class="form-control" required autofocus>
@@ -30,12 +30,12 @@
 
                 <div class="form-group">
                     {{Form::label('nombre', 'Fecha Comienzo')}}
-                    {{Form::date('fechaComienzo', \Carbon\Carbon::now())}}
+                    {{Form::date('comienzo', \Carbon\Carbon::now())}}
                 </div>
 
                 <div class="form-group">
                     {{Form::label('nombre', 'Fecha Final')}}
-                    {{Form::date('fechaFinal', \Carbon\Carbon::now())}}
+                    {{Form::date('final', \Carbon\Carbon::now())}}
                 </div>
 
 				<div class="form-group">
@@ -43,7 +43,7 @@
 				</div>
 
 
-			{!!Form::close()!!}		
+            </form>
             
 		</div>
 	</div>

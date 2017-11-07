@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-		<a href='{!!url("admin/promocion")!!}/create' class = 'btn btn-success'><i class="fa fa-plus"></i> Crear Promocion</a>
+		<a href='{{url("admin/promocion")}}/create' class = 'btn btn-success'><i class="fa fa-plus"></i> Crear Promocion</a>
 
 	</div><br><br>
 </div>
@@ -24,15 +24,10 @@
                     <td>{{ $promocione->fechaEmpieza}}</td>
                     <td>{{ $promocione->fechaTermina}}</td>
 					<td>
-						<a href="{{ url('admin/promocion/'.$promocione->id.'/productos') }}  ">
-							<button class="btn btn-info">Ver Productos</button>
-						</a>
+						<a href="{{url('admin/promocion/'.$promocione->id.'/edit')}}" class="btn btn-info">Editar</a>
+						<a href="{{ url('admin/promocion/'.$promocione->id.'/delete') }}  " class="btn btn-danger">Eliminar</a>
+						<a href="{{ url('admin/promocion/'.$promocione->id.'/editarProductos') }}  " class="btn btn-warning">EditarProductos</a>
 
-							<button class="btn btn-info" data-toggle="modal" data-target="#myModal">Editar</button>
-
-						<a href="#">
-							<button class="btn btn-info">Eliminar</button>
-						</a>
 					</td>
 
 				</tr>
@@ -41,18 +36,5 @@
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
-			</div>
-
-		</div>
-	</div>
-</div>
 @endsection
