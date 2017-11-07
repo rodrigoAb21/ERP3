@@ -105,13 +105,13 @@ CREATE TABLE accion (
         REFERENCES bitacora (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE promocion (
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     fechaEmpieza DATE NOT NULL,
     fechaTermina DATE NOT NULL,
     visible INT NOT NULL,
+    idEmpresa int ,
     PRIMARY KEY (id)
 );
 
@@ -168,10 +168,11 @@ CREATE TABLE producto (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 CREATE TABLE detalle_promo (
     promo INT,
     producto INT,
-    cantidad INT,
+    precio float,
     visible INT,
     PRIMARY KEY (promo , producto),
     FOREIGN KEY (promo)
@@ -186,10 +187,10 @@ CREATE TABLE beneficio (
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(200),
+    idEmpresa int,
     PRIMARY KEY (id),
     visible INT NOT NULL
 );
-
 CREATE TABLE categoria_beneficio (
     beneficio INT,
     categoria INT,
@@ -202,7 +203,30 @@ CREATE TABLE categoria_beneficio (
         REFERENCES categoria_cliente (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-
+CREATE TABLE categoria_promo (
+    promo INT,
+    categoria INT,
+    PRIMARY KEY (promo , categoria),
+    visible INT NOT NULL,
+    FOREIGN KEY (promo)
+        REFERENCES promocion (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (categoria)
+        REFERENCES categoria_cliente (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE categoria_beneficio (
+    beneficio INT,
+    categoria INT,
+    PRIMARY KEY (beneficio , categoria),
+    visible INT NOT NULL,
+    FOREIGN KEY (beneficio)
+        REFERENCES beneficio (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (categoria)
+        REFERENCES categoria_cliente (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 -- SEGUIMIENTO A CLIENTES
 
