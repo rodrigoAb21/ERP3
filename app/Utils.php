@@ -23,6 +23,8 @@ class Utils
     public static $TABLA_TIPO='tipo';
     public static $TABLA_PRODUCTO='producto';
     public static $TABLA_CUENTA_EMPLEADO='cuenta.empleado';
+    public static $TABLA_PUNTO='punto_de_venta';
+
 //Bitacora::registrarListar(Utils::$TABLA_EMPLEADO);
 //Bitacora::registrarCreate( Utils::$TABLA_EMPLEADO,$empleado->id
 //Bitacora::registrarUpdate( Utils::$TABLA_EMPLEADO,$empleado->id);

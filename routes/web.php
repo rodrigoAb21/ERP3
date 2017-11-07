@@ -128,7 +128,7 @@ Route::get('/admin/tipos/{id}/edit', 'Compras\TipoController@edit')->middleware(
 
 
 // ------------------- VENTAS ----------------------------------
-//Route::resource('/admin/clientes', 'Ventas\ClienteController');
+
 
 Route::post('/admin/clientes', 'Ventas\ClienteController@store');
 Route::get('/admin/clientes', 'Ventas\ClienteController@index')->middleware('permisos:14,leer');
@@ -136,6 +136,14 @@ Route::get('/admin/clientes/create', 'Ventas\ClienteController@create')->middlew
 Route::delete('/admin/clientes/{id}', 'Ventas\ClienteController@destroy')->middleware('permisos:14,eliminar');
 Route::put('/admin/clientes', 'Ventas\ClienteController@update');
 Route::get('/admin/clientes/{id}/edit', 'Ventas\ClienteController@edit')->middleware('permisos:14,editar');
+
+Route::post('/admin/puntosVenta', 'Ventas\PuntoController@store');
+Route::get('/admin/puntosVenta', 'Ventas\PuntoController@index')->middleware('permisos:13,leer');
+Route::get('/admin/puntosVenta/create', 'Ventas\PuntoController@create')->middleware('permisos:13,crear');
+Route::delete('/admin/puntosVenta/{id}', 'Ventas\PuntoController@destroy')->middleware('permisos:13,eliminar');
+Route::put('/admin/puntosVenta', 'Ventas\PuntoController@update');
+Route::get('/admin/puntosVenta/{id}/edit', 'Ventas\PuntoController@edit')->middleware('permisos:13,editar');
+
 
 
 

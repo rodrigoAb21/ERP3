@@ -30,8 +30,8 @@ CREATE TABLE categoria_cliente (
 
 CREATE TABLE cliente (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    ci INT,
-    nit INT,
+    ci VARCHAR(255),
+    nit VARCHAR(255),
     nombre VARCHAR(255) NOT NULL,
     puntosAcumulados INT NOT NULL,
     direccion VARCHAR(255),
@@ -85,7 +85,7 @@ CREATE TABLE bitacora (
     id INT AUTO_INCREMENT NOT NULL,
     fechaEntrada DATETIME NOT NULL,
     user_id INT NOT NULL,
-    idEmpresa INT ,
+    empresa_id INT ,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id)
         REFERENCES users (id)
@@ -383,10 +383,12 @@ insert into permisos VALUES (1,29,1,1,1,1);
 insert into permisos VALUES (1,30,1,1,1,1);
 insert into permisos VALUES (1,31,1,1,1,1);
 ----------------------------------------------------------------------------
-CREATE TABLE punto_de_venta (
+CREATE TABLE punto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
-    ubicacion VARCHAR(255) NOT NULL
+    ubicacion VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL
 );
 
 
@@ -401,7 +403,7 @@ CREATE TABLE pago (
     idCliente INT NOT NULL,
     idEmpleado INT NOT NULL,
     FOREIGN KEY (idPuntoVenta)
-        REFERENCES punto_de_venta (id)
+        REFERENCES punto (id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idCliente)
         REFERENCES cliente (id)
@@ -434,7 +436,7 @@ CREATE TABLE stock_puntoVenta (
     stock_minimo INT NOT NULL,
     PRIMARY KEY (idPuntoVenta , idProducto),
     FOREIGN KEY (idPuntoVenta)
-        REFERENCES punto_de_venta (id)
+        REFERENCES punto (id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idProducto)
         REFERENCES producto (id)

@@ -1,5 +1,5 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$p->id}}">
-	{{Form::Open(array('action'=>array('Ventas\Punto_de_ventaController@destroy',$p->id),'method'=>'delete'))}}
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$pun->id}}">
+	{{Form::Open(array('action'=>array('Ventas\PuntoController@destroy',$pun->id),'method'=>'delete'))}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -10,7 +10,7 @@
                 <h4 class="modal-title">Eliminar Punto de Ventas</h4>
 			</div>
 			<div class="modal-body">
-				<p>Confirme si desea Eliminar el Punto de Venta: {{$p->nombre}}</p>
+				<p>Confirme si desea Eliminar el Punto de Venta: {{$pun->nombre}}</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

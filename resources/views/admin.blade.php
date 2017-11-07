@@ -172,6 +172,7 @@
                       </a>
                       <ul class="treeview-menu">
                           <li><a href="{{asset('/admin/clientes')}}"><i class="fa fa-arrow-right"></i> Gestionar Clientes</a></li>
+                          <li><a href="{{asset('/admin/puntosVenta')}}"><i class="fa fa-arrow-right"></i> Gestionar Punto de Venta</a></li>
 
                       </ul>
                   </li>

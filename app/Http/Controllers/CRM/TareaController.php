@@ -52,7 +52,7 @@ class TareaController extends Controller
         $tarea -> descripcion = $request->get('descripcion');
         $tarea -> visible = '1';
         if ($tarea -> save()){
-            Bitacora::registrarCreate(Utils::$TABLA_TAREA, $tarea -> id);
+            Bitacora::registrarCreate(Utils::$TABLA_TAREA, $tarea -> id, 'se creo al cliente '.$tarea -> nombre);
         }
         return Redirect::to('admin/tareas');
     }
@@ -92,7 +92,7 @@ class TareaController extends Controller
         $tarea -> nombre = $request->get('nombre');
         $tarea -> descripcion = $request->get('descripcion');
         if ($tarea -> update()){
-            Bitacora::registrarUpdate(Utils::$TABLA_TAREA,$request -> id);
+            Bitacora::registrarUpdate(Utils::$TABLA_TAREA,$request -> id , 'se edito al cliente '.$tarea -> nombre);
         }
         return Redirect::to('admin/tareas');
     }
@@ -108,7 +108,7 @@ class TareaController extends Controller
         $tarea = tarea::findOrFail($id);
         $tarea -> visible = '0';
         if ($tarea -> update()){
-            Bitacora::registrarDelete(Utils::$TABLA_TAREA,$id);
+            Bitacora::registrarDelete(Utils::$TABLA_TAREA,$id , 'se elimino al cliente '.$tarea -> nombre);
         }
         return Redirect::to('admin/tareas');
     }

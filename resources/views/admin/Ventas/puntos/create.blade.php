@@ -13,7 +13,7 @@
 			</div>
 			@endif
 
-			{!!Form::open(array('url'=>'admin/punto_de_venta','method'=>'POST','autocomplete'=>'off'))!!}
+			{!!Form::open(array('url'=>'admin/puntosVenta','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="form-group">
@@ -25,7 +25,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="ubicacion">Ubicación</label>
-                    <input type="text" name="ubicacion" class="form-control">
+                    <input type="text" name="ubicacion" class="form-control" required>
                 </div>
             </div>
 
