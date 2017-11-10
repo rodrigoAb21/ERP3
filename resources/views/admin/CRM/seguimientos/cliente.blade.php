@@ -19,7 +19,7 @@
             <td>{{$seguimiento->fechaInicio}}</td>
             <td>{{$seguimiento->proposito}}</td>
             <td>
-                <div style="background-color: green;padding:4px;color: white">
+                <div style="background-color: {{$seguimiento->estado->color}};padding:4px;color: white">
                     <b>{{$seguimiento->estado->nombre}}</b>
                 </div>
             </td>

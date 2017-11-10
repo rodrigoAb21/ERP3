@@ -18,4 +18,9 @@ class Punto extends Model
         'visible',
         'idEmpresa'
     ];
+
+    public function scopegetPuntos($query){
+        $puntos = $query -> where('visible', '=', '1') -> get();
+        return $puntos;
+    }
 }

@@ -26,7 +26,6 @@
                     <table class="table table-responsive table-bordered ">
                         <thead>
                         <th>Producto</th>
-                        <th>Descripcion</th>
                         <th>PrecioPromo</th>
                         </thead>
                         <tbody>
@@ -34,7 +33,6 @@
                             <tr>
                                 <input type="hidden" name="producto[]" value="{{$producto->id}}">
                                 <td>{{ $producto->nombre}}</td>
-                                <td>{{ $producto->especificacion}}</td>
                                 <td><input name="precio[]" type="text" value="{{ $producto->pivot->precio}}"></td>
                             </tr>
                         @endforeach

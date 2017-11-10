@@ -25,4 +25,10 @@ class Cliente extends Model
         'visible',
         'idEmpresa'
     ];
+
+    public function scopegetClientes($query){
+        $clientes = $query -> where('visible', '=', '1') -> get();
+        return $clientes;
+    }
+
 }

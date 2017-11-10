@@ -26,6 +26,12 @@ class Empleado extends Model
     public function scopegetEmpleado($query, $id){
         return $this->findOrFail($id);
     }
+
+    public function scopegetEmpleados($query, $id){
+        $empleados = $query -> where('visible', '=', '1') -> get();
+        return $empleados;
+    }
+
   public function rol()
     {
         return $this->belongsTo('App\Modelos\Seguridad\AsignacionPermisos\Rol', 'rol_id','id');

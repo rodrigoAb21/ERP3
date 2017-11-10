@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Ventas;
 
 use App\Http\Controllers\Controller;
+use App\Modelos\Compras\Producto;
 use App\Modelos\Seguridad\Bitacora;
+use App\Modelos\Ventas\Cliente;
 use App\Modelos\Ventas\DetalleV;
 use App\Modelos\Ventas\Pago;
+use App\Modelos\Ventas\Punto;
 use App\Utils;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,9 +32,9 @@ class PagoController extends Controller
     }
 
     public function create(){
-        $punto = DB::table('punto') -> where('visible', '=', '1') -> get();
-        $cliente = DB::table('cliente') -> where('visible', '=', '1') -> where('tipo', '=', 'Cliente') -> get();
-        $producto = DB::table('producto') ->select('id','nombre','precioActual') -> where('visible', '=', '1') -> get();
+        $punto = Punto::getPuntos();
+        $cliente = Cliente::getClientes();
+        $producto = Producto::getProductos();
         return view('admin.Ventas.pagos.create',["punto" => $punto, "cliente" => $cliente, "producto" => $producto]);
     }
 
@@ -45,7 +48,7 @@ class PagoController extends Controller
             $pago -> nit = $request -> get('nit');
             $pago -> idPuntoVenta = $request -> get('idPuntoVenta');
             $pago -> idCliente = $request -> get('idCliente');
-            $pago -> idEmpleado = Auth::user() -> id;
+            $pago -> idEmpleado = Auth::user() -> idEmpleado;
             $pago -> idEmpresa = Auth::user() -> idEmpresa;
             $pago -> tipo = 'Contado';
             $pago -> estado = 'Activa';

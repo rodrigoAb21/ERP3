@@ -20,6 +20,7 @@ class Asignacion extends Model
         'hora_inicio',
         'hora_final'
     ];
+    
 
 
 
