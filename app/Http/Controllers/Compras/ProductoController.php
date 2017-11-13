@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Compras;
 
 use App\Http\Controllers\Controller;
 use App\Modelos\Compras\Producto;
+use App\Modelos\Compras\Tipo;
 use App\Modelos\Seguridad\Bitacora;
 use App\Utils;
 use Illuminate\Http\Request;
@@ -42,8 +43,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $tipo = DB::table('tipo')
-            ->where('visible', '=', '1') -> get();
+        $tipo = Tipo::getTipos();
         return view("admin.Compras.productos.create",["tipo" => $tipo]);
     }
 
@@ -98,8 +98,7 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        $tipo = DB::table('tipo')
-            ->where('visible', '=', '1') -> get();
+        $tipo = Tipo::getTipos();
         return view("admin.Compras.productos.edit",["tipo" => $tipo, "producto" => Producto::findOrFail($id)]);
     }
 

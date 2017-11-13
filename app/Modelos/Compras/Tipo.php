@@ -17,4 +17,9 @@ class Tipo extends Model
         'idEmpresa',
         'idCategoriaProd'
     ];
+
+    public function scopegetTipos($query){
+        $tipos = $query -> where('visible', '=', '1') -> get();
+        return $tipos;
+    }
 }

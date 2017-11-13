@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Compras;
 
 use App\Http\Controllers\Controller;
+use App\Modelos\Compras\CategoriaProducto;
 use App\Modelos\Compras\Tipo;
 use App\Modelos\Seguridad\Bitacora;
 use App\Utils;
@@ -39,8 +40,7 @@ class TipoController extends Controller
      */
     public function create()
     {
-        $categoria = DB::table('categoria_producto')
-            ->where('visible', '=', '1') -> get();
+        $categoria = CategoriaProducto::getCategorias();
         return view("admin.Compras.tipos.create",["categoria" => $categoria]);
     }
 
@@ -83,8 +83,7 @@ class TipoController extends Controller
      */
     public function edit($id)
     {
-        $categoria = DB::table('categoria_producto')
-            ->where('visible', '=', '1') -> get();
+        $categoria = CategoriaProducto::getCategorias();
         return view("admin.Compras.tipos.edit",["categoria" => $categoria, "tipo" => Tipo::findOrFail($id)]);
     }
 

@@ -27,7 +27,7 @@ class Empleado extends Model
         return $this->findOrFail($id);
     }
 
-    public function scopegetEmpleados($query, $id){
+    public function scopegetEmpleados($query){
         $empleados = $query -> where('visible', '=', '1') -> get();
         return $empleados;
     }

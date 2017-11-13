@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ventas;
 
+use App\Modelos\CRM\CategoriaCliente;
 use App\Modelos\Seguridad\Bitacora;
 use App\Http\Controllers\Controller;
 use App\Modelos\Ventas\Cliente;
@@ -39,8 +40,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $categoria = DB::table('categoria_cliente')
-            ->where('visible', '=', '1') -> get();
+        $categoria = CategoriaCliente::getCategorias();
         return view("admin.Ventas.clientes.create",["categoria" => $categoria]);
     }
 
@@ -90,9 +90,9 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $categoria = DB::table('categoria_cliente')
-            ->where('visible', '=', '1') -> get();
-        return view("admin.Ventas.clientes.edit",["categoria" => $categoria, "cliente" => cliente::findOrFail($id)]);
+        $categoria = CategoriaCliente::getCategorias();
+        $cliente = Cliente::findOrFail($id);
+        return view("admin.Ventas.clientes.edit",["categoria" => $categoria, "cliente" => $cliente ]);
     }
 
     /**

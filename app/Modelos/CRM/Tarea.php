@@ -24,4 +24,9 @@ class Tarea extends Model
     {
         return $this->belongsTo('App\Modelos\CRM\Estado','estado_id');
     }
+
+    public function scopegetTareas($query){
+        $tareas = $query -> where('visible', '=', '1') -> get();
+        return $tareas;
+    }
 }

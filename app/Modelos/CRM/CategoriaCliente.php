@@ -36,4 +36,9 @@ class CategoriaCliente extends Model
             'categoria_promo','categoria', 'promo')
             ->where('categoria_promo.visible','=',1);
     }
+
+    public function scopegetCategorias($query){
+        $categorias = $query -> where('visible', '=', '1') -> get();
+        return $categorias;
+    }
 }

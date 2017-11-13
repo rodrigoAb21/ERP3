@@ -17,4 +17,9 @@ class CategoriaProducto extends Model
         'visible',
         'idEmpresa'
     ];
+
+    public function scopegetCategorias($query){
+        $categorias = $query -> where('visible', '=', '1') -> get();
+        return $categorias;
+    }
 }
