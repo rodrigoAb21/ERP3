@@ -73,7 +73,8 @@ class DashboardController extends Controller
 
 
     public function editarEmpresa(){
-        return view('admin.Seguridad.perfil.editarEmpresa',["empresa" => Empresa::findOrFail(Auth::user()->idEmpresa)]);
+        $empresa = Empresa::findOrFail(Auth::user()->idEmpresa);
+        return view('admin.Seguridad.perfil.editarEmpresa',["empresa" => $empresa]);
     }
 
     public function guardarEmpresa(Request $request){

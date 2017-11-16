@@ -94,12 +94,7 @@ class PagoController extends Controller
             -> where('pago.id', '=', $id)
             -> first();
 
-        $detalle = DB::table('detallev')
-            -> join('producto', 'producto.id', '=', 'detallev.idProducto')
-            -> select('producto.nombre', 'detallev.cantidad', 'producto.precioActual', 'detallev.subtotal')
-            -> where('detallev.idPago','=', $id)
-            -> get();
-
+        $detalle = DetalleV::getDetalle($id);
         return view('admin.Ventas.pagos.show',["pago"=>$pago,"detalle"=>$detalle]);
     }
 

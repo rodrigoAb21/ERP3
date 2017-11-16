@@ -19,4 +19,12 @@ class DetalleV extends Model
         'subtotal',
         'detalle'
     ];
+
+    public function scopegetDetalle($query, $id){
+        $detalles = $query -> join('producto', 'producto.id', '=', 'detallev.idProducto')
+            -> select('producto.nombre', 'detallev.cantidad', 'producto.precioActual', 'detallev.subtotal')
+            -> where('detallev.idPago','=', $id)->get();
+        return $detalles;
+    }
+
 }
