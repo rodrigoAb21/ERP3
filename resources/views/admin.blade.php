@@ -164,7 +164,9 @@
                           <li><a href="{{asset('/admin/productos')}}"><i class="fa fa-arrow-right"></i> Gestionar Productos</a></li>
                           <li><a href="{{asset('/admin/categoriaProducto')}}"><i class="fa fa-arrow-right"></i> Gest Categorias de Productos </a></li>
                           <li><a href="{{asset('/admin/tipos')}}"><i class="fa fa-arrow-right"></i> Gestionar Tipos </a></li>
-                      </ul>
+                           <li><a href="{{asset('admin/notacompra')}}"><i class="fa fa-arrow-right"></i> Compras </a></li>
+                          <li><a href="{{asset('admin/inventario')}}"><i class="fa fa-arrow-right"></i> Inventario </a></li>
+                     </ul>
                   </li>
                   <li class="treeview">
                       <a href="#">
