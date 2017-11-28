@@ -122,6 +122,16 @@ Route::put('/admin/tipos', 'Compras\TipoController@update');
 Route::get('/admin/tipos/{id}/edit', 'Compras\TipoController@edit')->middleware('permisos:9,editar');
 
 
+Route::get('admin/notacompra','Compras\NotaCompraController@index')->middleware('permisos:10,leer');
+Route::get('admin/notacompra/show/{id}','Compras\NotaCompraController@show');
+Route::get('admin/notacompra/create','Compras\NotaCompraController@create')->middleware('permisos:10,crear');
+Route::get('admin/notacompra/store','Compras\NotaCompraController@store');
+
+Route::get('admin/ingreso/{notacompra}','Compras\IngresoController@reabastecer');
+Route::post('admin/ingreso','Compras\IngresoController@guardar');
+
+Route::get('admin/inventario','Compras\InventarioController@index')->middleware('permisos:11,leer');
+Route::get('admin/showPromociones/{idProducto}','Compras\InventarioController@showPromociones');
 
 
 
