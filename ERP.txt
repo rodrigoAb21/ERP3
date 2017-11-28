@@ -462,3 +462,25 @@ CREATE TABLE backup (
 	id INT AUTO_INCREMENT NOT NULL primary key,
     nombre varchar (250)
 );
+--Compra
+create table notaCompra (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha datetime ,
+    montoTotal FLOAT,
+    idEmpresa int,
+    idProveedor int,
+    cantidadProductos,
+    finalizado int,
+    FOREIGN key (idProveedor) REFERENCES proveedor(id),
+);
+
+create table lote_producto(
+    idNotaCompra int,
+    idProducto int,
+    cantidad int,
+    precioU float,
+    subtotal float,
+    PRIMARY key(idNotaVompra,idProducto),
+    FOREIGN key (idNotaVompra) REFERENCES notaCompra(id),
+    FOREIGN key (idProducto) REFERENCES producto(id)
+);
