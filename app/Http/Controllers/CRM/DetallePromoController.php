@@ -14,15 +14,20 @@ class DetallePromoController extends Controller
     public function editarProductos($id)
     {
         $promocion=Promocion::findOrFail($id);
-        $otros_productos=DB::select('SELECT producto.id,producto.nombre,producto.precioUVenta
+        $otros_productos=$this->getAllWhere($id);
+
+        return view ('admin.CRM.promocion.product',compact('promocion','otros_productos'));
+    }
+
+    public function getAllWhere($id)
+    {
+        return DB::select('SELECT producto.id,producto.nombre,producto.precioUVenta
                                     FROM producto
                                     WHERE producto.visible=1
                                      and producto.id not in
                                      (SELECT detalle_promo.producto from detalle_promo 
                                      WHERE detalle_promo.promo=? and detalle_promo.visible=1)',
-                                       [$id]);
-
-        return view ('admin.CRM.promocion.product',compact('promocion','otros_productos'));
+            [$id]);
     }
 
     public function actualizarPrecio(Request $request)
@@ -67,11 +72,10 @@ class DetallePromoController extends Controller
         $productos=$request->producto;
         $promo_id=$request->id;
         foreach ($productos as $producto) {
-            if(!DetallePromo::where('promo', '=',$promo_id)
+            DetallePromo::where('promo', '=',$promo_id)
                 ->where('producto', '=',$producto)
-                ->update(['visible'=>0]))
-                dd(DetallePromo::where('promo', '=',$promo_id)
-                    ->where('producto', '=',$producto)->first());
+                ->update(['visible'=>0]);
+
         }
         return redirect('/admin/promocion/'.$promo_id.'/editarProductos');
     }

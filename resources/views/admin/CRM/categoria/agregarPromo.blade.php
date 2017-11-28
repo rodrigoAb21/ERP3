@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Agregar Promociones</h4>
             </div>
             <form method='POST' action= {!!url("admin/categoriaCliente/".$categoria->id.'/agregarPromo')!!}>
                 {{ csrf_field() }}

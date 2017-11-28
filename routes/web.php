@@ -154,8 +154,20 @@ Route::delete('/admin/puntosVenta/{id}', 'Ventas\PuntoController@destroy')->midd
 Route::put('/admin/puntosVenta', 'Ventas\PuntoController@update');
 Route::get('/admin/puntosVenta/{id}/edit', 'Ventas\PuntoController@edit')->middleware('permisos:13,editar');
 
-Route::resource('/admin/pagos', 'Ventas\PagoController');
+Route::post('/admin/garantes', 'Ventas\GaranteController@store');
+Route::get('/admin/garantes', 'Ventas\GaranteController@index')->middleware('permisos:19,leer');
+Route::get('/admin/garantes/create', 'Ventas\GaranteController@create')->middleware('permisos:19,crear');
+Route::delete('/admin/garantes/{id}', 'Ventas\GaranteController@destroy')->middleware('permisos:19,eliminar');
+Route::get('/admin/garantes/{id}', 'Ventas\GaranteController@show');
+Route::put('/admin/garantes', 'Ventas\GaranteController@update');
+Route::get('/admin/garantes/{id}/edit', 'Ventas\GaranteController@edit')->middleware('permisos:19,editar');
+Route::get('/admin/garantes/{id}/edit', 'Ventas\GaranteController@edit')->middleware('permisos:19,editar');
 
+Route::resource('/admin/pagos', 'Ventas\PagoController');
+Route::resource('/admin/creditos', 'Ventas\CreditoController');
+
+Route::get('admin/creditos/{id}/cuotas','Ventas\CuotaController@index');
+Route::post('admin/creditos/{id}/cuotas', 'Ventas\CuotaController@pagar');
 
 
 // ------------------- CRM ----------------------------------

@@ -13,7 +13,7 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">
 			@foreach($puntosVenta as $punto)
-			<div class="well " >
+			<div class="well" >
 			<p><b>Punto de Venta: </b>{{$punto->nombre}}</p>
 			<table class="table table-striped table-condensed table-hover table-bordered">
 				<thead>

@@ -7,7 +7,7 @@ class LoteProducto extends Model
 {
     protected $table = 'lote_producto';
 
-    protected $primaryKey = 'idNotaCompra';
+    protected $primaryKey = ['idProducto','idNotaCompra',];
 
     public $timestamps = false;
 

@@ -15,17 +15,21 @@ class CategoriaPromocionController extends Controller
     public function editarPromociones($id)
     {
         $categoria=CategoriaCliente::findOrFail($id);
-        $otros_promociones=DB::select('SELECT promocion.id,promocion.nombre,promocion.fechaEmpieza,promocion.fechaTermina
+        $otros_promociones=$this->getAllWhere($id);
+
+        return view ('admin.CRM.categoria.promociones',compact('categoria','otros_promociones'));
+    }
+
+    public function getAllWhere($id)
+    {
+        return DB::select('SELECT promocion.id,promocion.nombre,promocion.fechaEmpieza,promocion.fechaTermina
                                     FROM promocion
                                     WHERE promocion.visible=1 and promocion.idEmpresa=? 
                                      and promocion.id not in
                                      (SELECT categoria_promo.promo from categoria_promo 
                                      WHERE categoria_promo.categoria=? and categoria_promo.visible=1  )',
             [Auth::user()->idEmpresa,$id]);
-
-        return view ('admin.CRM.categoria.promociones',compact('categoria','otros_promociones'));
-    }
-
+}
     public function agregarPromo(Request $request)
     {
         $promos=$request->promo;
@@ -52,12 +56,10 @@ class CategoriaPromocionController extends Controller
         $categoria_id=$request->id;
         $i=0;
         foreach ($promos as $item){
-            if(! CategoriaPromo::where('categoria', '=',$categoria_id)
+            CategoriaPromo::where('categoria', '=',$categoria_id)
                 ->where('promo', '=',$item)
-                ->update(['visible'=>0]))
-            {
+                ->update(['visible'=>0]);
 
-            }
             $i++;
         }
         return redirect('admin/categoriaCliente/'.$categoria_id.'/promociones');

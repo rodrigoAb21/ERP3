@@ -174,10 +174,11 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
+                          <li><a href="{{asset('/admin/pagos')}}"><i class="fa fa-arrow-right"></i> Pagos al Contado</a></li>
+                          <li><a href="{{asset('/admin/creditos')}}"><i class="fa fa-arrow-right"></i> Pagos al Credito</a></li>
                           <li><a href="{{asset('/admin/clientes')}}"><i class="fa fa-arrow-right"></i> Gestionar Clientes</a></li>
                           <li><a href="{{asset('/admin/puntosVenta')}}"><i class="fa fa-arrow-right"></i> Gestionar Punto de Venta</a></li>
-                          <li><a href="{{asset('/admin/pagos')}}"><i class="fa fa-arrow-right"></i> Pagos al Contado</a></li>
-
+                          <li><a href="{{asset('/admin/garantes')}}"><i class="fa fa-arrow-right"></i> Gestionar Garantes</a></li>
                       </ul>
                   </li>
                   <li class="treeview">

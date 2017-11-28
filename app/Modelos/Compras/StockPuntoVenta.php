@@ -7,7 +7,7 @@ class StockPuntoVenta extends Model
 {
     protected $table = 'stock_puntoVenta';
 
-    protected $primaryKey = 'idPuntoVenta';
+    protected $primaryKey = ['idProducto','idPuntoVenta'];
 
     public $timestamps = false;
 

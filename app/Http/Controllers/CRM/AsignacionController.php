@@ -21,13 +21,8 @@ class AsignacionController extends Controller
         $seguimiento=Seguimiento::find($id);
         if(!empty($seguimiento))
         {
-            $tareas=DB::select('select tarea.id as id,tarea.nombre as title,asignacion.fecha as start,estado.color as color
-                from asignacion ,tarea,estado
-                WHERE asignacion.seguimiento=?
-                and asignacion.tarea=tarea.id
-                and tarea.estado_id=estado.id', [$seguimiento->id]);
-
-            $fechaActual = $this->getFechaActual();
+            $tareas=$this->getAllWhere($seguimiento->id);
+             $fechaActual = $this->getFechaActual();
             return view('admin.CRM.asignaciones.index',
                 compact('seguimiento','fechaActual'))->with('tareas',json_encode($tareas));
         }
@@ -36,38 +31,54 @@ class AsignacionController extends Controller
             return redirect('admin/seguimientos');
         }
     }
+
+    public function getAllWhere($id)
+    {
+       return DB::select('select tarea.id as id,tarea.nombre as title,asignacion.fecha as start,estado.color as color
+                from asignacion ,tarea,estado
+                WHERE asignacion.seguimiento=?
+                and asignacion.tarea=tarea.id
+                and tarea.estado_id=estado.id', [$id]);
+    }
     public function store($id,Request $request)
     {
         if($this->validar($request->fecha) && $this->validarHoras($request->inicio,$request->final)) {
-            if(!$this->guardarTarea($request))
+            if($this->guardarTarea($request))
             {
-                flash('Ups ... ocurrio un error al registrar la tarea.')->error();
+                $this->enviarMensajeSucess();
             }else
             {
-                flash('Tarea registrada exitosamente...!!')->success();
+                $this->enviarMensajeError();
 
             }
         }
         else
         {
-            flash('La fecha y las horas de la tarea son incorrrectas.')->error();
+            $this->enviarMensajeDatosInvalidos();
+
         }
         return redirect('admin/asignacion/'.$id);
     }
+
+    public function findwhere($tarea,$seguimiento)
+    {
+        return Asignacion::where('tarea','=', $tarea)
+            ->where('seguimiento','=',$seguimiento)
+            ->first();
+    }
     public function destroy($tarea,$seguimiento)
     {
-        $asignacion=Asignacion::where('tarea','=', $tarea)
-                        ->where('seguimiento','=',$seguimiento)
-                        ->first();
+        $asignacion=$this->findwhere($tarea,$seguimiento);
+        $_tarea=Tarea::find($tarea);
         if($asignacion->delete())
         {
-            $_tarea=Tarea::find($tarea);
+
             $_tarea->delete();
-            flash('La tarea fue eliminada .')->success();
+            $this->enviarMensajeSuccess();
         }
         else
         {
-            flash('Ups hubo un error al eliminar la tarea.')->error();
+            $this->enviarMensajeErrorDestroy();
         }
         return redirect('admin/asignacion/'.$seguimiento);
     }
@@ -116,6 +127,31 @@ class AsignacionController extends Controller
     public function getFechaActual()
     {
         return $fechaActual = Carbon::now()->format('Y-m-d');
+    }
+
+    public function enviarMensajeError()
+    {
+        flash('Ups ... ocurrio un error al registrar la tarea.')->error();
+    }
+
+    public function enviarMensajeSucess()
+    {
+        flash('Tarea registrada exitosamente...!!')->success();
+    }
+
+    public function enviarMensajeDatosInvalidos()
+    {
+        flash('La fecha y las horas de la tarea son incorrrectas.')->error();
+    }
+
+    public function enviarMensajeSuccess()
+    {
+        flash('La tarea fue eliminada .')->success();
+    }
+
+    public function enviarMensajeErrorDestroy()
+    {
+        flash('Ups hubo un error al eliminar la tarea.')->error();
     }
 
 }

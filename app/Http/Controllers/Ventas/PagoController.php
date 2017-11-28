@@ -26,6 +26,7 @@ class PagoController extends Controller
                 ->where('pago.id','LIKE','%'.$query.'%')
                 ->where('pago.idEmpresa','=',Auth::user()->idEmpresa)
                 ->orderBy('pago.id','asc')
+                ->where('pago.tipo','Contado')
                 ->paginate(25);
             return view('admin.Ventas.pagos.index',["pago"=>$pago,"searchText"=>$query]);
         }

@@ -21,11 +21,6 @@ class PromocionController extends Controller
         return view('admin.CRM.promocion.index',compact('promociones','title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $title = 'Nueva Promocion';

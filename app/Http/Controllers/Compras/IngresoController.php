@@ -37,14 +37,18 @@ class IngresoController extends Controller
                 $idInput="v".$pv->id."p".$producto->id;
                 if($request[$idInput]>0)
                 {
+
                     $stockPV = StockPuntoVenta::where('idPuntoVenta','=',$pv->id)
                     ->where('idProducto','=', $producto->id)->first();
-                    if($stockPV==null)
+                    //
+                    if(!isset($stockPV))
                     {
-                        StockPuntoVenta::updateOrCreate(
-                            ['idProducto' =>  $producto->id, 'idPuntoVenta' =>  $pv->id],
-                            ['stock' => $request[$idInput],'stock_minimo' => 0]
-                        );
+                        $stock1=new StockPuntoVenta;//
+                        $stock1->idProducto=$producto->id;dd($producto->id);
+                        $stock1->idPuntoVenta=$pv->id;
+                        $stock1->stock=$request[$idInput];
+                        $stock1->stock_minimo=0;
+                        $stock1->save();
                     }
                     else{
                         $stockPV->stock=$stockPV->stock+$request[$idInput];
@@ -53,7 +57,6 @@ class IngresoController extends Controller
                     $controlStockTotal=$controlStockTotal+$request[$idInput];
 
                 }
-
             }
         }
         if($controlStockTotal==$compra->cantidadProductos)

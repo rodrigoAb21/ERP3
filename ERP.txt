@@ -416,6 +416,10 @@ CREATE TABLE pago (
     idPuntoVenta INT NOT NULL,
     idCliente INT NOT NULL,
     idEmpleado INT NOT NULL,
+    nroCuotas INT,
+    plazo INT,
+    montoCuota FLOAT,
+    interes FLOAT,
     FOREIGN KEY (idPuntoVenta)
         REFERENCES punto (id)
         ON UPDATE CASCADE ON DELETE CASCADE,
@@ -444,10 +448,10 @@ CREATE TABLE detalleV (
 
 
 CREATE TABLE stock_puntoVenta (
-    idPuntoVenta INT NOT NULL,
-    idProducto INT NOT NULL,
-    stock INT NOT NULL,
-    stock_minimo INT NOT NULL,
+    idPuntoVenta INT,
+    idProducto INT ,
+    stock INT ,
+    stock_minimo INT ,
     PRIMARY KEY (idPuntoVenta , idProducto),
     FOREIGN KEY (idPuntoVenta)
         REFERENCES punto (id)
@@ -462,17 +466,21 @@ CREATE TABLE backup (
 	id INT AUTO_INCREMENT NOT NULL primary key,
     nombre varchar (250)
 );
---Compra
+
+-- Compra
+
 create table notaCompra (
  id INT AUTO_INCREMENT PRIMARY KEY,
     fecha datetime ,
     montoTotal FLOAT,
     idEmpresa int,
     idProveedor int,
-    cantidadProductos,
+    cantidadProductos int,
     finalizado int,
-    FOREIGN key (idProveedor) REFERENCES proveedor(id),
+    FOREIGN key (idProveedor) REFERENCES proveedor(id)
 );
+
+
 
 create table lote_producto(
     idNotaCompra int,
@@ -480,7 +488,41 @@ create table lote_producto(
     cantidad int,
     precioU float,
     subtotal float,
-    PRIMARY key(idNotaVompra,idProducto),
-    FOREIGN key (idNotaVompra) REFERENCES notaCompra(id),
+    PRIMARY key(idNotaCompra,idProducto),
+    FOREIGN key (idNotaCompra) REFERENCES notaCompra(id),
     FOREIGN key (idProducto) REFERENCES producto(id)
+);
+
+
+
+CREATE TABLE garante (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    ci VARCHAR(255) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    telefono VARCHAR(10) NOT NULL,
+    documento VARCHAR(255) NOT NULL,
+    visible CHAR NOT NULL,
+    idEmpresa INT NOT NULL,
+    idCredito INT NOT NULL,
+    FOREIGN KEY (idCredito)
+        REFERENCES pago (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE cuota (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    fecha DATE NOT NULL,
+    monto FLOAT NOT NULL,
+    idCredito INT NOT NULL,
+    idEmpleado INT NOT NULL,
+    visible CHAR NOT NULL,
+    estado VARCHAR(255) NOT NULL,
+    idEmpresa INT NOT NULL,
+    FOREIGN KEY (idEmpleado)
+        REFERENCES empleado (id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idCredito)
+        REFERENCES pago (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
