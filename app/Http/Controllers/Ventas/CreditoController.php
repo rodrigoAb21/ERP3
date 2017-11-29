@@ -96,7 +96,9 @@ class CreditoController extends Controller
             $garante -> idEmpresa = Auth::user() -> idEmpresa;
             $garante -> visible = 1;
             $garante -> idCredito = $pago -> id;
-            $garante -> save();
+            if ($garante -> save()){
+                Bitacora::registrarCreate(Utils::$TABLA_GARANTE, $garante -> id, "Se creo al garante ".$garante -> nombre);
+            }
 
             $garante2 = new Garante();
             $garante2 -> ci = $request -> g2ci;
@@ -112,7 +114,11 @@ class CreditoController extends Controller
             $garante2 -> idEmpresa = Auth::user() -> idEmpresa;
             $garante2 -> visible = 1;
             $garante2 -> idCredito = $pago -> id;
-            $garante2 -> save();
+
+            if ($garante2 -> save()){
+                Bitacora::registrarCreate(Utils::$TABLA_GARANTE, $garante2 -> id, "Se creo al garante ".$garante2 -> nombre);
+            }
+
             $i = 0;
 
             while ($i < $pago -> nroCuotas){

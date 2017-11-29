@@ -160,11 +160,19 @@
                           <i class="fa fa-angle-left pull-right"></i>
                       </a>
                       <ul class="treeview-menu">
+                          <li class="treeview">
+                              <a href="#">
+                                  <span>Gestion de Productos</span>
+                                  <i class="fa fa-angle-left pull-right"></i>
+                              </a>
+                              <ul class="treeview-menu">
+                                  <li><a href="{{asset('/admin/categoriaProducto')}}"><i class="fa fa-arrow-right"></i> Categorias </a></li>
+                                  <li><a href="{{asset('/admin/tipos')}}"><i class="fa fa-arrow-right"></i> Tipos </a></li>
+                                  <li><a href="{{asset('/admin/productos')}}"><i class="fa fa-arrow-right"></i> Productos</a></li>
+                              </ul>
+                          </li>
                           <li><a href="{{asset('/admin/proveedores')}}"><i class="fa fa-arrow-right"></i> Gestionar Proveedores</a></li>
-                          <li><a href="{{asset('/admin/productos')}}"><i class="fa fa-arrow-right"></i> Gestionar Productos</a></li>
-                          <li><a href="{{asset('/admin/categoriaProducto')}}"><i class="fa fa-arrow-right"></i> Gest Categorias de Productos </a></li>
-                          <li><a href="{{asset('/admin/tipos')}}"><i class="fa fa-arrow-right"></i> Gestionar Tipos </a></li>
-                           <li><a href="{{asset('admin/notacompra')}}"><i class="fa fa-arrow-right"></i> Compras </a></li>
+                          <li><a href="{{asset('admin/notacompra')}}"><i class="fa fa-arrow-right"></i> Compras </a></li>
                           <li><a href="{{asset('admin/inventario')}}"><i class="fa fa-arrow-right"></i> Inventario </a></li>
                      </ul>
                   </li>
