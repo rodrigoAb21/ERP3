@@ -15,7 +15,7 @@
 		</div>
 	</div>
 
-			{!!Form::open(array('url'=>'admin/creditos','method'=>'POST','autocomplete'=>'off'))!!}
+			{!!Form::open(array('url'=>'admin/creditos','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
             {{Form::token()}}
     <div class="row">
 
@@ -128,7 +128,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="g1documento">Documento</label>
-                        <input type="text" name="g1documento" class="form-control" required >
+                        <input type="file" name="g1documento" class="form-control" required >
                     </div>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="g2documento">Documento</label>
-                        <input type="text" name="g2documento" class="form-control" required >
+                        <input type="file" name="g2documento" class="form-control" required >
                     </div>
                 </div>
             </div>

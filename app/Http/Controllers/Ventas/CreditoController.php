@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class CreditoController extends Controller
@@ -83,7 +84,15 @@ class CreditoController extends Controller
             $garante -> nombre = $request -> g1nombre;
             $garante -> direccion = $request -> g1direccion;
             $garante -> telefono = $request -> g1telefono;
-            $garante -> documento = $request -> g1documento;
+
+
+            if (Input::hasFile('g1documento')) {
+                $file = Input::file('g1documento');
+                $file -> move(public_path().'/documentos/'.$request -> g1nombre.'/', $file->getClientOriginalName());
+                $garante -> documento = $file->getClientOriginalName();
+            }
+
+
             $garante -> idEmpresa = Auth::user() -> idEmpresa;
             $garante -> visible = 1;
             $garante -> idCredito = $pago -> id;
@@ -94,7 +103,12 @@ class CreditoController extends Controller
             $garante2 -> nombre = $request -> g2nombre;
             $garante2 -> direccion = $request -> g2direccion;
             $garante2 -> telefono = $request -> g2telefono;
-            $garante2 -> documento = $request -> g2documento;
+
+            if (Input::hasFile('g2documento')) {
+                $file = Input::file('g2documento');
+                $file -> move(public_path().'/documentos/'.$request -> g2nombre.'/', $file->getClientOriginalName());
+                $garante2 -> documento = $file->getClientOriginalName();
+            }
             $garante2 -> idEmpresa = Auth::user() -> idEmpresa;
             $garante2 -> visible = 1;
             $garante2 -> idCredito = $pago -> id;

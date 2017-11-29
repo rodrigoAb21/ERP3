@@ -14,7 +14,7 @@ class ReporteController extends Controller
     }
 
     public function ventas(Request $request){
-        $mV = DB::select('select producto.id, producto.nombre,
+        $mV = DB::select("select producto.id, producto.nombre,
                           SUM(detallev.cantidad) as cantidad,
                           producto.precioUVenta as precioV, 
                           SUM(detallev.cantidad)*producto.precioUVenta as ganancia,
@@ -26,7 +26,7 @@ class ReporteController extends Controller
                                 punto.nombre= ? and 
                                 month (pago.fecha) = ?
                                 group  by producto.id
-                                order by SUM(detallev.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
+                                order by SUM(detallev.cantidad) desc;",[$request -> punto_id, $request -> mes]);
 
         return view('admin.reportes.ReporteVentas',["mV" => $mV]);
     }
@@ -45,7 +45,7 @@ class ReporteController extends Controller
                                 month (pago.fecha) = ?
                                 group  by producto.id
                                 order by SUM(detallev.cantidad) desc;',
-                          [$request -> puntoVenta, $request ->mes]);
+                          [$request -> punto_id, $request ->mes]);
 
         $pdf = \PDF::loadView('admin.reportes.ReporteVentas',["mV" => $mV]);
         return $pdf->download('ReporteVentas.pdf');
@@ -64,7 +64,7 @@ class ReporteController extends Controller
                                 punto.nombre= ? and 
                                 month (pago.fecha) = ?
                                 group  by producto.id
-                                order by SUM(detallev.cantidad) desc;',                                                             [$request -> puntoVenta, $request ->mes]);
+                                order by SUM(detallev.cantidad) desc;', [$request -> puntoVenta, $request ->mes]);
 
         $pdf = \PDF::loadView('admin.reportes.ReporteVentas',["mV" => $mV]);
         return $pdf->download('ReporteVentas.pdf');

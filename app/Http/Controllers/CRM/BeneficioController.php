@@ -36,6 +36,7 @@ class BeneficioController extends Controller
         $beneficio=new Beneficio();
         $beneficio->nombre=$request->get('nombre');
         $beneficio->descripcion=$request->get('descripcion');
+        $beneficio -> idEmpresa = Auth::user() -> idEmpresa;
         $beneficio -> visible = '1';
         if($beneficio->save())
             return redirect('/admin/beneficios');

@@ -9,45 +9,66 @@
 
 <div class="row container">
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label>Empleado</label>
             <p>{{$pago -> empleado}}</p>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label>NIT</label>
             <p>{{$pago -> nit}}</p>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label>Nombre</label>
             <p>{{$pago -> nombre}}</p>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label>Cliente</label>
             <p>{{$pago -> cliente}}</p>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label>Punto de Venta</label>
             <p>{{$pago -> punto}}</p>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <div class="form-group">
             <label for="montoTotal">Monto Total</label>
             <p>{{$pago -> montoTotal}}</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+        <div class="form-group">
+            <label>Nro de Cuotas</label>
+            <p>{{$pago -> nroCuotas}}</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+        <div class="form-group">
+            <label>Interes</label>
+            <p>{{$pago -> interes}}</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+        <div class="form-group">
+            <label for="">Monto Cuotas</label>
+            <p>{{$pago -> montoCuota}}</p>
         </div>
     </div>
 

@@ -20,7 +20,7 @@
 					<label>Punto de Venta</label>
 					<select name="punto_id" class="form-control selectpicker" data-live-search="true">
 						@foreach ($punto as $p)
-							<option value="{{$p -> id}}">{{$p -> nombre}}</option>
+							<option value="{{$p -> nombre}}">{{$p -> nombre}}</option>
 						@endforeach
 					</select>
 				</div>

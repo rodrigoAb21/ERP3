@@ -154,9 +154,8 @@ Route::delete('/admin/puntosVenta/{id}', 'Ventas\PuntoController@destroy')->midd
 Route::put('/admin/puntosVenta', 'Ventas\PuntoController@update');
 Route::get('/admin/puntosVenta/{id}/edit', 'Ventas\PuntoController@edit')->middleware('permisos:13,editar');
 
-Route::post('/admin/garantes', 'Ventas\GaranteController@store');
+
 Route::get('/admin/garantes', 'Ventas\GaranteController@index')->middleware('permisos:19,leer');
-Route::get('/admin/garantes/create', 'Ventas\GaranteController@create')->middleware('permisos:19,crear');
 Route::delete('/admin/garantes/{id}', 'Ventas\GaranteController@destroy')->middleware('permisos:19,eliminar');
 Route::get('/admin/garantes/{id}', 'Ventas\GaranteController@show');
 Route::put('/admin/garantes', 'Ventas\GaranteController@update');
