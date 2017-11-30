@@ -253,3 +253,24 @@ Route::get('/backup/create/{id}','backupController@save');
 // Route::post('/backup/restore','backupController@show');
 
 Route::get('/backup/backup','backupController@backup');
+
+//------------------------- MOVIL ----------------------------
+Route::get('movil/login/empresa/{id}','Movil\LoginController@empresa');
+
+Route::get('movil/cliente/registro','Movil\ClienteController@create');
+Route::post('movil/cliente/store', 'Movil\ClienteController@store');
+
+Route::get('movil/login', 'Movil\LoginController@login');
+Route::get('movil/login/salir', 'Movil\LoginController@login');
+Route::post('movil/login/ingresar', 'Movil\LoginController@ingresar');
+
+Route::get('movil/catalogo', 'Movil\CatalogoController@catalogo');
+Route::get('movil/promocion', 'Movil\CatalogoController@promocion');
+
+Route::get('movil/canjear/{id}', 'Movil\ReservaController@canjear');
+Route::get('movil/reservar/{id}', 'Movil\ReservaController@reservar');
+
+Route::get('movil/carrito', 'Movil\ReservaController@carrito');
+Route::get('movil/carrito/finalizar', 'Movil\ReservaController@finalizar');
+
+
