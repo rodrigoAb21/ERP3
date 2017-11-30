@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ventas;
 use App\Http\Controllers\Controller;
 use App\Modelos\Compras\Producto;
 use App\Modelos\Seguridad\Bitacora;
+use App\Modelos\Seguridad\Empleado;
 use App\Modelos\Ventas\Cliente;
 use App\Modelos\Ventas\Cuota;
 use App\Modelos\Ventas\DetalleV;
@@ -46,13 +47,14 @@ class CreditoController extends Controller
     {
         try {
             DB::beginTransaction();
+            $empleado = Empleado::findOrFail(Auth::user()->idEmpleado);
             $pago = new Pago();
             $pago -> nombre = $request -> get('nombre');
             $pago -> nit = $request -> get('nit');
             $pago -> idPuntoVenta = $request -> get('idPuntoVenta');
             $pago -> idCliente = $request -> get('idCliente');
             $pago -> montoTotal = $request -> get('t2');
-            $pago -> idEmpleado = Auth::user() -> idEmpleado;
+            $pago -> idEmpleado = $empleado -> id;
             $pago -> idEmpresa = Auth::user() -> idEmpresa;
             $pago -> tipo = 'Credito';
             $pago -> nroCuotas = $request -> nroCuotas;
@@ -86,11 +88,11 @@ class CreditoController extends Controller
             $garante -> telefono = $request -> g1telefono;
 
 
-            if (Input::hasFile('g1documento')) {
-                $file = Input::file('g1documento');
-                $file -> move(public_path().'/documentos/'.$request -> g1nombre.'/', $file->getClientOriginalName());
-                $garante -> documento = $file->getClientOriginalName();
-            }
+
+            $file = Input::file('g1documento');
+            $file -> move(public_path().'/documentos/'.$request -> g1nombre.'/', $file->getClientOriginalName());
+            $garante -> documento = $file->getClientOriginalName();
+
 
 
             $garante -> idEmpresa = Auth::user() -> idEmpresa;
@@ -106,11 +108,11 @@ class CreditoController extends Controller
             $garante2 -> direccion = $request -> g2direccion;
             $garante2 -> telefono = $request -> g2telefono;
 
-            if (Input::hasFile('g2documento')) {
-                $file = Input::file('g2documento');
-                $file -> move(public_path().'/documentos/'.$request -> g2nombre.'/', $file->getClientOriginalName());
-                $garante2 -> documento = $file->getClientOriginalName();
-            }
+
+            $file = Input::file('g2documento');
+            $file -> move(public_path().'/documentos/'.$request -> g2nombre.'/', $file->getClientOriginalName());
+            $garante2 -> documento = $file->getClientOriginalName();
+
             $garante2 -> idEmpresa = Auth::user() -> idEmpresa;
             $garante2 -> visible = 1;
             $garante2 -> idCredito = $pago -> id;
@@ -151,13 +153,8 @@ class CreditoController extends Controller
 
     public function show($id)
     {
-        $pago = DB::table('pago')
-            -> join('cliente', 'cliente.id', '=', 'pago.idCliente')
-            -> join('punto', 'punto.id', '=', 'pago.idPuntoVenta')
-            -> join('empleado', 'empleado.id', '=', 'pago.idEmpleado')
-            -> select('pago.id', 'pago.fecha', 'empleado.nombre as empleado', 'pago.montoTotal', 'pago.nit', 'pago.nombre', 'cliente.nombre as cliente', 'punto.nombre as punto', 'pago.nroCuotas', 'pago.interes','pago.plazo','pago.montoCuota')
-            -> where('pago.id', '=', $id)
-            -> first();
+
+        $pago = Pago::getPago($id);
 
         $garante = Garante::getGarante($id);
 

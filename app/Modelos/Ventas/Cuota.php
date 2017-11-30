@@ -21,4 +21,10 @@ class Cuota extends Model
         'estado',
         'idCredito',
     ];
+
+    public function scopegetCuotas($query, $id){
+        $cuotas = $query -> where('idCredito',$id)->paginate(25);
+        return $cuotas;
+    }
+
 }

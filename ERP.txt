@@ -417,7 +417,7 @@ CREATE TABLE pago (
     idCliente INT NOT NULL,
     idEmpleado INT NOT NULL,
     nroCuotas INT,
-    plazo INT,
+    plazo DATE,
     montoCuota FLOAT,
     interes FLOAT,
     FOREIGN KEY (idPuntoVenta)
