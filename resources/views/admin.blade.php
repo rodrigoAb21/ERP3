@@ -209,6 +209,7 @@
                       </a>
                       <ul class="treeview-menu">
                           <li><a href="{{asset('admin/reportes/ReporteVentas')}}"><i class="fa fa-arrow-right"></i> Reporte de Ventas</a></li>
+                          <li><a href="{{asset('admin/reportes/ReporteStocks')}}"><i class="fa fa-arrow-right"></i> Reporte Reabastecimiento</a></li>
                       </ul>
                   </li>
               </ul>

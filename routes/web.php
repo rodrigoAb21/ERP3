@@ -233,8 +233,14 @@ Route::post('admin/categoriaCliente/{id}/removerPromo','CRM\CategoriaPromocionCo
 
 Route::get('admin/reportes/ReporteVentas', 'Reportes\ReporteController@index');
 Route::post('admin/reportes/ReporteVentas', 'Reportes\ReporteController@ventas');
-Route::post('admin/reportes/ReporteVentas/PDF', 'Reportes\ReporteController@ventasPDF');
-//Route::post('admin/reportes/ReporteVentas/Imprimir', 'Reportes\ReporteController@ventasImprimir');
+
+Route::get('admin/reportes/ReporteStocks', 'Reportes\ReporteController@stockIndex');
+Route::post('admin/reportes/ReporteStocks', 'Reportes\ReporteController@stock');
+Route::get('admin/reportes/ReporteStocks2/PDF', 'Reportes\ReporteController@stockPDF2');
+Route::get('admin/reportes/ReporteStocks/PDF/{id}', 'Reportes\ReporteController@stockPDF');
+
+
+
 
 
 //-----------backup
